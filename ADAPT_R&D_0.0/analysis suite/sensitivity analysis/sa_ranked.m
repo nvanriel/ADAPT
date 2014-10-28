@@ -21,10 +21,10 @@ end
 % write to table
 if verLessThan('matlab', '8.1.0')
     sa_dataset = dataset({coefs_ot, names_xj{:}}, 'ObsNames', names_par);
-    export(sa_dataset, 'XLSfile', 'sa_dataset');
+    export(sa_dataset, 'XLSfile', 'sensitivity_analysis');
 else
     sar = array2table(coefs_ot, 'RowNames', names_par, 'VariableNames', names_xj);
-    writetable(sar, 'coefs_ot.xls', 'Sheet', 1, 'WriteVariableNames', 1, 'WriteRowNames', 1);
+    writetable(sar, 'sensitivity_analysis.xls', 'Sheet', 1, 'WriteVariableNames', 1, 'WriteRowNames', 1);
 end
 
 end
