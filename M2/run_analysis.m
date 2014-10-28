@@ -6,7 +6,7 @@ addpath(genpath('..\ADAPT_R&D_0.0\'))
 m.modelname = 'M2';
 
 m.Niter = 100;             %number of data samples
-m.Ndt = 200;             %number of time samples
+m.Ndt = 200;               %number of time samples
 
 m.info.smooth    = 1;       %default: 1
 m.info.sd_weight = 1;       %default: 1
