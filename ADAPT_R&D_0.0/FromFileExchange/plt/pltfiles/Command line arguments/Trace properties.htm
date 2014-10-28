@@ -1,0 +1,302 @@
+<html>
+<head>
+<title>Trace properties</title>
+<style>
+<!--
+.mcode   {
+	color: #E00000;
+	line-height: 1.2;
+	margin-top: 0;
+	margin-bottom: 0;
+	font-weight: bold;
+}
+h3           { color: #006699 }
+h2           { font-size: 22pt }
+-->
+</style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1" height="96">
+  <tr>
+    <td width="72%" height="96">
+    <h2>Trace properties</h2>
+    </td>
+    <td width="2%" height="96">&nbsp;</td>
+    <td width="26%" height="96">
+    <img border="0" src="../images/plt.png" width="211" height="97" align="right"></td>
+  </tr>
+</table>
+<p style="margin-top: -18">&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber2">
+  <tr>
+    <td width="13%" valign="top">
+    <h3>Right</h3>
+    </td>
+    <td width="87%" valign="top">You specify which traces should appear on the right-hand axis with the <span class="mcode">
+      'Right'</span> parameter. For example if you included <span class="mcode">
+      'Right',[1&nbsp;4:2:10&nbsp;17]</span> in the parameter list, then plt would put trace numbers 1,4,6,8,10, 
+      and 17 on the right axis and all other traces on the left axis. A slight 
+      shading is used behind the Trace IDs associated with the right hand axis 
+      so you can tell at a glance which traces belong to which axis. You can 
+      also tell which axis a trace is on by the shape of its cursor ('+' for 
+      left axis and 'o' for the right axis). You can optionally specify a 
+label for the right hand axis (see <span class="mcode">LabelY</span>) as well 
+    as the axis limits (see <span class="mcode">
+      YlimR</span>).<br>
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="13%" valign="top">
+    <h3>Markers</h3>
+    </td>
+    <td width="87%" valign="top">The Markers parameter is a shorthand way of setting a different marker 
+property for each line. For example <span class="mcode">plt(x,y,'Markers',s)</span> 
+    is equivalent to:<p class="mcode">&nbsp;</p>
+<p class="mcode"><span class="mcode">a=plt(x,y);</span></p>
+<p class="mcode"><span class="mcode">for k=1:length(a) set(a(k),'Marker',s(k,:)); 
+end;</span></p>
+<p>Consider the following examples:<span class="mcode"><br>
+plt(...,'Markers',['square';'none ';'+&nbsp;&nbsp;&nbsp; 
+']);<br>
+plt(...,'Markers',{'square','none ','+'});<br>
+plt(...,'Markers',['+';'+';'+';'o','*','x']);<br>
+plt(...,'Markers','+++o*x');</span></p>
+    <p>The first example, sets the marker for lines 1 and 3 
+to a square and a plus sign respectively while line 2 will be rendered 
+with no markers. The second example is equivalent to the first, but uses a cell 
+    array of strings instead of a character array. This method is easier when 
+    the elements are different sizes because you don't have to pad with blanks 
+    as with the character array. (Wherever a character array is allowed in a plt 
+    argument list, a cell array of strings is also allowed and visa versa.) The 
+    third example assigns a plus for lines 1,2,3 and an  <span class="mcode">o</span>, <span class="mcode">
+    *</span>, and an  <span class="mcode">x</span> for lines 4,5,6 respectively. Since all the markers in this example are represented by a single character (a situation that happens 
+often), a shorthand way is provided to do this. Example four is that 
+    method, and is equivalent to example three.<br>
+&nbsp;</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="13%" valign="top">
+    <h3>Styles</h3>
+    </td>
+    <td width="87%" valign="top">The Styles parameter is a shorthand way of setting the LineStyle property in 
+a similar way that the Markers parameter is used to set the Marker property. For example, to set the first 
+trace to normal, the 2nd and 3rd traces to dotted and dashed respectively, and 
+the 4th trace to none (useful when you want the markers with no lines connecting 
+them) you would use the following command:<span class="mcode"> </span>
+<p><span class="mcode">plt(...,'Styles',{'-',':','--','none'});</span></p>
+
+<p>The shorthand for single character styles mentioned above also works. For 
+instance, to alternate between normal and dotted among eight traces one could 
+use:</p>
+
+<p><span class="mcode">plt(...,'Styles','-:-:-:-:');</span></p>
+
+<p>One additional trick applies to the Styles parameter. If a single character 
+is given which is not a valid line style, then the linestyle property is set to 
+none and the given character is applied to the marker property. As an example, 
+the following command defines eight traces of which the first four are rendered 
+as continuous lines and the last four are rendered with plus signs placed at each 
+x,y location specified by the data arrays:</p>
+
+<p><span class="mcode">plt(...,'Styles','----++++');</span></p>
+
+<p>Since there are no marker property values which can also be linestyle 
+property values, there is never any ambiguity as to which property should be 
+set.<br>
+&nbsp;</p>
+
+    </td>
+  </tr>
+  <tr>
+    <td width="13%" valign="top">
+    <h3>GridStyle&nbsp;&nbsp;</h3>
+    </td>
+    <td width="87%" valign="top">The default and most commonly used grid line style is a solid line
+    (<span class="mcode">'-'</span>) although sometimes a dashed line is more pleasing
+    which you can select by using this parameter:
+    <p><span class="mcode">plt(...,'GridStyle',':');</span></p><br></td>
+  </tr>
+  <tr>
+    <td width="13%" valign="top">
+    <h3>TraceID</h3>
+    </td>
+    <td width="87%" valign="top">This parameter allows you to assign a name to each trace. This name will 
+appear in the trace selection box. The number of characters that will fit in the 
+trace selection box depends on the size you choose for the plt window. For the 
+default figure size there is room for 5 uppercase or 6 lowercase characters. In 
+    the example below, both forms are equivalent:<p><span class="mcode">plt(...,'TraceID',['Rtemp';'Ltemp';'RV1&nbsp; ']);<br>
+    plt(...,'TraceID',{'Rtemp';'Ltemp';'RV1'});</span></p>
+
+    <p>Default:<span class="mcode"> ['Line 1';'Line 2';&nbsp;...&nbsp;'Line n'];</span></p>
+
+<p>If you want the plot to be created without a TraceID box, call plt with a 
+TraceID parameter of zero or the empty set ([] or ''). Since plt can't create a 
+TraceID box containing more than 99 IDs, if you want to plot more than 99 
+traces, you must include <span class="mcode">'TraceID',0</span>&nbsp; in the 
+parameter list.</p>
+
+<p>When specifying trace IDs, you must have one trace ID for each trace on the 
+main axis (including also the traces on the right hand axis). However if you 
+don't want a trace ID for a specific trace to appear, just use the null string (<span class="mcode">''</span>) 
+for the trace name. If you do that, the trace ID box will be made smaller to 
+account for the fewer number of IDs displayed.</p>
+
+<p>You may specify a callback function (fcn) to execute when the user clicks on 
+any of the traceID tags by including the&nbsp; parameter <span class="mcode">'TIDcback',fcn</span> 
+in the argument list. If the 
+      string <span class="mcode">'@TID'</span> occurs anywhere inside the 
+      function string (fcn) it is replaced with 8192 times the handle of the 
+      trace ID string. Likewise if the string <span class="mcode">'@LINE'</span> 
+      occurs anywhere inside fcn, it is replaced with 8192 times the handle of 
+      the trace itself. The factor of 8192 is needed to insure that the handles 
+      are integers (i.e. exact). See the demo program <span class="mcode">
+pltquiv.m </span>for an example using the <span class="mcode">TIDcback</span> 
+parameter. In that example, the name and color of a trace is displayed in the 
+command window when you click on a Trace ID tag. (Not particularly useful, but 
+this example was contrived to demonstrate all the possible substitutions.) To 
+define a quote within a quote in Matlab, one uses two single quote characters in 
+a row. Since this can get confusing at times, callbacks defined within plt may 
+use a double quote character instead of two successive single quotes. The 
+pltquiv.m example uses this alternative form. In addition to a string,
+<span class="mcode">fcn</span> may also be a function handle of the form <span class="mcode">
+@func</span> or <span class="mcode">{@func,arg1,arg2,...,argn}</span>. Note that 
+the string substitutions can't be used with the function handle form of this 
+parameter.</p>
+
+<p>You also may change the trace IDs after the plot has been created. For 
+example, if the current figure contains a plot with four traces, these traces 
+can be renamed with a command such as:</p>
+
+<p><span class="mcode">plt('rename',{'First'&nbsp;'Second'&nbsp;'3rd'&nbsp;'4th'});</span></p>
+
+<p>If there are other changes you want to make to the TraceID box from you 
+program (as in the &quot;curves.m&quot; example), you can get the handle of the axis that 
+contains all the trace id objects with the following command:</p>
+
+<p><span class="mcode">tbox = findobj('user','TraceID');</span></p>
+
+<p>For example to hide the TraceID box altogether, you could follow that with:<br>
+<span class="mcode">
+set([tbox;&nbsp;get(tbox,'child')],'vis','off')&nbsp; </span>or the slightly 
+shorter:<br>
+<span class="mcode">
+set(tbox,'pos',[-2 0 1 1])</span>. 
+Or in the unlikely event you wanted the traceID box to appear upside down, use the command:<span class="mcode"><br>
+set(tbox,'view',[0&nbsp;270])</span>.<br>
+&nbsp;</p>
+
+    </td>
+  </tr>
+  <tr>
+    <td width="13%" valign="top">
+    <h3>TraceMK</h3>
+    </td>
+    <td width="87%" valign="top">This parameter allows you to include the line 
+    types in the trace selection box. If the argument is a vector, it specifies the 
+    marker positions within the trace selection box. For example
+    <span class="mcode">'TraceMK',[.6 .7 .8 .9]</span> would tell plt to place a 
+    horizontal line next to each TraceID label beginning and ending at x = .6 
+    and .9 with markers at the four locations specified (assuming the line type 
+    in the plot included markers). The area between x = 0 and .6 then would be 
+    used for the text label. If the first element of the vector is less than .25 
+    then plt will not display the text labels since there probably would not be 
+    room for them anyway. (Clicking on the lines in the TraceID box have the 
+    same effect as clicking on the labels, so the labels can be removed without 
+    loss of functionality). If the argument is a scalar, plt will use that value 
+    as the first element of a length 3 vector whose last element is .9. Thus
+    <span class="mcode">'TraceMK',.6</span> is shorthand for
+    <span class="mcode">'TraceMK',[.6 .75 .9]</span>. A special case is when the 
+    scalar argument is zero, in which case no lines are inserted into the 
+    trace selection box (as if the
+    <span class="mcode">TraceMK</span> parameter was not used at all). See the 
+    demo programs <span class="mcode">
+    trigplt.m </span>and <span class="mcode">
+    subplt.m</span>&nbsp; for examples of using the <span class="mcode">TraceMK</span> 
+    parameter.<br>
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="13%" valign="top">
+    <h3>TIDcolumn&nbsp;&nbsp;</h3>
+    </td>
+    <td width="87%" valign="top">Normally all the TraceIDs appear in the trace 
+    selection box in a single column. However when you have many traces it is 
+    often necessary to use more than one column to allow them all to fit. This 
+    parameter allows you to do this. If
+    <span class="mcode">TIDcolumn</span> is a scalar, it specifies the number of 
+    TraceIDs to put in the <i><b>second</b></i> column. If it is a vector, it 
+    specifies the number of TraceIDs to put in columns 2,3,etc, with the 
+    remaining going into column 1. For example, if 30 traces are displayed, and 
+    you use
+    <span class="mcode">'TIDcolumn',8</span>&nbsp; then the first 22 TraceIDs 
+    appear in the first column and the last 8 appear in the second column.
+    <span class="mcode">'TIDcolumn',[5&nbsp;5&nbsp;5]</span> would tell plt to arrange the 
+    30 IDs in four columns as follows: (1-15, 16-20, 21-25, 26-30).<br>
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="13%" valign="top">
+    <h3>DIStrace&nbsp;&nbsp;&nbsp;&nbsp; </h3>
+    </td>
+    <td width="87%" valign="top">By default, all the traces defined by plt are visible until you change that 
+from the trace selection box. You can change that default by disabling some 
+traces from the command line. For example:<p><span class="mcode">plt(...,'DIStrace',[1&nbsp;1&nbsp;0&nbsp;0&nbsp;0]);</span></p>
+
+<p>This tells plt to start the display with the first two traces disabled and 
+the remaining 3 traces enabled. Of course you can then enable the first two 
+traces via the trace selection box. If the parameter has fewer elements than the 
+number of traces, it is extended by adding zeros. This means that we could have 
+used <span class="mcode">[1&nbsp;1]</span> above to the same effect. After the 
+call to plt has been made, if you want to change which traces are 
+enabled/disabled you can click on the TraceIDs as described in
+<a href="../Using%20the%20plt%20window/Selecting%20traces.htm">Selecting&nbsp;traces</a>. 
+However if you want to do that from a program you can use the command:</p>
+
+<p><span class="mcode">plt('showTrace',e);</span></p>
+
+<p>The showTrace command only effects traces that are identified in the TraceID 
+box of the current figure window. (It doesn't apply to subplots.) e is a row or 
+column vector containing the trace numbers to enable. All other traces are 
+disabled. If you include a number larger than the number of traces, that number 
+will be ignored. For example <span class="mcode">plt('showTrace',[2;3;6]);</span> 
+will enable traces 2,3, and 6 while disabling all other traces. And <span class="mcode">
+plt('showTrace',1:99);</span> will enable all traces (since no more than 99 
+traceIDs are possible). To disable all traces use the command<span class="mcode"> plt('showTrace',[]);</span> 
+or<span class="mcode"> plt('showTrace','');</span>.<br>
+&nbsp;</p>
+
+    </td>
+  </tr>
+  <tr>
+    <td width="13%" valign="top">
+    <h3>ENAcur</h3>
+    </td>
+    <td width="87%" valign="top">By default you will be allowed to cursor every visible trace in the plot 
+area. You can change this default via the ENAcur parameter. For example, if we 
+    had five traces, but wanted to use cursors only on traces 1,4, and 5 you would use:<p><span class="mcode">plt(...,'ENAcur',[1&nbsp;0&nbsp;0&nbsp;1 
+    1]);</span></p>
+
+    <p>If the parameter has fewer elements than the number of traces, it is 
+    extended by adding ones. This means that we could have used <span class="mcode">
+    [1&nbsp;0&nbsp;0]</span> above to the same effect.<br>
+&nbsp;</p>
+
+    </td>
+  </tr>
+  </table>
+<h3>&nbsp;</h3>
+<h3>&nbsp;</h3>
+
+<h3>&nbsp;</h3>
+
+<h3>&nbsp;</h3>
+
+<h3>&nbsp;</h3>
+
+<h3>&nbsp;</h3>
+
+</body>
+
+</html>

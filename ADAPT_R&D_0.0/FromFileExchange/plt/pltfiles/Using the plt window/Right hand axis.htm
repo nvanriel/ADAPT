@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>Right hand axis</title>
+<style>
+<!--
+span.mcode   {
+	color: #E00000;
+	font-weight: bold;
+}
+h2           { font-size: 22pt }
+-->
+</style>
+</head>
+<title>Right hand axis</title>
+<body>
+
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1">
+  <tr>
+    <td width="70%">
+    <h2>Right-hand axis</h2>
+    </td>
+    <td width="3%">&nbsp;</td>
+    <td width="27%">
+    <img border="0" src="../images/plt.png" width="215" height="105" align="right"></td>
+  </tr>
+</table>
+
+<h3>Enabling</h3>
+
+<p>You specify which traces should appear on the right-hand axis with the <span class="mcode">
+      'Right'</span> parameter. For example if you included <span class="mcode">
+      'Right',[1&nbsp;4:2:10&nbsp;17]</span> in the parameter list, then plt would put trace numbers 1,4,6,8,10, 
+      and 17 on the right axis and all other traces on the left axis. A slight 
+      shading is used behind the Trace IDs associated with the right hand axis 
+      so you can tell at a glance which traces belong to which axis. You can 
+      also tell which axis a trace is on by the shape of its cursor ('+' for 
+      left axis and 'o' for the right axis). You can optionally specify the 
+label or the limits for the right hand axis by using the <span class="mcode">'LabelYR'</span> or <span class="mcode">
+      'YlimR'</span> parameters respectively or by using cell array inputs with 
+the <span class="mcode">'LabelY'</span> or <span class="mcode">
+      'Ylim'</span> parameters. Note that if you enabled metric 
+prefixes on the y-axis, this applies only to the left hand axis. The right hand 
+axis uses standard scaling. </p>
+
+<h3>Cursoring</h3>
+
+<p>Cursoring the traces on the right or left hand axes is identical except for 
+the shape of the cursor - a '+' for traces on the left axis and a 'o' for traces 
+on the right axis. Different cursor shapes are used for the
+<a href="Cursoring.htm">dual cursor</a>.</p>
+
+<h3>Panning and zooming</h3>
+
+<p style="margin-bottom: -18">The following controls affect both the main and 
+auxiliary axes simultaneously:</p>
+
+<ul>
+  <li>LinX/LogX (menu box)</li>
+  <li>LinY/LogY (menu box)</li>
+  <li>Panning the x-axis</li>
+  <li>Zooming the x-axis</li>
+</ul>
+
+<p style="margin-bottom: -18">
+<img border="0" src="../images/unlinked.png" align="left" hspace="10" width="67" height="253">Panning 
+and zooming the y-axis (which includes zooming with an expansion box and 
+left/right clicking on the &quot;zout&quot; tag) is also normally done simultaneously on 
+the right and left hand axes. This is called the &quot;linked&quot; mode. Sometimes 
+however it is more convenient to adjust the left and right axes separately (i.e 
+&quot;unlinked&quot;). To unlink the axes, simply click on the right hand axis label. The 
+label will then appear between two divide signs as shown in this picture (i.e. 
+the axes are &quot;divided&quot;). Click on the label again and the divide signs will 
+disappear indicating that the axes are again linked.</p>
+
+<p style="margin-bottom: -18">&nbsp;</p>
+
+<p style="margin-bottom: -18">Normally the axes are linked when plt initializes. 
+However if&nbsp; you want plt to start in unlinked mode, include the parameter <span class="mcode">
+'AxisLink',0</span>&nbsp; in the plt argument list. Including <span class="mcode">
+'AxisLink',1</span>&nbsp; tells plt to start in linked mode, although you will 
+rarely do that since linked mode is the default anyway.</p>
+
+<p style="margin-bottom: -18">&nbsp;</p>
+
+<p>Regardless of the linked/unlinked status you can pan or zoom the right hand 
+axis by right or left clicking 
+on or near one of the right-hand axis tick labels (i.e. the 20,40,60,80, or 100 
+in this picture) and dragging them to the 
+desired position. (As before left click/drag is for panning and right click/drag 
+is for zooming).</p>
+
+</body>
+
+</html>

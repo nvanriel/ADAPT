@@ -1,0 +1,449 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Menu box</title>
+<style>
+<!--
+span.mcode   {
+	color: #E00000;
+	font-weight: bold;
+}
+h2           { font-size: 22pt }
+-->
+</style>
+</head>
+
+<body>
+
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1">
+  <tr>
+    <td width="70%">
+    <h2>Menu box</h2>
+    </td>
+    <td width="3%">&nbsp;</td>
+    <td width="27%">
+    <img border="0" src="../images/plt.png" width="215" height="105" align="right"></td>
+  </tr>
+</table>
+
+<p>
+<img border="0" src="../images/MenuBox.png" align="left" hspace="10" vspace="10" width="81" height="237"></p>
+
+<p>&nbsp;</p>
+
+<p>By default, the menu box contains 8 items. Some or all of these items may be 
+missing if they were specifically excluded by using the <span class="mcode">'Options'</span> 
+argument in the calling sequence. See <span class="mcode">pltquiv.m</span> for an example of
+how you can add a new menu box function. Clicking on the menu box items has the following 
+effect:<br clear="left">
+&nbsp;</p>
+
+<h3>Help</h3>
+
+<p>On Windows systems when you left or right click on the the
+<span class="mcode">Help</span> tag, plt will display the file
+<span class="mcode">plt.chm</span>. On Unix and other systems the browser 
+will be opened to display the file
+<span class="mcode">plt.htm</span> (since these systems don't support the 
+chm file format). The left click behavior may be modified by including the
+<span class="mcode">'HelpFile'</span>  parameter on the command line and
+the right click behavior may be modified by including the
+<span class="mcode">'HelpFileR'</span>  parameter. Those parameters are described
+<a href="../Command%20line%20arguments/Options.htm">here</a>.</p>
+
+<h3>LinX</h3>
+
+<p>Left clicking this tag changes the x-axis scale from linear to logarithmic.
+The name of the tag itself also toggles between <span class="mcode">LinX</span>
+and <span class="mcode">LogX</span> so that it the tag name always matches the
+current x-axis scaling type. Left clicking again toggles it back to
+<span class="mcode">LinX</span>.</p>
+Right clicking this tag swaps the x and y data for all the traces which has the
+effect of displaying the inverse function of the original display. This swapping
+is not possible when a right hand axes is being used, and in that case the right
+click is simply ignored.
+
+<h3>LinY</h3>
+
+<p>The y-axis scale changes from linear to logarithmic. This tag also changes to
+<span class="mcode">LogY</span> so that it always matches the current scaling of 
+the y-axis. Clicking again toggles it back to <span class="mcode">LinY</span>.
+The print dialog box is accessed by clicking on the <span class="mcode">Print</span>
+tag (see below), but since this is not often used, by default the print tag does
+not appear in the menu box. However, although it is less obvious you can also
+bring up the print dialog box by right clicking on this LinY/LogY tag.
+</p>
+
+<h3>Grid</h3>
+
+<p>Left clicking on the Grid tag alternates between no grids (tick marks only)
+and full grids on both x and y axes. By default, the grids are solid dim grey lines.
+(This may be modified by the GRIDc and GridStyle parameters.)
+Grid lines with high contrast colors and brightness (such as what you get with the
+native Matlab plot command) makes it more difficult to observe the main data traces.
+
+Assuming the grid style has not been modified with the GRIDc or GridStyle parameters,
+then right clicking on the Grid tag will alternate between the following two grid modes:
+<ul>
+  <li><tt><b>&nbsp;Color = [.13 .13 .13],&nbsp; LineStyle = '-',&nbsp; EraseMode = 'xor'</b></tt> &nbsp; &nbsp; <i>(default)</i></li>
+  <li><tt><b>&nbsp;Color = [.26 .26 .26],&nbsp; LineStyle = ':',&nbsp; EraseMode = 'normal'</b></tt></li>
+</ul>
+The 'xor' mode generally looks better, although it sometimes produces display anomolies with
+some OS/graphics renderer combinations.
+</p>
+
+<h3>Zout</h3>
+
+<p>Each left click of the <span class="mcode">Zout</span> (Zoom out) tag expands the 
+x and y axes by 40% (20% at each end). This approximately doubles the area of 
+the cartesian plane displayed within the axis limits. (1.4<sup>2</sup> = 1.96). 
+Right clicking on the <span class="mcode">Zout </span>reverses the effect of a 
+left click (i.e. zooms in).</p>
+
+<h3>XY<font face="Times New Roman">&#8596;</font></h3>
+
+<p>Each click on the <span class="mcode">XY<font face="Times New Roman">&#8596;</font></span> 
+(XYrotate) tag cycles the x and y axis limits to the next 
+display expansion stored in a history list. (The axis limits from the last four 
+zooms or pans are saved in this list). After all the display limits in the 
+history list are used, the next click autoscales both axes so that all the data 
+is displayed. The next click again uses the first display expansion in the 
+history list.</p>
+
+<h3>Print</h3>
+
+<p>Note that the <span class="mcode">Print</span> tag does not appear in the 
+menu box by default. It will only appear if enabled by an <span class="mcode">'Options'</span> 
+argument in the calling sequence.</p>
+
+<p>
+<img border="0" src="../images/Hardcopy.png" align="left" hspace="10"></p>
+
+<p>Assuming you did enable it, when you click on 
+this Print tag this &quot;HardCopy&quot; dialog box will appear. The primary use of 
+this dialog box is to create BMP images of the plt window. (You will see from 
+the popup menu, that you can select other graphics formats as well, although not 
+all of them are well tested). For all 
+file types except BMP, the colors are inverted if the background is dark. On 
+most printers this makes the copy far more readable and saves large amounts of 
+toner.</p>
+
+<p>The reason that this tag is off by default is that 
+it can also be reached from the &quot;HardCopy&quot; submenu of the File menu in the menu 
+bar, and that is the preferred way to access it. If you don't see the menu bar, 
+click on the <span class="mcode">Menu</span> tag in the menu box to make the 
+menu bar visible.</p>
+
+<p>You can also print directly to the default windows printing device from the HardCopy menu, however an easier (and prossibly more reliable) way of doing this 
+is to select &quot;print&quot; from the File menu). And finally, often the 
+windows screen capture facility (via the PrintScreen key) is often the most 
+appropriate method. To enhance the screen capture method, before pressing 
+PrintScreen you can right click on the y-axis label. This hides the menu box and 
+cursor objects so these objects won't distract from the basic plot data. Right 
+clicking on the y-axis label a second time re-enables the cursor objects.</p>
+
+<h3>Mark</h3>
+
+<p>
+<img border="0" src="../images/Marker.png" width="171" height="108" hspace="10" vspace="10" align="left"></p>
+
+<p>When you left click on the Mark tag, a circular mark is placed at the current 
+cursor location and a text string is added to the plot containing the x and y 
+coordinates of the cursor location. The text string will be the same color as the active trace. If the text label is not positioned where you 
+want it, click on the label and drag it to the desired location.<br clear="left">
+&nbsp;</p>
+
+<div align="left">
+  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100" id="AutoNumber2" align="left">
+    <tr>
+      <td>
+      <img border="0" src="../images/MarkerEdit.png" width="307" height="124" hspace="10" vspace="10"></td>
+    </tr>
+    <tr>
+      <td>
+      <img border="0" src="../images/MarkerEdit2.png" width="308" height="238" hspace="10" vspace="10"></td>
+    </tr>
+    <tr>
+      <td>
+      <img border="0" src="../images/MarkerEdit3.png" width="308" height="270" hspace="10" vspace="10"></td>
+    </tr>
+  </table>
+</div>
+
+<p>If you right click on the text label, a new dialog box will appear which 
+allows you to change any or all of the properties of both the trace marker and 
+the text string. The two pictures below show the Marker and String properties 
+respectively that you can edit. Note that both the Marker and the String popups 
+have <span class="mcode">delete</span> as one of the options. This is useful if 
+you want to put a marker without a string or a string without a marker. You may 
+delete all the markers you have added this way by selecting <span class="mcode">
+delete</span> and then typing <span class="mcode">all</span> into the edit box 
+below the popup. The same trick works for deleting all the strings added to the 
+figure via the Mark tag. Note that you can have many of these Edit Marker dialog 
+boxes open at same time - as many as one per text string (or even more, although 
+there is probably little benefit to that). All these dialog boxes will be 
+deleted automatically if the main plot window is deleted.</p>
+
+<p>Once you select one of the 8 marker properties, or one of the 10 string 
+properties, the current value of the property appears in the respective edit 
+box. To change the property value, click in the edit box, and type in a new 
+value.</p>
+
+<p>Note that when you select the <span class="mcode">color</span> property, the 
+property value is a set of three numbers corresponding to red, green, and blue 
+respectively. Each number is an intensity value and must range from zero (off) 
+to 1.0 (full intensity). You may change the color by entering the desired rgb 
+values. When you press &lt;Enter&gt; the new value will be accepted and you will see 
+the marker or string change to the new color. However since it is often 
+difficult to predict exactly what these colors look like, plt provides an easier 
+way to select new colors. Instead of left clicking on the rgb triple, use a 
+right click. A new color section box will appear. The use of the color selection 
+box appears below, since the same dialog box is used to adjust figure and line 
+colors.<br clear="left">
+&nbsp;</p>
+
+<h3>Menu</h3>
+
+<p>The menu bar is not visible by default (unless <span class="mcode">
+'options','m'</span> appears in the argument list) but may be enabled by 
+left clicking on the Menu tag. For a description of the options available
+from the menu bar, see the section below (Menu Bar).
+<br><br>
+<img border="0" src="../images/CursorData.png" vspace="5" align="left" hspace="10"></p>
+Right clicking on the Menu tag opens up a new window similar to this one shown called
+the  <b><i><font size="+1"> Cursor Data Window </font></i></b>. This window shows the
+x and y values of all visible plot traces. The down arrows
+(<span class="mcode">vvvvvv</span>) highlighted in the middle of this window indicate
+that the cursor is currently pointing to the 199th data element of the trace
+whose trace ID is "Line 2". As you move the cursor around (by any of the many methods)
+the cursor data window will automatically be updated so that arrows always point to
+the current cursor location. The cursor index will always be shown near the middle
+of the window but you can use the scrollbar on the right side of the figure to view
+any of the data values that appear on the plot.
+<br><br>
+The first column heading is always "index" and the index column will contain all the
+integers between 1 and n, where n is the data length of the longest visible trace.
+The second column heading is always "X" which indicates that this column contains the
+Xdata values of the first visible trace. The 3rd column will contain the y values
+of the first visible trace and the column heading will be the traceID. The 4th column
+will again have a heading of "X" and will contain the x data for the 2nd visible trace
+except (as in this example) when the x values are the same as for the previous trace
+in which case the X column is omitted. In this example all 3 traces had the same x vector
+so only one column is needed for it. However if the 3 traces each had different x vectors
+then the column headings would have been <i>"index,X,Line1,X,Line2,X,Line3"</i>.
+<br><br>
+If the characters are two big or small for your taste you can adjust the size with the
+fontsize popup. Click the save button to create a text file that contains the exact text
+that appears in the list box (from index 1 all the way to the end of each trace).
+The column headings will appear at the very top of the text file.
+<br><br>
+Note that if you are using subplots, some of the column headings may be blank since
+the subplot traces do not use TraceIDs. However if a subplot has a y-axis label
+then that label will be used as column heading for the trace inside the subplot.
+<br clear="left">
+
+<h2>Menu Bar</h2>
+<p><img border="0" src="../images/Menu.png"></p>
+<p>If plt is compiled into an .exe application, only the 
+first and last menus (<span class="mcode">File</span>&nbsp;and&nbsp;<span class="mcode">Color/Lines</span>) will appear. (The other menu items depend on the MatLab application, 
+so it must be installed and running.)</p>
+<p>
+<img border="0" src="../images/FileMenu.png" vspace="5" align="right" hspace="10"></p>
+<p>
+The most useful function of the menu bar for most plt applications is <span class="mcode">
+Print</span>, the last item under the <span class="mcode">
+File</span> menu. This is probably the easiest and most reliable way to make a 
+hardcopy of the plt window. As you can see is this picture, plt adds the 
+following three items to the File menu:</p>
+<ul>
+  <li> <span class="mcode">
+  plt&nbsp;save </span>saves the current figure so that that it can be opened later 
+  (see plt open below). A dialog box opens allowing you to choose the name of 
+  the file. A .plt extension is used for these files although in fact they are 
+  ordinary .mat files. This menu item is equivalent to typing <span class="mcode">
+  plt&nbsp;save</span> at the Matlab command prompt. Also at the command prompt, you 
+  may type <span class="mcode">
+  plt&nbsp;save&nbsp;filename</span> which avoids the file dialog box by 
+  specifying the file directly and of course the functional form <span class="mcode">
+  plt('save','filename')</span> works also.</li>
+  <li> <span class="mcode">
+  plt&nbsp;open </span>opens a dialog box that allows you to select a .plt figure 
+  file that was saved with the plt save menu. The new window should look and 
+  behave the same as the original plt window. (Note that if the original plt 
+  window was created with a function that provided additional plotting features 
+  to the plt window, those features will not be available after opening the 
+  figure.) This menu item is equivalent to typing <span class="mcode">
+  plt&nbsp;open</span> at the Matlab command prompt. Also at the command prompt, you 
+  may type <span class="mcode">
+  plt&nbsp;open&nbsp;filename</span> which avoids the file dialog box by specifying the 
+  file directly. A new window is opened containing the data that was saved.</li>
+  <li> <span class="mcode">
+  plt&nbsp;hardCopy </span>opens a dialog box used for printing and creating 
+  screen captures of plt figures. As mentioned above, the general Maltab print 
+  command is used for the same purpose however in some cases the plt hardCopy 
+  dialog box may provide more flexibility, especially for creating  
+  screen captures in bmp, post script, or win meta formats. The use of the hardCopy dialog box is described 
+above under &quot;Menu box&quot;, &quot;Print&quot;.</li>
+</ul>
+<p>
+<img border="0" src="../images/pltMenu.png" align="left" hspace="10" vspace="30"></p>
+<p>&nbsp;</p>
+<p>The last menu item (<span class="mcode">plt</span>) is unique to plt. 
+When you click on this menu item you will see these eight submenus.</p>
+<p>To change the color or other property of a trace or of its associated cursor, 
+first click on the trace that you want to modify (i.e. make the trace active) 
+and then click on the <span class="mcode">Edit&nbsp;line</span> submenu. You 
+will see a new figure similar to the one below. Note that the three property 
+editing windows shown below may also be opened from the &quot;Properties&quot; selection 
+that appears when you right click on the Yedit cursor. (See
+<a href="Data%20editing.htm">Data editing</a>.)</p>
+<br clear=left>
+<h3>Editing line, cursor, and figure properties</h3>
+<p>
+<img border="0" src="../images/color2.png" align="left" hspace="10"></p>
+<p>As you can see from the submenu, you can also bring up the edit line figure 
+by pressing the &lt;Control E&gt; hot key. (Right clicking on the <span class="mcode">Mark</span> tag 
+in the menu box is yet a third way to bring up the edit line dialog box. That 
+might be quicker if the menu bar is hidden.)</p>
+<p>The left side of the Edit Line dialog box 
+controls the properties of the active trace and the right side controls the properties 
+of the cursor attached to that trace. The properties that appear in both these popups 
+are the same as those under &quot;Marker properties&quot; in the Edit Marker dialog box 
+shown above. Note that 
+one can edit the data plotted by selecting and editing the Xdata or Ydata line properties. This works 
+well for simple traces with less than a few dozen data elements. For longer 
+sequences you will be better off using&nbsp; the data editing technique described in 
+the <a href="Data%20editing.htm">data editing</a> section. Note that (for 
+example) if you modify the Ydata property by removing or adding data elements 
+that the line will dissappear until you also modify the Xdata property by 
+removing or adding the same number of points. This is because the line object 
+can't be rendered unless the lengths of the Xdata and Ydata properties are the 
+same.</p>
+<p>If you want to edit the properties of the line associated with a right hand 
+axis (if one has been enabled) you must:</p>
+<ul>
+  <li>First, right click on the TraceID tag 
+associated with that trace (always the last one in the TraceID list) to make 
+  that trace the only visible trace.</li>
+  <li>Then make the trace active by clicking on it.</li>
+  <li>Then select the <span class="mcode">Edit&nbsp;line</span> submenu (or press &lt;Cntrl&gt; 
+  E)</li>
+</ul>
+<p>
+<img border="0" src="../images/color2a.png" align="left" hspace="10">If you 
+want to edit all the lines at once, click on the <span class="mcode">Edit all 
+lines</span> submenu. A dialog box such as this will appear. (An alternate way 
+to bring up ths dialog box is to first click on the &Delta; button to put the 
+cursor in delta mode and then right 
+click on the <span class="mcode">Mark</span> tag.) When you change the popup 
+menu to select a new property, the edit box will be updated to show the current 
+value of that property for the active trace just as before. However if you then 
+change the property value in the edit box, this property will get changed for 
+all the traces on the plot, not just the active trace. This is probably not 
+appropriate for the color property, but it may be useful for some of the other 
+trace properties, such as linewidth. You can also use this dialog box to make 
+all the cursors larger or a different shape for instance.<br clear="left">
+&nbsp;</p>
+<p>
+<img border="0" src="../images/color3.png" align="left" hspace="10"></p>
+<p>The next submenu is <span class="mcode">Edit&nbsp;figure&nbsp;colors</span> which 
+brings up this dialog box. From this dialog box you can change all of the figure 
+colors which are not accessible from the edit lines dialog boxes described 
+above.<br clear="left">
+&nbsp;</p>
+<p>
+<img border="0" src="../images/color3a.png" align="left" hspace="10"></p>
+<p>These are the eight items that you can modify from the
+<span class="mcode">Edit&nbsp;figure&nbsp;colors</span> dialog box.
+After selecting one of these items, the current 
+color of that item appears in the edit box below the popup as a set of three 
+intensity numbers corresponding to red, green, and blue respectively. You may 
+change the color by left clicking the edit box and entering the desired rgb 
+values or by right clicking the edit box which will bring up the color selection 
+box shown below:<br clear="left">
+&nbsp;</p>
+<h3>The Color Selection box</h3>
+<p>
+<img border="0" src="../images/color4.png" align="left" hspace="10"></p>
+<p>When using the &quot;Edit&nbsp;Marker&quot;, &quot;Edit&nbsp;line&quot;, &quot;Edit&nbsp;all&nbsp;lines&quot;, or &quot;Edit&nbsp;figure&nbsp;colors&quot; dialog boxes described above, if you right click on an edit box 
+containing an rgb triple, the color selection box will appear.</p>
+<p>As with the rgb triples, the three sliders represent the intensity values (except in percent) and will initially be set to the same values that were in 
+the edit box. You can move the sliders (or type in new values) to give the 
+proportion of each color that you want. Only integer values between 0 and 100 
+are accepted giving you more than a million different colors (101 cubed). As you 
+move the sliders, the color of the marker, line, or figure element selected is 
+continually adjusted to reflect the slider settings. The color of the large 
+rectangular patch to the right of the red slider (called the &quot;current color 
+patch&quot;)&nbsp; is also adjusted at the same 
+time which makes it easier especially for the smaller screen elements.</p>
+<p>To make it easier to find the most pleasing color, the 11 by 11 grid of 
+colors is also updated every time a slider is moved. What this grid shows you 
+are the colors that result when the intensity value of the active slider is 
+mixed with 1 of 11 different intensity values of the two inactive sliders. The 
+active slider (i.e. the slider that was last moved) is shown highlighted in 
+yellow.</p>
+<p>So for example, in the figure above, the bottom slider (blue) is active and 
+happens to be set to 0%. This means that all 121 squares of the grid are made up 
+of colors containing no blue. Each row of the grid contains a different 
+intensity percentage of red (0% for the bottom row, 10% for the next row, and 
+100% for the top row). Likewise each column of the grid contains a different 
+intensity percentage of green (0% for the left column and 100% for the right 
+column). Thus, the upper right square in this example then would be yellow (rgb&nbsp;=&nbsp;[1 1 0]).</p>
+<p>When you see a color in the grid that you like, just click on it. The screen 
+element selected as well as the current color patch will instantly change to 
+be the same as the color you clicked on. Of course the two inactive sliders move 
+to show the intensity values of the color you just selected. If you can't find a 
+better color, you can revert to the color in effect when you right clicked on 
+the rgb triple by clicking on the current color patch.</p>
+<p>All this may sound somewhat complicated, however it is far easier to do than 
+to explain. Generally you can pick any of the three sliders, move it around a 
+bit, and you will quickly see the color you want in the grid. By the way, 
+clicking on the slider trough area moves the slider by 10%, so if you want to 
+limit yourself to the 1,331 colors formed with the intensities 
+0,10,20,30,...100%, then you can see all such colors after just 10 clicks of the 
+mouse.</p>
+<h3>Save figure colors</h3>
+<p>Changing colors inside the plt figure using the color selection box is not 
+permanent (i.e. those colors will be forgotten once the application is closed). 
+However you can make the changes permanent by selecting the last choice in the 
+color menu (<span class="mcode">Save&nbsp;figure&nbsp;colors</span>). Selecting that 
+submenu will save the current colors to the color file. You will find the rules 
+that plt uses to determine the color file name in the description of the <span class="mcode">
+'ColorFile'</span> parameter <a href="../Command%20line%20arguments/Colors.htm">
+here</a>.</p>
+<p>When plt starts, the color for each screen element is determined as follows:</p>
+<ul>
+  <li>If a color file is found, the color for all screen elements will be 
+  determined by the file contents.</li>
+  <li>If no color file exists, the colors for particular screen elements are 
+  determined by the color parameters included in the plt function call. These 
+  parameters are described <a href="../Command%20line%20arguments/Colors.htm">
+  here</a>.</li>
+  <li>If such a parameter is not included in the function call, then the color 
+  for that particular screen element will be specified by the plt default color 
+  scheme.</li>
+</ul>
+<p>These color files are in a consistent format so a color file generated in one 
+application can be used in another application by renaming the color file, or by 
+using the name of the desired color file explicitly with the <span class="mcode">
+'ColorFile'</span> parameter. It's possible to edit the color files in the 
+MatLab command window (load, edit save), however it is usually easier to edit 
+them in the same application that created them.</p>
+<h3>Delete cursor annotations</h3>
+The next three selections in the plt menu are also available from the gui without
+the menu enabled. The "Open Data Cursor Window" is available by right clicking on
+the Menu tag, The "Swap X/Y Axis" is available by right clicking on the LinX tag,
+and the "Toggle Line Smoothing" is available by right clicking on the "O" button.
+However the last menu selection ("Delete cursor annotations") is only available
+from the menu bar. If you want to delete the annotations one by one, you can
+right click on the annotations and delete the string and/or marker from the
+Edit Marker window. However if you have many annotations, this menu item provides
+a way to delete them with one simple action.
+</body>
+
+</html>

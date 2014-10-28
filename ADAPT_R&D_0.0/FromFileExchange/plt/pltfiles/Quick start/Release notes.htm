@@ -1,0 +1,1120 @@
+<html>
+<head>
+<title>Release notes</title>
+<style>
+<!--
+span.mcode   {
+	color: #E00000;
+	font-weight: bold;
+}
+h2           { font-size: 22pt }
+-->
+</style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1">
+  <tr>
+    <td width="46%">
+    <h2>Release notes</h2>
+    </td>
+    <td width="28%">
+    <p align="right">&nbsp;</p>
+    <p align="right">&nbsp;</td>
+    <td width="26%">
+    <img border="0" src="../images/plt.png" width="215" height="105" align="right"></td>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="8" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber2">
+  <tr>
+    <td width="11%" align="center">
+    <h3>Version</h3>
+    <p>&nbsp;</td>
+    <td width="89%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">13Mar14<br></span></td>
+    <td width="89%">
+    <ul>
+		<li>Enhancements to edit pseudo object: Values can now be continually incremented or decremented
+		    by holding down the mouse button. Absolute incr/decr values may be specified (as before) or
+		    now they may be specified as a percentage of the current value. incr/decr values may now
+		    be used with floating point edit pseudo objects as well. (Zero increment disables this feature.)
+		    Position may be specified in normalized units (as before) and now data units may be used as well.
+		    The slider in the circles12.m demo program was changed to an edit pseudo object to illustrated its use.</li>
+	        <li>Improved log grid lines. Now includes subdecade grids for 6 decades or less</li>
+ 		<li>HardCopy figure window now defaults properly for bmp files</li>
+		<li>Improved appearance of the menu box (background and border colors)</li>
+		<li>Added right click action to "LinY/LogY" tag. It now brings up the hard copy dialog.</li>
+		<li>Added 'Link' parameter to force groups of plt figures to close together.
+		    The demo programs editz.m and tasplt.m were modified to take advantage of this new parameter</li>
+		<li>Enhanced a few of the functions plotted in curves.m</li>
+		<li>Added images & thumbnails of all the example programs to the help file</li>
+		<li>Fixed various bugs related to log axis scaling and panning</li>
+		<li>Fixed LinX/LogX switching bug for subplots</li>
+		<li>Fixed bug which prevented data editing of subplots</li>
+                <li>Fixed bugs with the subplot parameter and in the weight.m demo program</li>
+		<li>Fixed bug occuring when using the 'MoveCB' parameter with subplots</li>
+		<li>Fixed bug occuring when right clicking on the grid tag using default colors</li>
+		<li>Other minor bug fixes.<br></li>
+	</ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">03Jan14<br></span></td>
+    <td width="89%">
+    <ul>
+                <li>Renamed <span class="mcode">vbar.m, ebar.m, quiv.m, and ftoa.m </span>
+		to <span class="mcode">Pvbar, Pebar, Pquiv, and Pftoa </span> to reduce the
+		probability of name collisions (since these files typically reside in
+		the plt folder on the matlab path).</li>
+		<li>Added <span class="mcode">Linesmoothing</span> to the list of strings
+		that may appear in the
+		<a href="../Command%20line%20arguments/Options.htm">Options</a> parameter.
+		When this option is specified, the Linesmoothing property of the traces is set
+		which tells Matlab to use anti-aliasing techniques to make the traces look
+		smoother. You can also toggle the Linesmoothing property by right clicking
+		on the marker button (labeled with "o"). See important details about this
+		property in the
+		<a href="../Using%20the%20plt%20window/Cursoring.htm">Cursoring</a> section</li> 
+		<li>Changed the default characteristics of the grid lines. The new default is
+		solid lines instead of dashed lines and the default color has changed from
+		dim grey (30%) to very dim gray (13%). Also the default erase mode for the
+		grid lines has changed from 'norm' to 'xor', The grid linestyle may now be selected
+		by using the new <span class="mcode">GridStyle</span> parameter. The Linestyle
+		parameter was also added to the 'init' action of the grid pseudo object.
+		The grid lines used to update only when a zoom or pan operation was complete, but
+		this has been changed so that the grid lines are now updated during the pan
+		and zoom operations. The color file format was updated to include the grid
+		lines erase mode as well as the new GridStyle parameter</li>
+		<li>Left clicking on the Grid tag in the menu box has the same meaning as
+		before (i.e. toggling between grid lines and ticks) however now you can also
+		right click on the Grid tag. The effect of this right click is to toggle back
+		and forth between the current default grid style and something similar to
+		the older grid style (i.e. slightly brighter grey dashed lines in normal
+		erase mode).</li>
+		<li>Left clicking on the Menu tag in the menu box has the same meaning as before
+		(i.e. toggling the menu bar visibility) but there is a new meaning to right
+		clicking on the Menu tag. The effect of this right click is to open a new
+		figure window containing a textual view of the trace data. See
+		<b><i>Cursor Data Window</i></b> in the
+		<a href="../Using%20the%20plt%20window/Menu%20box.htm">Menu box</a> section</li>
+		<li>Replaced the "Color/Lines" heading in the menu bar (which included 4 submenus)
+		    with the "plt" heading containing the original 4 submenus and 4 additional ones.
+		    Three of the new menus mirror right click actions of the GUI objects, but the menu
+		    bar makes the actions easier to discover and remember. The 4th action
+		    (Delete Cursor Annotations) is a new feature which allows you to quickly delete
+		    all annotations entered using the Mark tag. (Previously these annotations
+		    could only be deleted one at a time.)</li>
+		<li>Added the swap x/y action which swaps the x and y data of all traces
+		   (i.e. displays inverse functions). This action is available from the menu bar
+		   (plt menu) as well as by right clicking on the <span class="mcode">LinX</span> tag</i>
+		<li>The installation has been simplified by always including both the compiled help
+		file (plt.chm) as well as the all individual html files used to create it.
+		By default PC systems will open the plt.chm compiled help file and Unix based systems
+		will open plt.htm (the top level html file). However you can change these defaults.
+		See the <a href="Installation instructions.htm">Installation instructions</a> for details.</li>
+		<li>As before the <span class="mcode">HelpFile</span> parameter modifies the
+		help tag left click action. In a similar manner, the new
+		<span class="mcode">HelpFileR</span> parameter modifies help tag right click action.
+		For a full description of these parameters see
+		<a href="../Command%20line%20arguments/Options.htm">Options</a>.</li>
+		<li>Enhancements to the ColorPick pseudo object.</li>
+		<li>Improvements to the example programs include:
+		<ul><li><i>Fontsize</i> popup added to <span class="mcode">demoplt.m</span>
+		    <li><i># of lines</i> control added to <span class="mcode">pltn.m</span>
+		    <li><i>Cycle</i> button added to <span class="mcode">curves.m</span>
+		    <li>The upper plot in <span class="mcode">editz.m</span> now demonstrates the use of Dual Cursors.
+		    <li>Other more minor enhancements.
+		</ul>
+		<li>Y-axis metric prefixes are now disabled when using the SubTrace parameter</li>
+		<li>Fixed a bug which sometimes prevented you from being able to close the plt window.</li>
+		<li>Many other bug fixes and documentation improvements.</li>
+	</ul>
+    </td>
+  </tr>  
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">03Dec13<br></span></td>
+    <td width="89%">
+    <ul>
+                <li>Removed the <span class="mcode">plt('ftoa') </span>
+		and <span class="mcode">plt('vtoa') </span>commands and replaced and expanded on this
+		functionality with the seperate functions <span class="mcode">prin.m</span> and
+		<span class="mcode">ftoa.m</span>. (ftoa is called by prin and is not usually called directly)
+		See the new file <a href="../../prin.pdf">prin.pdf</a> &nbsp;for a description.
+		Modified <span class="mcode">demo\pub.m</span> as well as several of the other
+		example programs to take advantage of the new features provided by the
+		<span class="mcode">prin()</span> function.</li>
+		<li>The cursor control buttons (a group of buttons in lower left corner) previously
+		consisted of 3 buttons (peak finder, valley finder, and delta cursor). As of this release
+		a 4th button is included in this group (called the marker button) and is labeled with
+		the letter "o". The function of this new button is described in the
+		<a href="../Using%20the%20plt%20window/Cursoring.htm">Cursoring</a> section
+		but if you click on this button 3 times you will already know all it does.</li>
+		<li>Left/right clicking on the x-axis label still moves the cursor left/right one data
+		element as it did before, but now this has been enhanced so that the cursor continues
+		to move as long as you hold down the mouse button. The default repeat rate is 33 times
+		a second, but this is adjustable. See the full description in the
+		<a href="../Using%20the%20plt%20window/Cursoring.htm">Cursoring</a> section. This gives
+		the x-axis label nearly all the features of the optional x-axis slider without taking
+		up any extra space.</li>
+		<li>Including the letters <span class="mcode">H </span>or<span class="mcode"> Hidden </span>
+		in the options string now instructs plt to leave the plt figure hidden until the figure
+		visibility property is latter set to 'on'.</li>		
+		<li>Fixed a bug that appeared only on MACs that caused incorrect displays of some
+	        floating point numbers in edit boxes.</li>
+		<li>Other minor bug fixes.<br></li>
+	</ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">06Jun12<br></span></td>
+    <td width="89%">
+    <ul>
+		<li>Changed the focus of plt somewhat (in the <a href="Introduction.htm">
+		Introduction</a>) from plotting to GUI 
+		tools although many users will still think of plt primarily as a substitute for plot 
+		and plotyy.</li>
+		<li>Added the ColorPick pseudo object.&nbsp; (See
+		<a href="../Command%20line%20arguments/Pseudo%20objects.htm">Pseudo objects</a>). 
+		The demoplt.m function was modified to demonstrate how to use 
+		this new pseudo object.</li>
+		<li>The data editing capabilities of plt (See
+		<a href="../Using%20the%20plt%20window/Data%20editing.htm">Data editing</a> )
+		were completely revamped, both to make it easier to use and to allow
+		its use with subplots. The <span class="mcode">demo\editz.m</span> demo 
+		routine&nbsp; was substantially rewritten to take advantage of the new 
+		data editing interface.</li>
+		<li>Modified the <span class="mcode">demo\trigplt.m</span> demo routine to show 
+		how to create a &quot;clipboard&quot; button as well as how to modify the position 
+		and appearance of the traceID box.</li>
+		<li>Modified the <span class="mcode">demo\pltvbar.m </span>demo routine to show 
+		how to use the Grid pseudo object to display some tabular character 
+		data.</li>
+		<li>The <span class="mcode">plt('ftoa') </span>function was enhanced to 
+		include an additional formatting code ( <span class="mcode">'c'</span> ) 
+		which is useful for displaying color triples.</li>
+		<li>Many minor bug fixes.<br></li>
+	</ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">02Dec11</span></td>
+    <td width="89%">
+    <ul>
+      <li>Added the <span class="mcode">'SubTrace'</span> parameter to allow 
+      more flexibility on how traces are assigned to the various subplot axes. 
+      (See <a href="../Command%20line%20arguments/Axis%20properties.htm">
+      SubTrace Parameter</a>)</li>
+      <li>Added a new interpretation of the <span class="mcode">'SubPlot'</span> 
+      parameter which allows you to adjust the spacing between two columns of 
+      subplots. (See
+      <a href="../Command%20line%20arguments/Axis%20properties.htm">Subplot 
+      Parameter</a>)</li>
+      <li>The demo program <span class="mcode">demo\pub.m</span> was expanded to 
+      include yet one more plot to show how subplots can be used when formatting 
+      plots for publication and to show how the SubTrace parameter is used.</li>
+      <li>Fixed bugs which were causing the delta cursor and peak/valley finder 
+      features to work incorrectly when using Matlab 2009b or newer.</li>
+      <li>Fixed bugs which caused the <span class="mcode">AxisPos</span> 
+      parameter to be interpreted incorrectly when used with subplots.</li>
+      <li>Added the <span class="mcode">'MotionEdit'</span> parameter which 
+      allows you to specify a function to be executed while the mouse is being 
+      moved during a data edit operation. (See
+      <a href="../Command%20line%20arguments/Cursor%20commands.htm">Mouse Motion 
+      Functions</a>.) The <span class="mcode">demo\editz.m</span>&nbsp; program 
+      was updated to take advantage of this feature. If you have used previous 
+      versions of editz (which updated the plots only after you have selected 
+      the final root location), you will recognize the benefit of seeing 
+      the transfer function plot update in real time as you drag a root to a new 
+      location.</li>
+      <li>In a similar vain to 'MotionEdit' the <span class="mcode">'MotionZoom'</span> 
+      parameter was added which allows you to specify a function to be executed 
+      while the mouse is being moved during a display zoom operation (i.e. while 
+      the zoom box is being dragged). (See
+      <a href="../Command%20line%20arguments/Cursor%20commands.htm">Mouse Motion 
+      Functions</a>.) The <span class="mcode">demo\gauss.m</span> 
+      function was updated to take show how to use this feature.</li>
+      <li>Fixed a bug which caused the display to flicker while a plt window was 
+      being initialized.</li>
+      <li>Added more useful information to the &quot;Calling sequence&quot; section of the 
+      documentation.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">11Mar10</span></td>
+    <td width="89%">
+    <ul>
+      <li>The demo program <span class="mcode">demo\pub.m</span> was expanded to 
+      include an additional plot (bar chart).</li>
+      <li>A bug was fixed that caused an error when null strings were specified 
+      in the TraceID parameter.</li>
+      <li>The cursor ID (cid) is now saved in the axis user data even for 
+      subplot axes.</li>
+      <li>Changes for compatibility with Matlab ver 2009b</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">25Feb10</span></td>
+    <td width="89%">
+    <ul>
+      <li>Added a cursor mode to show distance from cursor to the origin or to 
+      the marked location, i.e. abs(x+iy). See <i>Average, RMS, Slope, &amp; Distance readout
+      </i>section in <a href="../Using%20the%20plt%20window/Cursoring.htm">
+      Cursoring</a>. </li>
+      <li>Improvements and bug fixes to the &quot;plt hardcopy&quot; function (from the 
+      file menu or optionally in the menu box). Defaults are now saved in 
+      pltHcpy.mat in the folder containing plt.m.</li>
+      <li>Fixed a bug that caused the cursor to misbehave when cursoring non-monotonic 
+    traces on the right hand axis.</li>
+      <li>Fixed a bug that caused annotations added 
+    with the &quot;mark&quot; feature to sometimes be associated with the incorrect axis.</li>
+      <li>Fixed a bug that sometimes caused the grid lines to not initialize 
+      properly until the first time you clicked on the figure window.</li>
+      <li>Fixed some bugs related to grid lines on subplots (turning on/off via 
+      the menu box tag or via the 'Ticks' options argument).</li>
+      <li>Fixed bug in setting x-axis limits for right hand column of subplots 
+      ('Xlim' parameter).</li>
+      <li>Improved cursor hiding feature (right click of y-axis label) to work 
+      with subplots as well.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">03Dec09</span></td>
+    <td width="89%">
+    <ul>
+      <li>Added a new example (<span class="mcode">pub.m</span>) to the demo 
+      folder to show how to optimize a plot for publication (instead of the 
+      typical data exploration uses of plt). Also demonstrates the use of the 
+      new property prefix characters described below.</li>
+      <li>Previously there were two property prefix characters ('<span class="mcode">+</span>', 
+      '<span class="mcode">-</span>') which refer to the left and right axis 
+      properties. (Without the prefix characters plt assumes properties are to 
+      be applied to the line objects.) Now three additional prefix characters 
+      have been added ('<span class="mcode">&lt;</span>', '<span class="mcode">&gt;</span>', 
+      '<span class="mcode">.</span>') which refer the properties to the left 
+      y-label, right y-label and x-label respectively. A property may be 
+      preceded by more than one prefix character.&nbsp; For example <span class="mcode">
+      '&gt;.-FontSize',14</span>&nbsp; will change the font size of the right 
+      y-label, the x-label and the tick marks of the right hand axis. See
+      <a href="../Command%20line%20arguments/Axis%20properties.htm">Axis 
+      properties</a> for details.</li>
+      <li>Improved <span class="mcode">
+      demoplt.m</span> so that it is easier to tell which demo is currently 
+      running.</li>
+      <li>Fixed a bug with the workspace plotter that occurred when the 
+      workspace contained a large number of variables.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">07Nov09</span></td>
+    <td width="89%">
+    <ul>
+      <li>Fixed a bug in plt's <span class="mcode">
+      Edit line</span> selection from the color menu.</li>
+      <li>Fixed a bug in <span class="mcode">
+      demoplt.m</span> that would sometimes cause an error if you clicked in the 
+      listbox window.</li>
+      <li>Fixed a bug in the <span class="mcode">
+      plt('open')</span> command for non Windows systems</li>
+      <li>Significant enhancements to the <span class="mcode">
+      winplt.m</span> demo program including the use of an application specific 
+      help file as well as the use of a popup control to edit a vector (the 
+      window kernel in this example).</li>
+      <li>Added the <span class="mcode">
+      plt hideCur</span> command. Equivalent to right clicking on the y-axis 
+      label. See <a href="../Command%20line%20arguments/Cursor%20commands.htm">
+      Cursor commands</a>.</li>
+      <li>Added the <span class="mcode">plt('showTrace',e)</span> command. For 
+      details see the &quot;DIStrace&quot; section at
+      <a href="../Command%20line%20arguments/Trace%20properties.htm">
+      Trace&nbsp;properties</a>.</li>
+      <li>Documentation updates</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">25Oct09</span></td>
+    <td width="89%">
+    <ul>
+      <li>All the example routines in the <span class="mcode">
+      demo</span> folder (except the scripts) were substantially rewritten for 
+      improved clarity.</li>
+      <li>The <span class="mcode">
+      winplt</span> demo now demonstrates how to include two help tags in the 
+      menu box (one for plotting help and the other for application specific 
+      help). The files <span class="mcode">
+      winplt.chm</span> and <span class="mcode">
+      winplt.pdf</span> were added both to demonstrate this feature and to 
+      provide more extensive information about the winplt demo program.</li>
+      <li>The<span class="mcode">
+    demoplt.m </span>program was rewritten to make it easier to run the 
+      individual examples as well as auto-sequence thru them. A listbox was 
+      added to allow easy viewing of the demo programs help text.</li>
+      <li>In addition to pure strings to be evaluated, the plt callback 
+      functions now allows you to specifying a function handle of the form<span class="mcode"> 
+      @func </span>as well as the cell array form<span class="mcode"> {@func,&nbsp;arg1,</span>&nbsp;<span class="mcode">ar2,&nbsp;...&nbsp;argn} </span>
+      which lets you provide arguments to the callback function. This 
+      applies to the plt parameters <span class="mcode">
+      moveCB</span>,<span class="mcode">
+      axisCB</span>,<span class="mcode">
+      TIDcback</span>,<span class="mcode">
+      Xstring</span>, and<span class="mcode">
+      Ystring</span> as well as the callbacks for the auxiliary plt functions <span class="mcode">
+      edit</span>,<span class="mcode">
+      pop</span>, and<span class="mcode">
+      slider</span>. Note that you can't take advantage of the string 
+      substitution features of these callbacks when using the function handle 
+      forms. This form is now used in many of the
+      <a href="../Command%20line%20arguments/Programming%20examples.htm">
+      programming examples</a>.</li>
+      <li>Added the ability to modify properties of the left or right axis using 
+      plt parameters. (See <a href="../Command%20line%20arguments/Axis%20properties.htm">
+      +AxisProp, -AxisProp</a>). This feature is demonstrated in the<span class="mcode">
+      demo\pltvbar.m</span> example program.</li>
+      <li>Enhanced the data editing features to include the ability to add or remove 
+      data points from a trace. Also added a more natural way of entering the data 
+      edit mode. See
+      <a href="../Using%20the%20plt%20window/Data%20editing.htm">data editing</a> 
+      for details.</li>
+      <li>Added a new set command (<span class="mcode">'val'</span>) to the <span class="mcode">
+      plt('slider') </span>plt auxiliary function. See
+      <a href="../Command%20line%20arguments/Auxiliary%20plt%20functions.htm">
+      here</a>.</li>
+      <li>Added the <span class="mcode">plt('save',file)</span> command. See
+      <a href="../Using%20the%20plt%20window/Menu%20box.htm">menu box</a> for 
+      details.</li>
+      <li>Fixed a bug that caused the right hand axis to be missing from <span class="mcode">getappdata(gcf,'axis')</span>, 
+      as well as a minor bug fix in the data editing mode and a bug fix relating 
+      to a rare crash when saving a file from the menu bar.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">11Aug09</span></td>
+    <td width="89%">
+    <ul>
+      <li>This is the first release which includes the full <span class="mcode">
+      .m</span>&nbsp; source code. The <span class="mcode">
+      pcode</span> or <span class="mcode">
+      dll</span> versions are no longer needed.</li>
+      <li>Added the <span class="mcode">
+      TraceMK</span> parameter to allow you to include the line types in the 
+      trace selection box. See the demo programs <span class="mcode">
+      demo\trigplt.m </span>and <span class="mcode">
+      demo\subplt.m</span>&nbsp; for examples of using this parameter. See
+      <a href="../Command%20line%20arguments/Trace%20properties.htm">Trace 
+      properties</a><span class="mcode"> </span>for a complete description of the 
+      TraceMX parameter.</li>
+      <li>Added a new example to the demo folder (<span class="mcode">trigplt.m</span>) 
+      to demonstrate the use of the TraceMK parameter as well as the use of the 
+      slider pseudo object.</li>
+      <li>Added the <span class="mcode">
+      Fig</span> parameter to allow plt to use an already opened figure window 
+      instead of creating a new one. See
+      <a href="../Command%20line%20arguments/Labels%20and%20figure%20properties.htm">
+      Labels and figure properties</a><span class="mcode"> </span>for a complete description of the 
+      Fig parameter.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">11May09</span></td>
+    <td width="89%">
+    <ul>
+      <li>Fixed a bug which caused plt to crash when called from a guide 
+      application.</li>
+      <li>Fixed a bug which sometimes caused the wrong foreground color in the 
+      cursor edit boxes.</li>
+      <li>Fixed a bug which sometimes caused the <span class="mcode">
+      Xlim</span> or <span class="mcode">
+      Ylim</span> parameter to be ignored.</li>
+      <li>Improved the operation of the x-axis slider.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">18Jan09</span></td>
+    <td width="89%">
+    <ul>
+      <li>The <span class="mcode">SubPlot</span> parameter was added, a major 
+      enhancement in plt's ability to place multiple plots in a figure window. 
+      This is more flexible and far easier to use than the subplot method 
+      introduced in version 19Aug08. The <span class="mcode">demo\subplt.m</span> 
+      and <span class="mcode">subplt8.m</span> examples were rewritten to use 
+      the new SubPlot parameter. The <span class="mcode">weight.m</span> example 
+      (which was also simplified by using the new parameter) also demonstrates a 
+      trick for allowing multiple traces in each subplot. See <a href="../Command%20line%20arguments/Axis%20properties.htm">
+      Axis properties</a><span class="mcode"> </span>for a complete description of the 
+      SubPlot parameter.</li>
+      <li>The <span class="mcode">
+      Xlim</span> and <span class="mcode">
+      LabelX</span> parameters now allow cell array inputs so that they may 
+      specify values for the right hand column of subplots. The <span class="mcode">
+      LabelY</span> parameter now allows a cell array input so that you can 
+      specify labels for all the subplots as well as for the right hand axis of 
+      the main plot, and <span class="mcode">
+      Ylim</span> parameter can take a cell array input to specify limits for 
+      both the left and right hand axis of the main plot.</li>
+      <li>Added an easier way to remove cursor objects for production plots. See 
+      the <span class="mcode">
+      -All</span> and the <span class="mcode">
+      Nocursor</span> items under the <span class="mcode">
+      Options</span> parameter. (The last figure of the <span class="mcode">
+      circles12.m</span> example demonstrates this usage.)</li>
+      <li>Right clicking on the <span class="mcode">
+      Menu</span> tag in the menu box will now toggle the line style used for of 
+      all traces. (See <a href="../Using%20the%20plt%20window/Menu%20box.htm">
+      Menu box</a>)</li>
+      <li>Added the <span class="mcode">
+      Lhandles, axis, </span>and<span class="mcode">
+      cid </span>cid figure application properties. (See
+      <a href="../Command%20line%20arguments/Calling%20sequence%20and%20line%20styles.htm">
+      Calling sequence</a>)</li>
+      <li>Added the <span class="mcode">
+      'tag','MenuBox'</span> property to the menu box axis to make it easier to 
+      find.</li>
+      <li>Added a new parameter to the <span class="mcode">
+      plt('grid','init',...</span> command (the erase mode). (See
+      <a href="../Command%20line%20arguments/Auxiliary%20plt%20functions.htm">
+      Auxiliary plt functions</a>). Also the default erase mode for the grids 
+      has changed from xor to normal. You may select the exclusive-or erase mode for the 
+      grids by specifying a grid color containing a negative value (e.g. <span class="mcode">
+      'GRIDc',[0 -.2 .4]</span>). The actual grid color used in this example is 
+      [0 .2 .4]).</li>
+      <li>Added a special case to the<span class="mcode"> 
+      plt('cursor',cid,'set','activeLine',a,k)</span> command for when a is zero. (See
+      <a href="../Command%20line%20arguments/Cursor%20commands.htm">Cursor 
+      commands</a>)</li>
+      <li>Added a special case for null trace ID strings. (See
+      <a href="../Command%20line%20arguments/Trace%20properties.htm">Trace 
+      properties</a>)</li>
+      <li>Fixed bug that could cause a crash when selecting logarithmic y-axis.</li>
+      <li>Fixed bug that caused a crash when using the color selection box to 
+      edit plot colors.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">03Oct08</span><p>&nbsp;</td>
+    <td width="89%">
+    <ul>
+      <li>A zero is now allowed for the 3rd or 4th element of the <span class="mcode">
+      'position'</span> parameter to indicated that the width or height of the 
+      window should be chosen so that circles will look symmetric. However after 
+      stretching the figure size with the mouse, the circle will then look like 
+      an ellipse. If you want the circle to look symmetric even after the figure 
+      window is resized, you should follow the plt command with the command <span class="mcode">
+      axis('equal')</span>.</li>
+      <li>The example programs <span class="mcode">circle12.m</span>&nbsp; and&nbsp; <span class="mcode">
+      editz.m</span>&nbsp; were enhanced to demonstrate the feature mentioned 
+      above.</li>
+      <li>The TraceID box has been made wider in situations where it will not 
+      run into the y-axis label.</li>
+      <li>The file <span class="mcode">plt.dll</span> is now compressed into a 
+      zip file called pltdll.zip. This replaces a different type of compression 
+      used in earlier releases that caused some errant virus protection programs 
+      to flag this file as a virus. (For a description of this file, see the <a href="Installation%20instructions.htm"> installation instructions</a> 
+      or see the last item in the 12-Mar-08 release notes).</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">19Aug08</span></td>
+    <td width="89%">
+    <ul>
+      <li>Added two new example programs (<span class="mcode">demo\subplt.m</span> 
+      and <span class="mcode">subplt8.m</span>) which show how to put several plots (each with its own cursor) in a 
+      single figure window. The cursor move callback (<span class="mcode">moveCB</span>) 
+      and the axis callback (<span class="mcode">axisCB</span>) are used to keep 
+      the plots synchronized.</li>
+      <li>The way that <span class="mcode">plt.chm</span> is opened when you 
+      click on the <span class="mcode">help</span> tag has been improved. 
+      Previously plt and any application calling plt would hang until the help 
+      window was closed. Now you can continue to use plt while the help window 
+      is open.</li>
+      <li>The axis change (<span class="mcode">axisCB</span>) callback is now 
+      called (as it should) when you click on the <span class="mcode">Zout</span> 
+      or <span class="mcode">XY&lt;-&gt;</span> tags in the menu box.</li>
+      <li>Now when you right click on the y-axis label, the menu box and all 
+      cursor objects disappear. Right clicking again causes the objects to 
+      reappear. This is useful for making screen captures of the plots since 
+      these objects are used for data exploration and are normally just a 
+      distraction in a hardcopy. See
+      <a href="../Using%20the%20plt%20window/Cursoring.htm">cursoring</a>.</li>
+      <li>The <span class="mcode">cursor('get','obj')</span> call was added so 
+      that one can easily get the handles of the cursor objects.</li>
+      <li>The <span class="mcode">cursor('set','VISon')</span> and&nbsp;
+      <span class="mcode">VISoff</span> calls were improved so that they now 
+      include control of the xstring and ystring objects, the x-cursor slider 
+      and the cursor id string.</li>
+      <li>A bug was fixed which caused plt to render some text improperly when 
+      the default text interpreter was changed.</li>
+      <li>A bug was fixed which sometimes caused the plt cursor to change shape 
+      after the data editing feature was used.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">13Jun08</span></td>
+    <td width="89%">
+    <ul>
+      <li>Added a new example program (<span class="mcode">demo\movbar.m</span>) 
+      which shows a simple way to start and stop a moving plot as well as 
+      demonstrating the use of the <span class="mcode">xstring</span> parameter.</li>
+      <li>Added the ability to set properties of the main axis from within the 
+      plt call. (Just add a &quot;<span class="mcode">+</span>&quot; in front of the axis 
+      property name. For example <span class="mcode">+FontSize</span> will set 
+      the axis font size property. For an example of how you might use this 
+      feature, see the <span class="mcode">demo\pltvbar.m</span> demo program.</li>
+      <li>Added a cursor function to call the user defined cursor callbacks. 
+      (See the <a href="../Command%20line%20arguments/Cursor%20commands.htm">
+      mainCur</a><span class="mcode"> </span>function and <span class="mcode">demo\movbar.m</span>)</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">11Apr08</span></td>
+    <td width="89%">
+    <ul>
+      <li>Added the ability to link the left and right axes for panning and 
+      zooming. This option is enabled by default. Use the new
+      <span class="mcode">AxisLink</span> parameter to turn off linking by 
+      default. Regardless of the status of the default you may toggle the axis 
+      linking by clicking on the right-hand y-axis label. The divide sign 
+      indicates the axes are unlinked (i.e. divided).</li>
+      <li>Improved the <span class="mcode">demo\editz.m</span> demo program, 
+      which now displays phase as well as magnitude. It also demonstrates the 
+      use of the new <span class="mcode">AxisLink</span> parameter</li>
+      <li>Previously although a plt figure could be saved (.fig), when the 
+      figure was reopened the usual plt cursor controls would not be available. 
+      In this release, <span class="mcode">plt&nbsp;save</span> and <span class="mcode">
+      plt&nbsp;open</span> items have been added to the file menu. Figures saved via 
+      the plt save menu are saved with a <span class="mcode">.plt</span> 
+      extension (although like .fig files they are actually ordinary .mat 
+      files). You can reopen the figure from a file browser dialog box by 
+      selecting the plt open menu or by typing <span class="mcode">plt&nbsp;open</span> 
+      at the command prompt. Or at the command prompt you can type <span class="mcode">
+      plt&nbsp;open&nbsp;filename</span>.</li>
+      <li>Fixed a bug relating to metric prefixes on the y-axis. (The scaling 
+      was improperly applied to the right hand axis where as the intention was 
+      that it should be applied only to the left hand axis.)</li>
+      <li>Fixed a bug relating to the modification and saving of color schemes 
+      when a right hand axis was being used.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">12Mar08</span></td>
+    <td width="89%">
+    <ul>
+      <li>Changed the method of rendering the right-hand axes to avoid the 
+      problem when plotting overlapping or very dense data sets.</li>
+      <li>Changes for compatibility with Matlab ver 7.5</li>
+      <li>Previously data editing only worked on traces on the left axis. Now it 
+      works on the right axis as well.</li>
+      <li>Renamed the &quot;COLORc&quot; parameter to &quot;COLORdef&quot; for clarity.</li>
+      <li>Eliminated the flicker and window movement you used to see when 
+      starting plt.</li>
+      <li>Fixed bug in plt('datestr') and other minor bug fixes.</li>
+      <li>Added the <span class="mcode">plt.d</span>&nbsp; file to this 
+      release. This dll is only useful for compiled applications using the older 
+      Matlab compiler (ver 2.2) that shipped with Matlab 6.1. Feel free to 
+      delete this file if you are not using that compiler. <i>(To use this file, 
+      rename it to plt.dll)</i></li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">02Dec07</span><p>&nbsp;</td>
+    <td width="89%">
+    <ul>
+      <li>Many of the example programs where modified to improve clarity.</li>
+      <li>A new example program (<span class="mcode">demo\dice.m</span>) was 
+      added that shows how to plot a function as it is as it is being computed 
+      (i.e. the plot shows the function growing in length).</li>
+      <li>A new feature was added to the x-axis label. Now when you left/right 
+      click on this label the cursor x-axis position increments/decrements by 
+      one data index. See the
+      <a href="../Using%20the%20plt%20window/Cursoring.htm">cursoring</a> 
+      section for details.</li>
+      <li>The x-axis slider now provides a more natural functionality. See the
+      <a href="../Using%20the%20plt%20window/Cursoring.htm">cursoring</a> 
+      section for details.</li>
+      <li>The cursor <span class="mcode">'maincur'</span> call now changes the 
+      axis limits if necessary to keep the cursor in view.</li>
+      <li>Modified the default trace color ordering. The most significant change 
+      is that yellow is now used as the color of the 13th trace instead of the 
+      7th. This means that yellow will be used less often (which is good since 
+      yellow doesn't normally print well).</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">08Jul07</span></td>
+    <td width="89%">
+    <ul>
+      <li>Expanded the <span class="mcode">pltsq.m</span> example to show how 
+      all the traces can be cursored at once</li>
+      <li>Several of the demo examples were edited to improve readability</li>
+      <li>Removed the 'noshift' option that was added in the previous version. 
+      (This proved to be misguided).</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">17May07</span></td>
+    <td width="89%">
+    <ul>
+      <li>The <span class="mcode">plt('datestr')</span> function has been 
+      modified slightly. For dates between 2000 and 2099, it now uses two digits 
+      for the year instead of four. For example &quot;12-Jan-2007&quot; becomes 
+      &quot;12-Jan-07&quot;. This only applies to date string formats 0 and 1.</li>
+      <li>A new method of drawing a zoom expansion box is provided ... <i>hold 
+      both mouse buttons down, and drag</i>. (Actually this method 
+      was previously available as an undocumented feature.)</li>
+      <li>The <span class="mcode">
+      demo\tasplt.m</span> example program was updated and simplified. It now 
+      shows how to use a right hand or top axis to plot in more than one unit.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">04Mar07</span></td>
+    <td width="89%">
+    <ul>
+      <li>The <span class="mcode">plt('slider')</span> function has been 
+      reworked to be easier to use. Several arguments were reordered with 
+      improved defaults. See winplt.m and the new wfall.m for examples of how to 
+      use the slider object.</li>
+      <li>A new example program (<span class="mcode">demo\wfall.m</span>) was 
+      added to demonstrate waterfall plotting as well as extensive use of the <span class="mcode">
+      plt('slider')</span> function.</li>
+      <li>Now the callback function defined by <span class="mcode">'moveCB'</span> 
+      is not called by events initiated from outside the figure window 
+      containing the cursor. (For example a button push that moves the cursor in 
+      another figure window would not activate the callback.) The reason for 
+      this change was to prevent infinite loops when figure A modifies figure 
+      B's cursor and visa versa. If you do want to enable the callback for 
+      external events, insert an extra semicolon as the first character of the 
+      moveCB callback string.</li>
+      <li>Fixed bug causing the cursor to move to the wrong y-axis position for 
+      traces on the right hand axis (only a problem when clicking in the axis 
+      area). Also improved the ability to select the desired line when several 
+      right hand traces are close together.</li>
+      <li>Removed the <span class="mcode">'NewLimit'</span> parameter. (It had 
+      the same function as <span class="mcode">'axisCB'</span>.)</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">28Jan07</span></td>
+    <td width="89%">
+    <ul>
+      <li>Removed the 99 trace limitation for cases where the TraceID box is not used.</li>
+      <li>Added the <span class="mcode">'moveCB'</span> and <span class="mcode">'axisCB'</span> 
+    parameters to plt as an alternate to the equivalent <span class="mcode">
+    plt('cursor',...)</span> commands. The <span class="mcode">editz.m</span> 
+      example was modified to take advantage of this.</li>
+      <li>Added a new example (<span class="mcode">demo\bounce.m</span>) showing 
+    how to use matrix arguments to create many line objects at once. Also shows 
+    how to avoid plt's 99 trace limit by disabling the TraceIDs.</li>
+      <li>Modified the <span class="mcode">
+      pltn</span> example to allow displaying an unlimited number of traces.</li>
+      <li>The colors specified by <span class="mcode">
+      TRACEc</span> are now used in a cyclical fashion to allow specifying fewer 
+      colors than traces.</li>
+      <li>The
+    <span class="mcode">ENAcur</span> and
+    <span class="mcode">DIStrace</span> parameters are now extended if they 
+      contain fewer elements than the number of traces.</li>
+      <li>Added
+    <span class="mcode">TIDcolumn</span> to the documentation (inadvertent 
+      omission).</li>
+      <li>Fixed a bug causing the &quot;Mark&quot; function to crash when TraceIDs are 
+    disabled.</li>
+      <li>Fixed a bug causing incorrect colors when choosing
+    <span class="mcode">COLORc,'default'</span>.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">23Jan07</span></td>
+    <td width="89%">
+    <ul>
+      <li>The <span class="mcode">'Xstring'</span> and <span class="mcode">'Ystring'</span> 
+      parameters where added to provide additional textual information related 
+      to the plotted data including customized cursor readouts. The <span class="mcode">
+      ptln.m, tasplt.m, editz.m</span> examples now use this feature to good 
+      advantage.</li>
+      <li>The callback functions defined by <span class="mcode">'TIDcback'</span>,<span class="mcode"> 'Xstring'</span>, <span class="mcode">'Ystring'</span>, <span class="mcode">'moveCB'</span>, 
+      and<span class="mcode"> 'axisCB'</span> can now contain strings within 
+      strings defined using a single double quote character on either side of the string, 
+      instead of the usual and more cumbersome method using two single quote 
+      characters on each side.</li>
+      <li>The <span class="mcode">'pltquiv.m'</span> example was updated to 
+      demonstrate the use of the <span class="mcode">'TIDcback'</span> 
+      parameter.</li>
+      <li>Added a right click action to the <span class="mcode">XY<font face="Times New Roman">&#8596;</font></span> 
+(XYrotate) tag in the menu box.</li>
+      <li>Improved the avg and rms cursor readout so that NaN values are ignored.</li>
+      <li>Added an additional plot to the circles12.m example program.</li>
+      <li>Added the <span class="mcode">@CID</span> tag to the <span class="mcode">
+      'moveCB'</span> cursor callback function. The <span class="mcode">weight.m</span> and <span class="mcode">
+      tasplt.m</span> 
+      examples now make use of this tag.</li>
+      <li>The <span class="mcode">xy</span> output from <span class="mcode">plt('cursor',cid,'get','position')</span> 
+      is now complex.</li>
+      <li>Improved the look of the cursor peak/valley buttons and delta cursor 
+      button by removing the rectangular dotted line around the string.</li>
+      <li>Fixed bug in Y/X cursor value</li>
+      <li>Added &quot;HardCopy&quot; as the fourth item of the File menu. (See 
+      &quot;print&quot; under &quot;Menu box&quot;).</li>
+      <li>Many documentation improvements and updates</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">26Nov06</span></td>
+    <td width="89%">
+    <ul>
+      <li>Added the capability of assigning different line property values for 
+      each trace</li>
+      <li>A new parameter (<span class="mcode">TIDcolumn</span>) was added to 
+      allow you to arrange the trace IDs in multiple columns.</li>
+      <li>Added a new demo program (<span class="mcode">circles12.m</span>)</li>
+      <li>Fixed a bug that prevented assigning a color to two different traces.</li>
+      <li>Fixed a bug that caused incorrect positioning for the &quot;Mark&quot; function 
+      (right hand axis).</li>
+      <li>Added a default to the color property of the 'pop' and 
+      'edit' objects ([1 1 .4]). Fixed the default color for the background of an open 
+      'pop' menu to agree with the documentation.</li>
+      <li>Added the Fresnel function to curves.m demo so that the symbolic 
+      toolbox is not called.</li>
+      <li>Modified the editz.m example so that the signal processing toolbox is 
+      not required.</li>
+      <li>Modified the winplt.m example program so that it can run without the 
+      signal processing toolbox, however in that case it will not be able to 
+      display all the window types.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">04Sep06</span></td>
+    <td width="89%">
+    <ul>
+      <li>The way plt handles complex arguments was changed. Now including
+      <span class="mcode">w</span> in the argument list (where <span class="mcode">
+      w</span> is complex) is equivalent to including the two arguments &quot;<span class="mcode">real(w),imag(w)</span>&quot;. 
+      In earlier revisions this was only true sometimes.</li>
+      <li>The delta button is now highlighted whenever the delta cursor mode has 
+      been selected.</li>
+      <li>Left clicking on the up/down arrow buttons moves to the next 
+      peak/valley respectively as before. Also as before, clicking on the trace 
+      resets the peak or valley finder so that the next click of the up/down 
+      arrow brings you to the largest peak or smallest valley. Now, the 
+      resetting of the peak or valley finder may also be accomplished by <i>
+      right</i> clicking on the up/down arrow button.</li>
+      <li>Added files:<br>
+      <span class="mcode">vbar.m</span> - for displaying functions as vertical 
+      bars<br>
+      <span class="mcode">ebar.m</span> - for displaying error bars<br>
+      <span class="mcode">quiv.m</span> - for displaying vector fields 
+      (arrows)</li>
+      <li>The functionality of quiv.m is similar to Matlab's quiver.m although 
+      unlike quiver, quiv doesn't call plot. Therefore you must call plot or plt 
+      with the data generated by quiv. In earlier versions of plt, the code in 
+      quiv.m was inside plt.p, but I extracted it to a separate function to 
+      provide more flexibility and a cleaner user interface.</li>
+      <li>In the previous release, all the files were in the same folder. In 
+      this release a new folder named &quot;<span class="mcode">demo</span>&quot; was 
+      added to contain all the example programs.</li>
+      <li>A new program named <span class="mcode">demoplt.m</span> was added (in 
+      the demo folder) which runs all 12 example programs in succession. Every 
+      time you press &lt;Enter&gt; demoplt will close the current example and start up 
+      the next one.</li>
+      <li>A new example program named <span class="mcode">pltvbar.m</span> was 
+      added to demonstrate the use of <span class="mcode">vbar.m</span> and <span class="mcode">
+      ebar.m</span> .</li>
+      <li>The <span class="mcode">pltquiv.m</span> example program was modified 
+      to use the new <span class="mcode">quiv.m</span> function.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">17Aug06</span></td>
+    <td width="89%">
+    <ul>
+      <li>A new parameter (<span class="mcode">'Right'</span>) was added to 
+      specify which traces should be on the right hand axis. In earlier plt 
+      versions, only one trace was allowed on the right hand axis and it had to 
+      be the last trace. Now you may place any or all of the traces on the right 
+      axis. For example, in the argument list you could specify <span class="mcode">
+      'Right',[1&nbsp;4:2:10&nbsp;17]</span>. Then plt would put trace numbers 1,4,6,8,10, 
+      and 17 on the right axis and all other traces on the left axis. A slight 
+      shading is used behind the Trace IDs associated with the right hand axis 
+      so you can tell at a glance which traces belong to which axis. You can 
+      also tell which axis a trace is on by the shape of its cursor (+/o for 
+      left/right axis). As with earlier revisions, a right axis is created if 
+      you include the <span class="mcode">'LabelYR'</span>, or <span class="mcode">
+      'YlimR</span>' parameters in the argument list. For clarity, you should 
+      also include the <span class="mcode">'Right'</span> parameter in that 
+      case, however if omitted, plt will put the last trace on the right axis.</li>
+      <li>A new parameter (<span class="mcode">'DualCur'</span>) was added to 
+      control a feature I now call a dual cursor. The usual cursor can only show 
+      the value of one of the visible traces on the plot. With a dual cursor, 
+      two such values can be shown at the same time - especially useful 
+      when displaying two tightly linked values (for example, the magnitude and 
+      phase of a complex quantity). In earlier versions of plt, a dual cursor 
+      was provided, however it was forced to be on the last trace only which was 
+      also forced to be on the right hand axis. (Moreover the dual cursor was 
+      not optional. If you wanted to use a right hand axis, you automatically 
+      got a dual cursor). As of this version, you specify a dual cursor for 
+      the Nth trace by including <span class="mcode">'DualCur',N</span> in the 
+      parameter list. This means that trace N will never be the active trace and 
+      so its value will never appear in the usual y value readout location 
+      (immediately to the right of the &quot;y:&quot; cursor label). However when you 
+      cursor any other trace, a cursor will also appear on trace N at the same 
+      x-axis location and the value of trace N will appear just to the right 
+      of the value for the active trace. The dual cursor is easily distinguished from the usual cursor by 
+      its shape - an asterisk if the dual cursored trace is on the left axis or 
+      a square if it is on the right axis.</li>
+      <li>A new parameter (<span class="mcode">'TIDcback',fcn</span>) was added 
+      to that one can define a callback function to be executed whenever the 
+      user clicks on a Trace ID (i.e. a trace is enabled or disabled).</li>
+      <li>The <span class="mcode">winplt</span> example program was updated to 
+      show comparisons between previous window time shapes as well as the 
+      previous frequency shapes. (In the earlier revision, only the previous 
+      frequency shapes were saved). This takes advantage of plt's new ability to 
+      put multiple traces on the right hand axis.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">25Jun06</span></td>
+    <td width="89%">
+    <ul>
+      <li>Added the <span class="mcode">Color</span> menu to the menu bar 
+      providing the ability to change any of the colors used by plt and 
+      optionally to make those changes permanent.</li>
+      <li>Enhanced the ability to edit strings created with the <span class="mcode">plt('edit')</span> 
+      command by using the left and right arrow keys.</li>
+      <li>Enhanced the functionality of the <span class="mcode">winplt</span> 
+      example program.</li>
+      <li>Changed the default alignment of&nbsp; <span class="mcode">plt('edit')</span> 
+      strings to <span class="mcode">'center'</span>.&nbsp; (Required to make the 
+      increment/decrement feature to work.)</li>
+      <li>Set foreground (text) color of x/y cursor readout objects to white or 
+      black, whichever enhances contrast.</li>
+      <li>Swapped execution order of <span class="mcode">MoveCB</span> and <span class="mcode">
+      MoveCB2</span> callbacks. This appears to fix the problem of mouse button 
+      up events getting lost (which was only a problem with Matlab ver 2006a or 
+      later).</li>
+      <li>Swapped viewing order of the menu and TraceID boxes. This fixed the 
+      problem where the top menu box item was inaccessible.</li>
+      <li>Fixed bug with <span class="mcode">'@VAL'</span> substitution in <span class="mcode">plt('slider')</span>.</li>
+      <li>Fixed bug in <span class="mcode">plt('slider') </span>relating to the <span class="mcode">'%d'</span> 
+      format.</li>
+      <li>Fixed bug relating to accidentally redefining the <span class="mcode">
+      exp()</span> function</li>
+      <li>Fixed bug relating to finding the help file.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">11Apr06</span></td>
+    <td width="89%">
+    <ul>
+      <li>Added a new option <span class="mcode">plt('Options','Slider',...</span> to 
+      create a slider used for changing the cursor x position</li>
+      <li>Added a dialog box (via a right click on the <span class="mcode">Mark</span> 
+      tag) that allows the editing of line and cursor properties</li>
+      <li>Fixed delta cursors so they can work between different traces</li>
+      <li>Extended <span class="mcode">plt('ftoa',...)</span> to work with 
+      vectors as well as scalars and added a delimiter option. The <span class="mcode">
+      plt('vtoa',...)</span> function was also enhanced.</li>
+      <li>Added the <span class="mcode">[TexOff]</span> specifier in the <span class="mcode">
+      'title'</span> option.</li>
+      <li>The slider now replaces <span class="mcode">'@VAL'</span> in the 
+      slider callback with the current slider value.</li>
+      <li>Biased <span class="mcode">'metricp'</span> call to favor no prefix 
+      between .1 and 9999</li>
+      <li>Changed order of ancillary cursor readout functions (now Avg, RMS,
+      <font face="Times New Roman">Y/X)</font></li>
+      <li><font face="Times New Roman">Added the </font><span class="mcode">
+      plt('rename',s)</span><font face="Times New Roman"> function</font></li>
+      <li><font face="Times New Roman">Added the </font><span class="mcode">
+      plt('cursor','set','activeLine')</span><font face="Times New Roman"> 
+      function</font></li>
+      <li><font face="Times New Roman">Enhanced the&nbsp; </font> <span class="mcode">
+      plt('cursor','Maincur')</span><font face="Times New Roman"> call by 
+      allowing optional parameters</font></li>
+      <li><font face="Times New Roman">Added the&nbsp; </font> <span class="mcode">
+      plt('cursor','init' ...) </span><font face="Times New Roman">call to the 
+      documentation</font></li>
+      <li><font face="Times New Roman">Added a new example program called </font> <span class="mcode">
+      weight.m</span></li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">26Jan06</span></td>
+    <td width="89%">
+    <ul>
+      <li>Changed default color order for better hardcopy results</li>
+      <li>Fixed minor bug in the workspace plotter</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">17Dec05</span></td>
+    <td width="89%">
+    <ul>
+      <li>Added the <span class="mcode">Zout</span> and <span class="mcode">
+      Print</span> tags to the menu box</li>
+      <li>Minor bug fixes and documentation updates</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">06Nov05</span></td>
+    <td width="89%">
+    <ul>
+      <li>Minor improvements to the pseudo slider object</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">18Sep05</span></td>
+    <td width="89%">
+    <ul>
+      <li>Added support for plotting vector arrows (quiver)</li>
+      <li>Added the option to use cell arrays of strings in place of character 
+      arrays in argument lists</li>
+      <li>Extended the use of the <span class="mcode">'AxisPos'</span> parameter 
+      (position of TraceID)</li>
+      <li>The workspace plotter recognizes the new <span class="mcode">
+      TraceIDlen</span> parameter</li>
+      <li>Added&nbsp; <span class="mcode">plt close </span>as an alternative to <span class="mcode">plt closefigs</span></li>
+      <li>Added a new programming example<span class="mcode"> (pltquiv.m) </span>
+      to demonstrate quiver and several other plt features</li>
+      <li>Minor bug fixes and documentation updates</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">11May05</span></td>
+    <td width="89%">
+    <ul>
+      <li>Added the auxiliary function <span class="mcode">plt('edit') </span>for 
+    creating edit text objects</li>
+      <li>Added the auxiliary function <span class="mcode">plt('pop') </span>for 
+    creating popup text objects</li>
+      <li>Added a new programming example (<span class="mcode">curves.m</span>) 
+      to demonstrate the use of the <span class="mcode">plt('edit')</span> and <span class="mcode">plt('pop')</span> 
+      commands.</li>
+      <li>Fixed a bug in the data editing capability that caused it to work only 
+      with large fonts selected in windows.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">29Mar05</span></td>
+    <td width="89%">
+    <ul>
+      <li>Two new programming examples have been added (<span class="mcode">tasplt.m</span> 
+    and <span class="mcode">winplt.m</span>).</li>
+      <li>Added the slider component <span class="mcode">plt('slider',...)</span>. 
+    See <span class="mcode">winplt.m</span> for an example of its use.</li>
+      <li>Added auxiliary functions <span class="mcode">plt('ftoa')</span>, <span class="mcode">plt('vtoa')</span>, <span class="mcode">plt('closefigs')</span>, <span class="mcode">plt('help')</span>, 
+    and <span class="mcode">plt('version').</span></li>
+      <li>The workspace plotter now can plot vectors contained inside 
+    structures.</li>
+      <li>The default figure window position was changed so it doesn't 
+    overlap the start menu.</li>
+      <li>Minor bug fixes and documentation updates</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">03Aug04</span></td>
+    <td width="89%">
+    <ul>
+      <li>A new programming example (<span class="mcode">editz.m</span>) 
+    has been included to demonstrate the utility of the data editing capability.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">14Jul04</span></td>
+    <td width="89%">
+    <ul>
+      <li>Eliminated the commercial version of plt and integrated the
+enhanced features into the free version. The public domain
+version of plt now supports delta cursors and up to 99 traces
+(an increase from five traces).</li>
+      <li>The workspace plotter has been added, which allows you to interactively
+select the vectors in your Matlab workspace that you want to plot.
+This is activated by calling plt with no arguments. A new sample
+script (<span class="mcode">pltvar.m</span>) was added to demonstrate this feature. It simply
+creates several vectors in the workspace and calls plt with no
+arguments.</li>
+      <li>The cursor ID tag is now always to the left of the cursor y label. 
+    Changing the cursor ID tag to <span class="mcode">Avg</span> or
+    <span class="mcode">RMS</span> is now accomplished
+by clicking on the cursor ID tag itself to rotate among the options.
+Also an additional option (<span class="mcode">Y/X</span>) has been added to this selection,
+which displays the ratio of the y and x cursor values. (In delta
+cursor mode, this can be used to display the slope of a trace segment.)</li>
+      <li>Data editing has been added. The data editing mode is 
+    entered by right clicking on the x or y cursor edit boxes. See the 
+    documentation for additional details.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">24May04</span></td>
+    <td width="89%">
+    <ul>
+      <li>Modified the <span class="mcode">plt5</span> and
+    <span class="mcode">pltn</span> examples so they didn't use 
+    <span class="mcode">interp</span>
+(interp requires the signal processing toolbox)</li>
+      <li>Renamed <span class="mcode">PLT.p</span> to 
+    <span class="mcode">plt.p</span> in the zip file (unix is case sensitive)</li>
+      <li>Added the release notes section to the documentation</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">16May04</span></td>
+    <td width="89%">
+    <ul>
+      <li>Added a more obvious way to restore zoomed axis limits</li>
+      <li>&nbsp;Fixed minor bug with the Styles argument</li>
+      <li>Improved the Options argument and made it less cryptic </li>
+      <li>Supply documentation as html in addition to chm</li>
+      <li>Provided an easy way to use Matlab's default colors</li>
+      <li>Improved the organization of the help file</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" align="center" valign="top"><span class="mcode">09May04</span></td>
+    <td width="89%">
+    <ul>
+      <li>First public release of plt</li>
+    </ul>
+    </td>
+  </tr>
+  </table>
+<p>&nbsp;</p>
+
+</body>
+
+</html>

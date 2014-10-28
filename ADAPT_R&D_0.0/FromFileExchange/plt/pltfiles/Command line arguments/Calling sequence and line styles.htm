@@ -1,0 +1,252 @@
+<html>
+<head>
+<title>Calling sequence and line styles</title>
+<style>
+<!--
+span.mcode   {
+	color: #E00000;
+	font-weight: bold;
+}
+h2           { font-size: 22pt }
+-->
+</style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1" height="1">
+  <tr>
+    <td width="71%" height="1">
+    <h2>Calling sequence and line styles</h2>
+    </td>
+    <td width="5%" height="1"></td>
+    <td width="24%" height="1">
+    <img border="0" src="../images/plt.png" width="210" height="98" align="right"></td>
+  </tr>
+</table>
+
+<p><i>Note: The strings in the cursor and auxiliary commands are case sensitive. All 
+other plt string arguments are case insensitive.</i></p>
+
+<p>If no arguments are specified, plt will display the
+<a href="../Quick%20start/Workspace%20plotting.htm">workspace plotter</a>. For 
+plt to plot data it must have at least one argument specifying the y-values to 
+be displayed. More often you will call plt with two arguments:</p>
+<p><span class="mcode">plt(x,y);</span></p>
+
+<p>This plots the data in vector x along the horizontal axis and the data in 
+vector y along the vertical axis. x and y may be row or column vectors. Plt 
+will transpose one of the arguments if needed to line things up, so x could be a 
+row vector while y was a column vector. x and y must be the same length however. 
+If not you will get an error message saying that the vectors must be the same 
+length.</p>
+
+<p>You can call <span class="mcode">plt</span> using an output argument, which 
+(as with <span class="mcode">plot</span>) will return a list of trace handles. 
+For example <span class="mcode">&nbsp;h = plot(x,y) </span>will return a column 
+vector <span class="mcode">h</span> where the length of <span class="mcode">h</span> 
+will be the same as the number of lines in the TraceID box.</p>
+
+<p>If y is a real vector, <span class="mcode">plt(y)</span> is equivalent to
+<span class="mcode">plt(1:length(y),y)</span>.</p>
+
+<p>To plot more than one trace include the x and y vectors for each 
+trace in the argument list. For example <span class="mcode">
+plt(x1,y1,x2,y2,x3,y3)</span> plots three traces. Quite often several traces 
+share the same x vector. In this case we can simply repeat the x vector in the 
+argument list, as in <span class="mcode">plt(x,y1,x,y2,x,y3)</span> or a 
+shorthand way of writing that is <span class="mcode">plt(x,[y1;y2;y3])</span>. 
+That would work only if the y1,y2,y3 were row vectors. If they were column 
+vectors you would need to write <span class="mcode">plt(x,[y1 y2 y3])</span>.</p>
+
+<p>Plt returns a column vector of handles to the lines that it creates. For 
+instance the above command returns a 3x1 vector. The first element of that 
+vector is the line handle associated with the y1 trace. Most often when you type 
+the plt command at the command prompt you don't need to save plt's return value. 
+However when plt is called from a program the line handles are often required to 
+allow further manipulations of the plot.</p>
+
+<p>If <span class="mcode">x</span> and <span class="mcode">y</span> are both 
+matrices of the same size, <span class="mcode">plt(x,y)</span> will create one 
+trace per column.</p>
+
+<p>None of this so far should come as a surprise since it is identical to 
+Matlab's <span class="mcode">plot</span> command. </p>
+
+<p>Also like plot, if y is a complex vector, <span class="mcode">plt(y)</span> is equivalent to
+<span class="mcode">plt(real(y),imag(y))</span>. Unlike plot however, complex 
+arguments are treated this way no matter where they appear in the argument list. 
+For instance if a and b are both complex, <span class="mcode">plt(a,b)</span> is 
+equivalent to&nbsp;
+<span class="mcode">plt(real(a),imag(a),real(b),imag(b)).</span> This doesn't 
+work with <span class="mcode">plot</span> for some reason.</p>
+
+<p>Also like the plot command you can include any line property in the argument 
+list. For example:</p>
+
+<p><span class="mcode">plt(x,y,'LineWidth',2)</span> is equivalent to<span class="mcode"> set(plt(x,y),'LineWidth',2)</span></p>
+
+<p>One difference in the behaviors of plt and plot is that with plot these line 
+properties must appear after all the data vectors in the argument list. (plot gives an error otherwise). With plt the line properties may 
+occur in the middle of the argument list. In that case, the line property is 
+applied only to the lines defined earlier in the argument list. For example:</p>
+
+<p><span class="mcode">plt(x,[y1;y2],'Marker','Diamond',x,[y3;y4]);</span><br>
+<br>
+only sets the Marker property for the first two traces. An equivalent to the 
+above is:</p>
+<p><span class="mcode">a=plt(x,[y1;y2;y3;y4]); set(a(1:2),'Marker','Diamond');</span></p>
+<p>By using cell arrays, you can set properties differently on each trace. For 
+example:</p>
+<p><span class="mcode">plt(x,[y1;y2;y3;y4],'LineWidth',{2 2 4 2});</span></p>
+<p>This would set the LineWidth of the trace associated with y3 to 4 and the 
+other three traces to 2. A column (<span class="mcode">{2;2;4;2}</span>) would 
+have worked equally as well. The number of elements in the row or column vector 
+must identical to the number of traces defined so far in the argument list. (so 
+as above, traces defined after the LineWidth parameter will just be assigned to 
+the default LineWidth. Two more examples are:</p>
+<p><span class="mcode">plt(x,[y1;y2;y3;y4],'LineStyle',{'-' ':' '-.' 'none'});<br>
+plt(x,[y1;y2;y3],'Marker',{'square','none ','+'});</span></p>
+<p>Note that this method of assigned properties applies to any line property. In 
+the two particular line properties used above, you could have replaced <span class="mcode">
+'LineStyle'</span> with <span class="mcode">'Styles'</span> 
+and <span class="mcode">'Marker'</span> with <span class="mcode">
+'Markers'</span> and the results would be the same. Styles and Markers are not 
+really line properties, however plt allows you to use those alternate forms to 
+allow some additional flexibility in how you write the parameter that follows 
+it. (For example a character array may be used in place of the cell array.)&nbsp; The details of the additional flexibility provided by using 
+these two alternate parameters are described in the
+<a href="Trace%20properties.htm">Trace properties</a> section below.</p>
+<p>The special plot types vertical bars, error bars, and vector fields (arrows) 
+are plotted with the help of auxiliary functions vbar, ebar and quiv. The use of 
+these functions is described in the <a href="Auxiliary%20m%20files.htm">
+Auxiliary .m files</a> section.</p>
+<p><b><font size="4">Figure application data:</font></b></p>
+<p>After a call to plt, the following information is available from the figure 
+application data:</p>
+
+<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" bordercolor="#C0C0C0" id="AutoNumber2" width="734">
+  <tr>
+    <td style="width: 187px"> <span class="mcode">&nbsp;getappdata(gcf,'axis')</span></td>
+    <td width="459">Returns a vector of handles of the axes containing the 
+    plotted data. The first handle in the vector is the left hand main plot. 
+    This is followed by the subplot axes (if any) from the bottom up. Finally, 
+    the last element of the vector will be the handle of the main plot right 
+    hand axis (if any).</td>
+  </tr>
+  <tr>
+    <td style="width: 187px"> <span class="mcode">
+&nbsp;getappdata(gcf,'cid')</span></td>
+    <td width="459">Returns the cursor IDs for each axis, starting with the main 
+    (lower) axis and working upwards to include all the subplot axes.</td>
+  </tr>
+  <tr>
+    <td style="width: 187px"> <span class="mcode">
+&nbsp;getappdata(gcf,'Lhandles')</span></td>
+    <td width="459">Returns a list of all handles of all data traces created by 
+    plt. Note that this is identical to the plt return value.</td>
+  </tr>
+  <tr>
+    <td style="width: 187px"> <span class="mcode">
+    getappdata(ax,'Lhandles')&nbsp;</span></td>
+    <td width="459">Each axis (including the right hand axis) also has a 'Lhandles' 
+    application data value. This contains a list of all lines contained in that 
+    axis. The main (lower) plot is an exception since its Lhandles list includes the traces on 
+	both the 
+    left and right hand axis.</td>
+  </tr>
+  <tr>
+    <td style="width: 187px"> <span class="mcode">findobj('name','Abc')</span></td>
+    <td width="459">If the plt call includes a parameter such as <span class="mcode">
+    'FigName','Abc'</span> then this command will return the handle of the 
+    figure window that plt created. This can be useful in programs that create 
+    multiple plt figures.</td>
+  </tr>
+  <tr>
+    <td style="width: 187px"> <span class="mcode">findobj(gcf,'user','TraceID')</span></td>
+    <td width="459">This command will return the handle of the TraceID box which 
+    could be useful if you want to modify the location, appearance, or contents 
+    of the TraceID box.</td>
+  </tr>
+  <tr>
+    <td style="width: 187px"> <span class="mcode">findobj(gcf,'tag','MenuBox')</span></td>
+    <td width="459">This command will return the handle of the MenuBox. Assuming 
+    the menu box is in it's default configuration, a command such as <span class="mcode">
+    get(findobj(gcf,'tag','MenuBox'),'child') </span>will return a list of text 
+    objects with string properties of <span class="mcode">'Help'</span>, <span class="mcode">
+    'LinX'</span>, <span class="mcode">'LinY'</span>, <span class="mcode">'Grid'</span>, <span class="mcode">
+    'Menu'</span>, <span class="mcode">'Zout'</span>, and <span class="mcode">'XY&lt;-&gt;'</span> 
+    .</td>
+  </tr>
+  <tr>
+    <td style="width: 187px"> <span class="mcode">findobj(gcf,'user','grid')</span></td>
+    <td width="459">This command returns the handle of the single line object 
+    that creates the grid lines on the plot.</td>
+  </tr>
+  <tr>
+    <td style="width: 187px"> <span class="mcode">getappdata(gcf,'params')</span></td>
+    <td width="459">Returns a list of the parameters specified on the plt 
+    command line. </td>
+  </tr>
+  <tr>
+    <td style="width: 187px"> <span class="mcode">getappdata(ax,'xstr')</span></td>
+    <td width="459">Returns the value that was specified in the <span class="mcode">
+    'Xstring'</span> parameter when plt was called.</td>
+  </tr>
+  <tr>
+    <td style="width: 187px"> <span class="mcode">getappdata(ax,'ystr')</span></td>
+    <td width="459">Returns the value that was specified in the <span class="mcode">
+    'Ystring'</span> parameter when plt was called.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<h4><font size="4">Single argument actions:</font></h4>
+
+<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" bordercolor="#C0C0C0" id="AutoNumber2" width="734">
+  <tr>
+    <td style="width: 97px"> <span class="mcode">&nbsp;plt help</span></td>
+    <td width="590">Displays the plt help file. You could also use the 
+    functional form of this command: <span class="mcode">plt('help')</span>. To 
+get a much shorter help system display type <span class="mcode">help plt</span>.</td>
+  </tr>
+  <tr>
+    <td style="width: 97px"> <span class="mcode">
+&nbsp;plt version</span></td>
+    <td width="590">Returns the plt version. Same as: <span class="mcode">
+    plt('version')</span></td>
+  </tr>
+  <tr>
+    <td style="width: 97px"> <span class="mcode">
+&nbsp;plt save</span></td>
+    <td width="590">Opens a dialog box allowing you to select a .plt figure file 
+    that can be opened later using the <span class="mcode">
+    plt&nbsp;open</span> item in the file menu. If you want to avoid the file dialog 
+    box add the file name as a 3rd argument (i.e.&nbsp;<span class="mcode">plt&nbsp;save&nbsp;filename</span>). 
+    The use of these plt figure files are described in more detail in 
+    the <a href="../Using%20the%20plt%20window/Menu%20box.htm">Menu box</a> section.</td>
+  </tr>
+  <tr>
+    <td style="width: 97px"> <span class="mcode">
+&nbsp;plt open</span></td>
+    <td width="590">Opens a dialog box allowing you to select a .plt figure file 
+    that was saved using the <span class="mcode">
+    plt&nbsp;save</span> item in the file menu. If you want to avoid the file dialog 
+    box add the file name as a 3rd argument (i.e.&nbsp;<span class="mcode">plt&nbsp;open&nbsp;filename</span>).  </td>
+  </tr>
+  <tr>
+    <td style="width: 97px"> <span class="mcode">
+&nbsp;plt close</span><p> <span class="mcode">
+&nbsp;plt closefigs</span></td>
+    <td width="590">If a programming error causes plt to crash, you may find it 
+    difficult to close the plt figure windows (because they use the close 
+    request function). This command solves the problem by closing all currently 
+    open plt figure windows. Figure windows not created by plt are not closed. (The shorter and longer forms are equivalent 
+    and of course you may also use the functional forms.)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<html>
+<head>
+<title>Selecting traces</title>
+<style>
+<!--
+h2           { font-size: 22pt }
+-->
+</style>
+</head>
+<body>
+
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1">
+  <tr>
+    <td width="70%">
+    <h2>Selecting traces</h2>
+    </td>
+    <td width="3%">&nbsp;</td>
+    <td width="27%">
+    <img border="0" src="../images/plt.png" width="215" height="105" align="right"></td>
+  </tr>
+</table>
+<p>
+<img border="0" src="../images/TraceSelect.png" width="150" height="296" align="left" hspace="10" vspace="10"></p>
+<p>&nbsp;</p>
+
+<p>If more than one y-vector argument was given to plt, a trace selection box will appear 
+in the upper left corner of the plt window. Note: when using sub-plots, only the 
+main plot (lower left) includes a trace selection box.</p>
+
+<p>In the example shown to the left, plt has been given five y-vectors to plot. The name of each 
+trace and the colors used to plot them are also given. Usually you should give 
+each trace a more informative name, but in this case no trace names were 
+specified on the command line, so plt just named each trace with a number. The 
+trace IDs associated with traces 2 and 3 are shown in an italic normal weight 
+font, indicating that they are currently disabled (not visible). The other three 
+trace IDs are shown in a bold upright font, indicating that those traces are 
+enabled in the plot area.<br clear="left">
+<br>
+Below is a list of the ways you can control which traces are displayed. If 
+you are plotting just a few traces, the first bullet should cover all that you 
+need to know. However since plt can plot up to 99 traces, the remaining tricks 
+may come in handy:</p>
+
+<ul>
+  <li>When you left click on one of the trace names in the trace selection box, 
+  the associated trace is toggled on or off.</li>
+  <li>To view a single trace all by itself, right click on the trace name of 
+  interest. That trace will be enabled and all the others will be disabled.</li>
+  <li>Double click on any of the trace names to enable all traces at once.</li>
+</ul>
+<p>
+<img border="0" src="../images/TraceSelect2.png" width="74" height="188" align="left" vspace="10" hspace="10"></p>
+
+<p>&nbsp;</p>
+<p>If the plot uses a right hand axis, plt indicates which traces are plotted on 
+the right hand axis by adding some shading to the background of the trace ID. 
+For instance, in this example, traces 1,3,4, and 5 are plotted on the right hand 
+axis. The use of italics to indicate inactive traces, and the methods for 
+enabling/disabling traces are the same no matter which axes are used. (Traces 2 
+and 4 are disabled in this example.)</p><br clear="left">
+
+<img border="0" src="../images/TraceSelect3.png" width="119" height="138" align="left" vspace="10" hspace="10"></p>
+<p>If the TraceMK argument was used, then the line types are also shown in the 
+trace selection box. An example of this is shown here which used 'TraceMK',.6 in 
+the plt argument list. The .6 indicates that the first 60% of the width is used 
+for the trace names and the remaining width is used to show the line types. See
+<a href="../Command%20line%20arguments/Trace%20properties.htm">Trace Properties</a> 
+for more detail on the TraceMK parameter.</p><br clear="left">
+
+<img border="0" src="../images/TraceSelect4.png" width="119" height="139" align="left" vspace="10" hspace="10"><p>
+<p>When the line types are included in the trace selection box, you may 
+enable/disable traces by clicking on the trace name as described above, or by 
+clicking on the line type to the right of the trace name. In this example traces 
+3,4 and 5 have been disabled. The trace names for the disabled traces are shown 
+in italics as usual and the line types are also grayed out (actually blue/green) 
+to make it clear that these traces are not currently visible in the plot area.
+</p><br clear="left">
+
+<img border="0" src="../images/TraceSelect5.png" width="120" height="140" align="left" vspace="10" hspace="10"><p>
+<p>Since left or right clicking on the line types serves the same purpose as
+left/right clicking on the trace names, you can dispense with the trace
+names altogether if you like. (This mode is selected by specifying assigning
+less than 25% of the width to the trace names, i.e. a TraceMK parameter of less than .25).
+In the example to the left, the TraceMK parameter was 0.1 and note that the first
+trace has been disabled.</p>
+
+</body></html>

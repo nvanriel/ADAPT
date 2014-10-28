@@ -1,0 +1,164 @@
+<html>
+<head>
+<title>Labels and figure properties properties</title>
+<style>
+<!--
+h3           { color: #006699 }
+span.mcode   {
+	color: #E00000;
+	text-align: left;
+	font-weight: bold;
+}
+h2           { font-size: 22pt }
+-->
+</style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1" height="86">
+  <tr>
+    <td width="70%" height="86">
+    <h2>Labels and figure properties</h2>
+    </td>
+    <td width="3%" height="86">&nbsp;<p>&nbsp;</p>
+    <p>&nbsp;</td>
+    <td width="27%" height="86">
+    <img border="0" src="../images/plt.png" width="214" height="98" align="right"></td>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber2">
+  <tr>
+    <td width="107" valign="top">
+    <h3>Title</h3>
+    </td>
+    <td width="751" valign="top"><p><span class="mcode">plt(...,'Title',t);<br>
+    </span>Inserts the title string <span class="mcode">t</span> above the plot area. The Tex interpreter 
+    is used to render the string allowing entry of Greek and other special 
+    characters. If you don't want the Tex interpreter to be used, include the 
+    string <span class="mcode">[TexOff]</span> anywhere in the title. (The [TexOff] 
+    string will be deleted from the title before display). Alternatively you 
+    could disable the Tex interpreter after the call to plt with the following 
+    command:</p>
+    <p><span class="mcode">set(get(gca,'title'),'interpreter','none');</span></p>
+    <p>Default: no title<br>
+&nbsp;</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="107" valign="top">
+    <h3>LabelX</h3>
+    </td>
+    <td width="751" valign="top"><p><span class="mcode">plt(...,'LabelX',s);<br>
+    </span>Uses string <span class="mcode">s</span> as the x-axis label. If you 
+    are using subplots with two columns, you may also specify the x-axis label 
+    for both the left and right columns of plots by using a cell array: <span class="mcode">plt(...,'LabelX',{'left&nbsp;x&nbsp;label'&nbsp;'right&nbsp;x&nbsp;label');</span><br>
+    Default: <span class="mcode">'x axis'<br>
+&nbsp;</span></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="107" valign="top">
+    <h3>LabelY</h3>
+    </td>
+    <td width="751" valign="top"><p><span class="mcode">plt(...,'LabelY',s);<br>
+    </span>Uses string <span class="mcode">s</span> as the  left hand y-axis label 
+    of the main plot. 
+    You can specify both the left and right labels by using a cell array. For 
+    example, if there are no subplots, <span class="mcode">'LabelY',{'ab' 'cd'}</span> 
+    is equivalent to <span class="mcode">'LabelY','ab','LabelYR','cd'</span>. If 
+    there are subplots, the right hand axis label must come last. For example 
+    with 3 subplots:<br>
+&nbsp;<span class="mcode">plt(...,'SubPlot',[50 20 30],'LabelY',...<br>
+&nbsp;&nbsp; {'lower-axis' 'middle-axis' 'upper-axis' right-hand-axis'});</span></p>
+    <p>Default: <span class="mcode">'Y axis (Left)'<br>
+&nbsp;</span></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="107" valign="top">
+    <h3>LabelYR</h3>
+    </td>
+    <td width="751" valign="top"><p> <span class="mcode">plt(...,'LabelYR',s);<br>
+    </span>Uses string <span class="mcode">s</span> as the  right hand y-axis label. The <span class="mcode">
+    'right'</span> parameter should also be included in this case, however if 
+    you don't, plt will default to placing the last trace on 
+    the right hand axis. Note that using a cell array argument to the <span class="mcode">
+    'LabelY'</span> parameter (described above) is usually a more convenient way 
+    to specify the y-axis label, and the <span class="mcode">'LabelYR'</span> 
+    parameter is primarily used in legacy code.</p>
+    <p> Default: <span class="mcode">'Y axis (Right)'<br>
+&nbsp;</span></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="107" valign="top">
+    <h3>FigName&nbsp;&nbsp; </h3>
+    </td>
+    <td width="751" valign="top"><p><span class="mcode">plt(...,'FigName',f);<br>
+    </span>Uses string  <span class="mcode">f</span> as the name for the plt figure window.<br>
+    Default: <span class="mcode">'plt'<br>
+&nbsp;</span></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="107" valign="top">
+    <h3>Position</h3>
+    </td>
+    <td width="751" valign="top"><p><span class="mcode">plt(...,'Position',[x(left)&nbsp;y(bottom)&nbsp;height&nbsp;width]);<br>
+    </span>Specify the figure size and position on the screen in pixels. If the 
+    height specified as zero, plt will choose a height so that a unit along the 
+    x-axis is the same as a unit along the y-axis (i.e.if you plot a circle, it 
+    would look like a circle and not an ellipse). If the width is specified as 
+    zero, plt chooses the width to meet the same condition. (Obviously you can't 
+    specify zero for both the height and the width). If you resize the figure 
+    window with the mouse, then the units along the x and y axes will no longer 
+    be equal (and a plotted circle may appear to be an ellipse). If you wish 
+    that the equal units property to be maintained even after the figure window 
+    is resized, you should follow the plt command with the command <span class="mcode">
+    axis('equal')</span>. If you specify the same position vector for more than 
+    one plt command, plt will add a small offset to all the figure window 
+    positions (except the first one) so that no two figure windows are exactly 
+    on top of each other. This feature makes it less likely that you will loose 
+    track of one of the figures and also makes it much easier to select or move 
+    any figure with the mouse. If a second plt command specifies a position that 
+    differs from the first plt command by even one pixel, then this feature will 
+    not be engaged.<br>
+    Default: <span class="mcode">[9&nbsp;45&nbsp;700&nbsp;525]</span>, or if 
+    subplots are enabled:<span class="mcode"> [9&nbsp;45&nbsp;840&nbsp;570]<br>
+&nbsp;</span></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="107" valign="top">
+    <h3>Link</h3>
+    </td>
+    <td width="751" valign="top">
+    This parameter is used to force a group of plt figures to close when any member
+    of the group is closed. Consider the following sequence:<br><br>
+    <span class="mcode">plt(x1,y1);</span><br>
+    <span class="mcode">g = gcf;</span><br>
+    <span class="mcode">plt(x2,y2,'Link',g);</span><br>
+    <span class="mcode">plt(x3,y3,'Link',g);</span><br><br>
+    This of course will create 3 plotting figures.
+    Closing any one of the three figures will cause the other two to also close.<br><br>
+    The demo programs <span class="mcode">editz.m</span> and <span class="mcode">tasplt.m</span>
+    take advantage of this parameter.<br><br>
+    </td>
+  </tr>
+  <tr>
+    <td width="107" valign="top">
+    <h3>Fig</h3>
+    </td>
+    <td width="751" valign="top">Normally plt opens a new figure window when it 
+    is called. In rare situations one may want to tell plt to use a pre-existing 
+    figure instead. This parameter allows you to specify a figure window to use. 
+    This parameter is different from the other parameters in that it only works 
+    if it is included as the first argument in the calling sequence. (The 
+    parameter is ignored otherwise.) For example, to open plt using figure 
+    number 4, you would use <span class="mcode">plt('Fig',4,...);</span></td>
+  </tr>
+</table>
+
+</body>
+
+</html>

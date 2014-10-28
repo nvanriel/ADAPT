@@ -1,0 +1,282 @@
+<html>
+<head>
+<title>Colors</title>
+<style>
+<!--
+h3           { color: #006699 }
+span.mcode   {
+	color: #E00000;
+	text-align: left;
+	font-weight: bold;
+}
+h2           { font-size: 22pt }
+-->
+</style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1" height="86">
+  <tr>
+    <td width="70%" height="86">
+    <h2>Colors</h2>
+    </td>
+    <td width="3%" height="86">&nbsp;<p>&nbsp;</p>
+    <p>&nbsp;</td>
+    <td width="27%" height="86">
+    <img border="0" src="../images/plt.png" width="214" height="98" align="right"></td>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber2" width="100%">
+  <tr>
+    <td width="128" valign="top">
+    <h3>TRACEc</h3>
+    </td>
+    <td width="1262" valign="top"><p><span class="mcode">plt(...,'TRACEc',ct);<br>
+    </span>Specify trace colors. Usually you will have at least as many rows in ct as there 
+    are traces, however if ct doesn't have enough rows, plt will start over from 
+    the beginning. For example if you specify:<span class="mcode"><br>
+    &nbsp;&nbsp; TRACEc,[1 0 0; 1 1 0; 1 1 1]<br>
+    </span>then plt will use red, yellow, and white respectively for traces 1,2, 
+    and 3. If you had a fourth trace, plt would use red for that trace and so 
+    on. If ct is a single 3 element vector, plt will use that color for all 
+    traces. If the TRACEc parameter is not included and color files are not 
+    being used (see
+    <span class="mcode">'ColorFile'</span> below), then the following default 
+    colors are used:</p>
+    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber3" height="100%">
+      <tr>
+        <td width="793" height="205">Default (for up to 34 lines):<span class="mcode">
+        ct =<br>
+        [ 0&nbsp;&nbsp;1&nbsp;&nbsp;0;&nbsp;&nbsp; 1&nbsp;&nbsp;0&nbsp;&nbsp;1;&nbsp;&nbsp; 0&nbsp;&nbsp;1&nbsp;&nbsp;1;&nbsp;&nbsp; 
+    1&nbsp;&nbsp;0&nbsp;&nbsp;0;
+&nbsp;.2&nbsp;.6&nbsp;&nbsp;1;<br>
+&nbsp;&nbsp;1&nbsp; 1&nbsp; 1;&nbsp;&nbsp; 1&nbsp;.6&nbsp;.2;&nbsp;&nbsp; 0&nbsp; 0&nbsp; 
+        1; &nbsp; 1&nbsp;.2&nbsp;.6; &nbsp;.2&nbsp;&nbsp;1&nbsp;.6;<br>
+&nbsp;.6&nbsp;&nbsp;1&nbsp;.2;
+        &nbsp;.6 .2&nbsp; 1;&nbsp;&nbsp; 1&nbsp; 1&nbsp; 0;&nbsp;&nbsp; 0&nbsp;.6&nbsp;&nbsp;0;&nbsp;&nbsp;.6&nbsp;&nbsp;0&nbsp;.6;<br>
+        &nbsp;&nbsp;0&nbsp;.6&nbsp;.6;
+&nbsp;.6 .6&nbsp; 0;&nbsp;&nbsp;.7 .7 .7;&nbsp;&nbsp;.6&nbsp;&nbsp;0&nbsp;&nbsp;0;&nbsp;&nbsp;.2&nbsp;.2&nbsp;.7;<br>
+        &nbsp;.5 .5 .5;&nbsp; .7 .2 .2;&nbsp; .2 .7 .2;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;0&nbsp;.6;&nbsp; 
+        .3 .3 .3;<br>
+&nbsp; 0 .9 .4;&nbsp;&nbsp; 0 .4 .9;&nbsp; .9&nbsp;.4&nbsp; 0;&nbsp;&nbsp;.4&nbsp;.9&nbsp; 
+        0;&nbsp; .9&nbsp; 0 .4;<br>
+        &nbsp;.4&nbsp; 0&nbsp;.9;&nbsp; .8 .5 .5;&nbsp; .5 .8 .5;&nbsp; .5&nbsp;.5&nbsp;.8];</span><p>If the number of lines (=N) is more than 34, ct is expanded via:<span class="mcode"><br>
+        &nbsp;
+        for k=35:N ct = [ct; .75 * ct(k-34,:)]; end;<br>
+        </span>This makes each successive group of 34 traces 25% dimmer than the 
+        previous group. This creation of default colors continues only up to 99 
+        colors. If you have more than 99 traces, plt will start assigning colors 
+        cyclically as described above.</td>
+      </tr>
+    </table>
+<p>&nbsp;</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="128" valign="top">
+    <h3>CURSORc&nbsp;&nbsp;&nbsp;&nbsp; </h3>
+    </td>
+    <td width="1262" valign="top"><p><span class="mcode">plt(...,'CURSORc',rgb);<br>
+    </span>Specify the cursor color.
+    Here, and on the rest of this 
+    page,<span class="mcode">
+    rgb</span> must be a 3 element row or column vector.</p>
+    <div align="left">
+      <blockquote>
+      <table border="1" cellpadding="6" style="border-collapse: collapse" bordercolor="#C0C0C0" width="80%" id="AutoNumber4" cellspacing="0">
+        <tr>
+          <td width="70">Defaults:</td>
+          <td width="139">Only one trace<br>
+          (dark plot backgrounds)</td>
+          <td width="92">
+    <span class="mcode">[1 1 .5]</span></td>
+        </tr>
+        <tr>
+          <td width="70">&nbsp;</td>
+          <td width="139">Only one trace<br>
+          (light plot backgrounds)</td>
+          <td width="92">
+    <span class="mcode">[0 0 .5]</span></td>
+        </tr>
+        <tr>
+          <td width="70">&nbsp;</td>
+          <td width="139">More than one trace</td>
+          <td width="92">Cursor color is set to match trace color</td>
+        </tr>
+      </table>
+      </blockquote>
+    </div>
+    <p>&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="128" valign="top">
+    <h3>DELTAc</h3>
+    </td>
+    <td width="1262" valign="top"><p><span class="mcode">plt(...,'DELTAc',rgb);<br>
+    </span>Specify color indicating the delta cursor.<br>
+    Default:
+    <span class="mcode">[1 0 0]</span></p>
+    <p>&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="128" valign="top">
+    <h3>PltBKc</h3>
+    </td>
+    <td width="1262" valign="top"><p> <span class="mcode">plt(...,'PltBKc',rgb);<br>
+    </span>Specify the plot area background color.<br>
+    Default: <span class="mcode">
+    [0 0 0]</span></p>
+    <p>&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="128" valign="top">
+    <h3>FigBKc</h3>
+    </td>
+    <td width="1262" valign="top"><p><span class="mcode">plt(...,'FigBKc',rgb);<br>
+    </span>Specify the figure window background color.<br>
+    Default:
+    <span class="mcode">[.25 .15 .15]</span></p>
+    <p>&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="128" valign="top">
+    <h3>xyAXc</h3>
+    </td>
+    <td width="1262" valign="top"><p><span class="mcode">plt(...,'xyAXc',rgb);<br>
+    </span>Specify the color of the x and y axes.<br>
+    Default: <span class="mcode">
+    [1 1 1]</span></p>
+    <p>&nbsp;</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="128" valign="top">
+    <h3>xyLBLc&nbsp;&nbsp;&nbsp; </h3>
+    </td>
+    <td width="1262" valign="top"><p><span class="mcode">plt(...,'xyLBLc',rgb);<br>
+    </span>Specify the color of the x and y axis labels.<br>
+    Default:
+    <span class="mcode">[.64 .78 .94]</span><p>
+    &nbsp;</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="128" valign="top">
+    <h3>GRIDc</h3>
+    </td>
+    <td width="1262" valign="top">
+    <p><span class="mcode">plt(...,'GRIDc',rgb);</span><br>
+    Specify the color of the grid lines.
+    (See also <a href="Trace%20properties.htm">GridStyle</a>)
+    Normally the grid lines are drawn in 
+    exclusive-or erase mode, however if any of the rgb values are negative (e.g. <span class="mcode">
+    'GRIDc',[0 -.2 .4]</span> ), then the grids are drawn in normal mode 
+    (which is occasionally preferable). The actual grid color used in the above 
+    example is [0 .2 .4]).<br>
+    Default: <span class="mcode">[.13 .13 .13]</span><br>
+    &nbsp;</td>
+  </tr>
+  <tr>
+    <td width="128" valign="top">
+    <h3>COLORdef</h3>
+    </td>
+    <td width="1262" valign="top">
+    <p style="margin-bottom: 18">
+    <span class="mcode">plt(...,'COLORdef',c);</span><br>
+    Sets the PltBKc, FigBKc, xyAXc, and xyLBLc colors mentioned above to be
+    consistent with Matlab's current default colors. Trace colors are set as 
+    follows:</p>
+    <blockquote>
+    <table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse" bordercolor="#C0C0C0" width="90%" id="AutoNumber5">
+      <tr>
+        <td width="198">c = <span class="mcode">0</span> or <span class="mcode">'default'</span></td>
+        <td width="515">Matlab's current default trace colors are  
+    used.<br>
+        i.e.&nbsp; <span class="mcode">TRACEc = get(0,'DefaultAxesColorOrder')</span></td>
+      </tr>
+      <tr>
+        <td width="198">c is a 3 column array</td>
+        <td width="515">c is appended to the default trace colors 
+        property.<br>
+        i.e.&nbsp; <span class="mcode">TRACEc = [get(0,'DefaultAxesColorOrder') 
+        c]<br>
+        </span>(useful if Matlab doesn't have enough default trace colors)</td>
+      </tr>
+      </table>
+    </blockquote>
+    <p>If TRACEc so defined has fewer rows than the 
+    number of traces to be plotted the the colors will be used cyclically as 
+    described above.<p>&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="128" valign="top">
+    <h3>ColorFile</h3>
+    </td>
+    <td width="1262" valign="top">
+    <span class="mcode">plt(...,'ColorFile','filename');<br>
+    </span>The normal behavior of plt (i.e. when the
+    <span class="mcode">ColorFile</span> argument is not included) is as 
+    follows.<ul>
+      <li>If plt is called from the MatLab command line, when plt initializes 
+    it looks for a file called
+    <span class="mcode">pltcolor.mat</span> in the folder where you installed 
+      plt. If this file isn't found, no action is taken. If it is found, the 
+    file is loaded causing all the default colors and the colors specified by 
+    all the other parameters shown on this page to be overwritten with the data 
+    saved in the .mat file. When you select the &quot;Save figure colors&quot; selection 
+      under the Color menu, plt saves the current colors to this same file (<span class="mcode">pltcolor.mat</span>).</li>
+      <li>If plt is called from a MatLab function or script file, the 
+    behavior is similar except that the file name used is
+    <span class="mcode">fnameColor.mat</span> where fname is the name of the top 
+    level MatLab command or script. Again, plt looks for this file in the folder 
+      containing the .m file defining fname (or in the folder containing 
+      the fname.exe file for compiled applications).</li>
+    </ul>
+    <p>When the
+    <span class="mcode">'ColorFile'</span> parameter is included in the plt 
+    argument list, the above behavior is modified as follows:</p>
+    <blockquote>
+    <table border="1" cellpadding="6" cellspacing="0" bordercolor="#C0C0C0" id="AutoNumber6" width="90%" style="border-collapse: collapse">
+      <tr>
+        <td width="25%">
+    <span class="mcode">'ColorFile','filename'</span></td>
+        <td width="75%">If the filename is specified without any path, plt uses 
+        the specified file name both on startup (to load the color scheme) and 
+        when &quot;Save figure colors&quot; is selected. plt looks for this file in the 
+        folder containing the .m file defining fname (or in the folder 
+        containing the fname.exe file for compiled applications). The extension 
+        used is always
+    <span class="mcode">.mat</span> and you may not include an extension or a 
+        period in the filename string.</td>
+      </tr>
+      <tr>
+        <td width="25%">
+    <span class="mcode">'ColorFile', 'drive:\path\filename'</span></td>
+        <td width="75%">As above, plt uses the specified file both on startup 
+        (to load the color scheme) and when &quot;Save figure colors&quot; is selected. 
+        However when path information is supplied, plt will look for the file 
+        only in the location given. As before, you may not include an extension 
+        in the filename string</td>
+      </tr>
+      <tr>
+        <td width="25%">
+    <span class="mcode">'ColorFile',''</span></td>
+        <td width="75%">plt will use its default colors, and any colors 
+        specified by the other parameters in this section. A color file will 
+        never supersede them on startup, even if
+    <span class="mcode">fnameColor.mat</span> exists. If you select &quot;Save figure 
+        colors&quot;, plt will allow you to save the current colors to any file of 
+        your choosing (by opening a file selection box), but these colors will 
+        not be loaded unless you change to one of the above
+    <span class="mcode">'ColorFile'</span> options, or remove the
+    <span class="mcode">'ColorFile'</span> parameter altogether. </td>
+      </tr>
+      </table>
+    </blockquote>
+    <p>&nbsp;</td>
+  </tr>
+</table>
+
+</body>
+
+</html>

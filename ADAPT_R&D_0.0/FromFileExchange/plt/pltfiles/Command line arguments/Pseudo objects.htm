@@ -1,0 +1,854 @@
+<html>
+
+<head>
+<title>Auxiliary plt functions</title>
+<style>
+<!--
+.mcode   {
+	color: #E00000;
+	line-height: 1.2;
+	margin-top: 0;
+	margin-bottom: 0;
+	font-weight: bold;
+}
+h3           { color: #006699 }
+h2           { font-size: 22pt }
+.auto-style1 {
+	margin: 10px;
+}
+.auto-style2 {
+	text-decoration: underline;
+}
+-->
+</style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1" height="96">
+  <tr>
+    <td width="72%" height="96">
+    <h2>Pseudo objects</h2>
+    </td>
+    <td width="2%" height="96">&nbsp;</td>
+    <td width="26%" height="96">
+    <img border="0" src="../images/plt.png" width="211" height="97" align="right"></td>
+  </tr>
+</table>
+<p style="margin-top: -18">&nbsp;</p>
+<p>These are functions provided by plt that are only peripherally 
+related to its usual data plotting capability:</p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber2">
+  <tr>
+    <td width="14%" valign="top">
+    <font size="5" color="#006699">grid</font><i><br>
+    (grid line<br>
+    object)</i></td>
+    <td width="86%" valign="top">The trace color of the native Matlab axis grid 
+    lines can't be independently set leading to grid lines that over power the 
+    display. The grid line pseudo object is designed to solve this problem by 
+    providing grid lines of whatever color and style you choose. Grid lines are
+    positioned at each tick label. Additional (sub-decade) grid lines will also
+    be used for logarithmicly scaled axes that span six or fewer decades. (The
+    six decade limit may be changed by adjusting the <span class="mcode">logTR</span>
+    figure application data property which defaults to <span class="mcode">1.0e6</span>)
+    <br><br>
+    The grid line functions are:
+    &nbsp;<p><span class="mcode">plt('grid',ax,'init',color,erMode,LineStyle,In7,In8,In9,In10) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; - </span>Initializes grid lines on axis <span class="mcode">ax</span>
+    of color <span class="mcode">color</span>
+    with erase mode <span class="mcode">erMode</span>
+    and LineStyle <span class="mcode">LineStyle</span>.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp; <span class="mcode">
+    color</span> is optional with default [.13 .13 .13]<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&nbsp; <span class="mcode">
+    erMode</span> is optional with default 'xor'.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&nbsp; <span class="mcode">
+    LineStyle</span> is optional with default '-'<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&nbsp; <span class="mcode">
+    In7,In8</span> is an optional parameter/value pair to apply to the grid 
+    lines<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&nbsp; <span class="mcode">
+    In9,In10</span> is an optional parameter/value pair to apply to the grid 
+    lines</p>
+
+<p><span class="mcode">plt('grid',ax,'toggle')&nbsp;&nbsp;&nbsp; </span>- toggle grids (on/off)</p>
+
+<p><span class="mcode">plt('grid',ax,'get')&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+- 
+get current on/off state of grids</p>
+
+<p><span class="mcode">plt('grid',ax,'off')&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+- turn grids off</p>
+
+<p><span class="mcode">plt('grid',ax,'on')&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+- turn grids on<br>
+<br>
+<span class="mcode">plt('grid',ax,'update')&nbsp;&nbsp;&nbsp; </span>- update grids</p>
+
+<p><span class="mcode">plt('grid',ax)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+- update grids (same as above)</p>
+
+<p><br>
+All the above calls return 1 if the grids are on and 0 otherwise.</p>
+
+<p>To experiment with these functions, try typing this at the command prompt:</p>
+
+<p class="mcode">&gt;&gt; a = axes;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; % create axis<br>
+&gt;&gt; plt('grid',a,'init');&nbsp;&nbsp;&nbsp; % draw grid lines<br>
+&gt;&gt; set(a,'ylim',[0 6]);&nbsp;&nbsp; % change axis limits<br>
+&gt;&gt; plt('grid',a);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; % update grid lines<br>
+</p><br>The <span class="mcode">pltvbar.m </span> demo program
+
+    uses the grid pseudo object to create a tabular list next to the main plot area.<br> &nbsp;</td>
+  </tr>
+  <tr>
+    <td width="14%" valign="top">
+    <font size="5" color="#006699">edit</font><i><br>
+    (edit<br>
+    text<br>
+    object)&nbsp;&nbsp; </i>
+    </td>
+    <td width="86%" valign="top">
+
+Sometimes a GUI needs many numeric and character controls in a small space. 
+Matlab's usual <span class="mcode">
+    uicontrol('Style','Edit')</span> controls may be used but they use up so 
+many extra pixels that a complicated GUI will quickly become overly cluttered. 
+The <span class="mcode">
+    edit</span> function of plt fills this need. With numeric controls, we often 
+would like to change the value by small amounts quickly and repeatedly. Matlab's 
+slider control (or plt's slider object described below) fills this need well, 
+however both take up too much space to use many of them is a single GUI. For 
+this reason, several features of the plt edit pseudo object are tailored specifically 
+for incrementing and decrementing numeric controls. To create an edit text 
+	pseudo object use 
+the command:<br>
+<br>
+<span class="mcode">
+    H = plt('edit','PropName1','PropVal1','PropName2','PropVal2',...);</span><br>
+<br>
+where:<br>
+&nbsp;<table border="1" cellpadding="4" cellspacing="0" style="border-collapse: collapse" bordercolor="#C0C0C0" width="100%" id="AutoNumber9">
+  <tr>
+    <td width="15%" align="center"><b>
+    <font color="#0000FF" face="Arial" size="4">Property Name</font></b></td>
+    <td width="85%"><b><font face="Arial" size="4" color="#0000FF">Property<br>
+    Value</font></b></td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"> <span class="mcode">
+    value</span></td>
+    <td width="85%">The numerical value of the edit text object (zero if it is a 
+    string type).</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">callbk</span></td>
+    <td width="85%">A callback to be executed when the edit text object is changed.<br>
+    Occurrences of <span class="mcode">'@VAL'</span> will be replaced with the 
+    current value.<br>
+    Occurrences of <span class="mcode">'@OBJ'</span> will be replaced with the 
+    8192 times the edit text handle.</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">enable</span></td>
+    <td width="85%">0=disable, 1=enable (default=1). If disabled, the text will 
+    still be visible, but may not be modified.</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">min</span></td>
+    <td width="85%">The minimum allowed value (default = -1e9)</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">max</span></td>
+    <td width="85%">The maximum allowed value (default = 1e9)</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">incr</span></td>
+    <td width="85%">The increment value for a numeric plt edit object. (default 
+    = 1) When you click on the right/left side of the center of the object,
+    the value of the pseudo edit object is increased/decreased by &quot;incr&quot;.
+    A negative value of "incr" is used to indicate that the increment factor
+    is in percentage terms instead of absolute. For example, if incr=-0.1 then
+    clicking on the right/left side of the edit object will increase/decrease
+    the edit object's value by 0.1 percent (i.e. from 1000 to 1001 or 999).
+    Setting incr to zero disables the incr/decr feature which means the left
+    clicking on the object will have the same effect as right clicking. Note
+    that the incr/decr feature is also disabled if the length parameter
+    (below) is set to anything other than one.</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">length</span></td>
+    <td width="85%">The length of the vector allowed as the edit value. Usually 
+    length=1 indicating the edit value must be a scalar. If length=4 (for 
+    example), an allowed edit value must be a row or column vector of length 4. 
+    Two special cases are length=-1 and length=0. length=-1 is used to indicate 
+    that a numeric array of any length is a legal value. length=0 is used for 
+    string edit objects i.e. the edit string is not interpreted as a number or 
+    vector. (default&nbsp;=&nbsp;1)</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">format</span></td>
+    <td width="85%">The format conversion string used to display numeric edit 
+    objects (default&nbsp;=&nbsp;<span class="mcode">'%7w'</span>).
+    See&nbsp;<span class="mcode">Pftoa</span> for a description of the formatting codes.</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">*****</span></td>
+    <td width="85%">If a property name is given which isn't in the list above 
+    then the property is applied to the text object itself. (It must be a valid 
+    text property.) The position (<span class="mcode">'pos'</span>) of the edit
+    pseudo object must be set this way. The text color (<span class="mcode">'color'</span>)
+    is also usually set this way, however if that property is not specified, the default 
+    color is [1&nbsp;1&nbsp;.4]. </td>
+  </tr>
+</table>
+<p>The above calls create the edit text object and returns the handle of the 
+text object created. This handle (H) is used as an argument in the calls below:<p>
+<span class="mcode">
+    plt('edit',H,'PropName1','PropVal1','PropName2','PropVal2',...);<br>
+</span>If H is a scalar, the specified property values (using items from the 
+table above) are applied to the edit text object identified by handle H. If H is 
+a vector then PropertyName1 of H(k) is set to the kth row of PropertyValue1. If 
+PropertyValue1 doesn't have that many rows, the last row will be used. Only 1 
+property is allowed.<p><span class="mcode">plt('edit',H,'get','value')<br>
+</span>returns the numeric value of the specified edit text object<p><b>
+<font size="4">Keyboard and mouse behavior:</font></b><br>
+Right clicking on the edit text object always &quot;opens&quot; the object for editing. 
+What this means is that the old edit string  appears with the cursor (underscore) 
+at the end of the string indicating that it is ready to accept keys typed at the 
+keyboard. If you start typing right away, the new characters typed will be 
+appended to the end of the old string. To insert the new characters at a point 
+other than the end, simply move the cursor to the desired point using the 
+left/right arrow keys. To remove characters, press &lt;Backspace&gt; or &lt;Delete&gt; to 
+remove a character before or after the cursor. Pressing &lt;Delete&gt; when the cursor 
+is at the end of the string deletes all the characters. This special case makes 
+it easier to enter a new string that bears little resemblance to the previous 
+entry. Note that while typing, the text object is shown in a different color to 
+remind you that a new value is being entered. When you press &lt;Enter&gt;, the new 
+string is accepted and the color returns to the original. If you type an invalid 
+entry, the word &quot;error&quot; will appear. Click again on the &quot;error&quot; string to try 
+the entry again or to recover the previous entry (via &lt;Esc&gt;). A summary of the 
+special keys follow:<br>
+&nbsp;<table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse" bordercolor="#C0C0C0" width="100%" id="AutoNumber10">
+  <tr>
+    <td style="width: 12%">&lt;Esc&gt;</td>
+    <td width="82%">The edit text object is closed for editing and the original 
+    text value is restored as if the edit object was never opened for editing.</td>
+  </tr>
+  <tr>
+    <td style="width: 12%">&lt;Backspace&gt;</td>
+    <td width="82%">Deletes the character on the left side of the cursor.</td>
+  </tr>
+  <tr>
+    <td style="width: 12%">&lt;Delete&gt;</td>
+    <td width="82%">Deletes the character on the right side of the cursor. If 
+    the cursor is at the end of the string, all the characters are deleted leaving only the 
+    underscore cursor.</td>
+  </tr>
+  <tr>
+    <td style="width: 12%">&lt;Right arrow&gt;</td>
+    <td width="82%">Moves the underscore cursor one position to the right. </td>
+  </tr>
+  <tr>
+    <td style="width: 12%">&lt;Left arrow&gt;</td>
+    <td width="82%">Moves the underscore cursor one position to the left. </td>
+  </tr>
+  <tr>
+    <td style="width: 12%">&lt;Enter&gt;</td>
+    <td width="82%">Closes the edit text object, accepting the current entry 
+    (without the underscore cursor) as 
+    the new value.</td>
+  </tr>
+  <tr>
+    <td style="width: 12%">&lt;Click&gt;</td>
+    <td width="82%">Clicking the mouse on the edit text object while it is open 
+    has the same effect as pressing &lt;Esc&gt; on the keyboard.</td>
+  </tr>
+  <tr>
+    <td style="width: 12%">i</td>
+    <td width="82%">When entering a scalar value, if lower case &quot;i&quot; (increment) 
+    is entered as the last character, this indicates that the entered value 
+    should be used as a new &quot;incr&quot; parameter for the object. In this case the 
+    text object value from before the object was opened is retained.</td>
+  </tr>
+</table>
+<p>Left clicking on the edit text object also opens the object for editing 
+except for one important exception. This exception happens when the edit text
+object is a scalar (i.e. the length parameter is equal to one). In fact this is
+more the rule than the exception since that is the most commonly used
+(and default) value for the length parameter.
+
+  <p>In this (scaler parameter) case, when you left click on the edit text object, its 
+  value is incremented or decremented by the object's &quot;incr&quot; parameter. Weather 
+  the value is incremented or decremented depends on the position of the mouse 
+  click. If you click to the right of the edit object's center, the value will 
+  be incremented. Likewise, the value will be decremented for clicks to the left 
+  of center. As an example, suppose the current edit text object has a value of 
+  259, and the increment parameter is 1. Left clicking on the 9 will change the 
+  edit object's value to 260 (because the 9 is right of the center of the text 
+  string). On the other hand, left clicking on the two will decrement the value 
+  by one. Remember that if the increment amount is not convenient, you can change
+  the increment amount on the fly by using the "i" character as described above.
+  
+<p> An important property of the scaler increment/decrement feature is that the edit object
+    will continue to increment as long as you hold down the mouse button. This is useful
+    for many interactive controls and allows the edit objects to take the place of sliders
+    (the only other handle graphic object to have this repeat property). When you hold down
+    the mouse button, there will be a delay of 0.4 seconds before the auto-incrementing
+    begins. After that delay, the value will be incremented once every 0.03 seconds.
+    You can alter the repeat rate by setting the figure application data
+    <span class="mcode">repeat</span> property. For example, to halve the repeat rate use
+    <span class="mcode">setappdata(gcf,'repeat',0.06);</span>. You can also change the default
+    repeat delay as well. For example, the following command changes the repeat rate to
+    0.06 seconds and the repeat delay to 0.25 seconds: 
+    <span class="mcode">setappdata(gcf,'repeat',[0.06 0.25]);</span>
+    
+    <p>Whenever a number is being typed in, you may also type an expression 
+    instead. For example, the following entries are all equivalent:<ul>
+  <li>
+    <p class="mcode">5</li>
+  <li>
+    <p class="mcode">abs(3+4i)</li>
+  <li>
+    <p class="mcode">[2&nbsp;1] * [2&nbsp;1]'</li>
+  <li>
+    <p class="mcode">sqrt(3*2^3-cos(pi))</li>
+</ul>
+    <p>Typing <span class="mcode">sum(get(gca,'xlim').*[0&nbsp;1])'
+</span>would be equivalent to typing in the current upper x axis limit. And to 
+    be really perverse, typing <span class="mcode">log(-1)/(2*pi)
+</span>would be equivalent to typing &quot;.5i&quot; which as mentioned above would
+change the auto increment value to one half.
+
+<p><a href="Programming%20examples.htm">See</a> the <span class="mcode">curves.m</span> 
+example program for an example of how to use edit text objects as well as the 
+popup text objects described below. The <span class="mcode">circles12.m</span>
+example also uses an edit text object for controling the rotation speed of the circle
+plotted in the last figure window.
+<br>
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="14%" valign="top">
+    <font size="5" color="#006699">pop</font><i><br>
+    (popup<br>
+    text<br>
+    object)&nbsp;&nbsp; </i>
+    </td>
+    <td width="86%" valign="top">
+
+Occasionally in a complicated GUI, many popup menus are needed in a space too 
+small to fit Matlab's normal <span class="mcode">
+    uicontrol('Style','Popup')</span> popups. The <span class="mcode">
+    pop</span> pseudo object fills this need. To create a plt popup text menu 
+	pseudo object use 
+the command:<br>
+<br>
+<span class="mcode">
+    H = plt('pop','PropName1','PropVal1','PropName2','PropVal2',...);</span><br>
+<br>
+where:<br>
+&nbsp;<table border="1" cellpadding="4" cellspacing="0" style="border-collapse: collapse" bordercolor="#C0C0C0" width="100%" id="AutoNumber7">
+  <tr>
+    <td width="15%" align="center"><b>
+    <font color="#0000FF" face="Arial" size="4">Property Name</font></b></td>
+    <td width="85%"><b><font face="Arial" size="4" color="#0000FF">Property<br>
+    Value</font></b></td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"> <span class="mcode">
+    choices</span></td>
+    <td width="85%">A cell array of strings specifying the choices given when 
+    the popup is selected.</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"> <span class="mcode">
+    index</span></td>
+    <td width="85%">An integer specifying the current choice (1 = the 1st 
+    choice)</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">callbk</span></td>
+    <td width="85%">A callback to be executed when the popup value is changed.<br>
+    Occurrences of <span class="mcode">'@IDX'</span> will be replaced with the 
+    popup index<br>
+    Occurrences of <span class="mcode">'@STR'</span> will be replaced with the 
+    popup string</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">colorbk</span></td>
+    <td width="85%">The background color used when the popup is open. (default&nbsp;=&nbsp;[0&nbsp;.3&nbsp;.4]);</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">colorfr</span></td>
+    <td width="85%">The foreground color used when the popup is open. (default&nbsp;=&nbsp;[.1&nbsp;1&nbsp;.9])</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">location</span></td>
+    <td width="85%">height or [x y width height] for the popup.</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">offset</span></td>
+    <td width="85%">y or [x y] offset added to location when popup is open.</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">enable</span></td>
+    <td width="85%">0=disable, 1=enable (default=1)</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">hide</span></td>
+    <td width="85%">A list of objects to hide before opening the popup. After 
+    the selection is made, these objects are shown again (unless they were 
+    hidden before the popup opened). This can be used it remove the distraction 
+    of objects overlapping the popup list.</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">interp</span></td>
+    <td width="85%">'none' or 'tex' (default='none')</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center"><span class="mcode">*****</span></td>
+    <td width="85%">If a property name is given which isn't in the list above 
+    then the property is applied to the popup text object itself. (It must be a 
+    valid text property.)&nbsp; The text color (<span class="mcode">'color'</span>) 
+    is usually set this way, however if that property is not specified, the 
+    default color is [1&nbsp;1&nbsp;.4]. </td>
+  </tr>
+</table>
+<p>The above calls create the popup text object and returns the handle of the 
+text object created. This handle (H) is used as an argument in the calls below:<p>
+<span class="mcode">
+    plt('pop',H,'PropName1','PropVal1','PropName2','PropVal2',...);<br>
+</span>If H is a scalar, the specified property values (using items from the 
+table above) are applied to the popup text object identified by handle H. If H 
+is a vector then PropertyName1 of H(k) is set to the kth row of PropertyValue1. 
+If PropertyValue1 doesn't have that many rows, the last row will be used. Only 1 
+property is allowed.<p><span class="mcode">plt('pop',H,'get','index')<br>
+</span>returns the index of the currently selected choice (1 = 1st choice)<p><span class="mcode">plt('pop',H,'get','string')<br>
+</span>returns the string corresponding to the selected choice.<p><span class="mcode">plt('pop',H,'get','choices')<br>
+</span>returns the cell array of choices.<p><b>
+<font size="4">Mouse behavior:</font></b><br>
+Left clicking on the popup text object &quot;opens&quot; the popup. What this means is 
+that the popup string is replaced by a list of the popup choices (rendered using 
+colorfr/colorbk). The user then clicks on the desired choice which then becomes 
+the new text string. Right clicking on the popup text object changes the text 
+string to the next available choice. If the last choice is already selected, 
+then right clicking will change the text string to the first available choice 
+(in the &quot;choices&quot; array).<p><a href="Programming%20examples.htm">See</a> 
+the <span class="mcode">curves.m</span> example program for an example of how to 
+use popup text objects as well as the edit text objects described above.<br>
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="14%" valign="top">
+    <font size="5" color="#006699">slider</font><i><br>
+    (pseudo<br>
+    slider<br>
+    object)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </i>
+    </td>
+    <td width="86%" valign="top">
+
+<p>To use a slider to enter a numeric value in a gui application, besides the 
+slider object itself one generally also wants an edit box to show the current 
+slider value as well as to allow data entry by typing the number. Usually a 
+label is required to identify the data and two fields that indicate the minimum 
+and maximum values allowed are also handy. The pseudo slider object combines 
+these five objects into one and is included in plt since many gui applications 
+designed around plt may require sliders. To create a slider pseudo object, use the command:</p>
+
+<p><span class="mcode">H = plt('slider',In1,In2,In3,In4,In5,In6,In7)</span></p>
+
+    <table border="1" cellspacing="0" bordercolor="#C0C0C0" id="AutoNumber3" style="border-collapse: collapse" cellpadding="10" width="100%">
+      <tr>
+        <td style="width: 7%">&nbsp;</td>
+        <td width="85%">This creates a pseudo object that has the 5 following 
+        sub objects:<p><font face="Lucida Sans Typewriter">&nbsp; 
+        ------------label----------<br>
+&nbsp; min----value editbox----max<br>
+&nbsp; -----------slider----------</font></p>
+
+<p><span class="mcode">plt</span> returns the pseudo slider's handle (<span class="mcode">H</span>). This handle 
+is required in the get and set commands to read and modify the pseudo slider's properties.<br>
+The arguments of the slider <span class="mcode">'init' </span>command are:</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td style="width: 7%"><span class="mcode">&nbsp;&nbsp; In1 </span></td>
+        <td width="85%"><span class="mcode">[x,y,width]</span> in pixels or 
+        normalized units. (Mixing units is ok - values less than one are assumed 
+        to be normalized). [<span class="mcode">x,y</span>] are the coordinates 
+        of the upper left corner of the pseudo slider label. If <span class="mcode">
+        width</span> is missing 0.13 is assumed. In1 is the only required 
+        parameter for this function.</td>
+      </tr>
+      <tr>
+        <td style="width: 7%"><span class="mcode">&nbsp;&nbsp; In2</span></td>
+        <td width="85%"><span class="mcode">[value, smin, smax,  emin, emax]</span><br>
+        value is the initial value assigned to the slider.<br>
+        smin/smax are the slider values at its leftmost/rightmost position.<br>
+        emin/emax are the smallest/largest values allowed when entering numbers 
+        into the edit box. If emin and emax are missing, 1e-99 and 1e99 are 
+        assumed. If In2 is not supplied, [50 0 100] is assumed.</td>
+      </tr>
+      <tr>
+        <td style="width: 7%"><span class="mcode">&nbsp;&nbsp; In3</span></td>
+        <td width="85%">Slider label. If you don't want a label, don't supply 
+        this parameter, or set
+        <span class="mcode">In3</span> to <span class="mcode">''</span>.</td>
+      </tr>
+      <tr>
+        <td style="width: 7%"><span class="mcode">&nbsp;&nbsp; In4</span></td>
+        <td width="85%">Slider callback. This expression will be evaluated 
+        whenever the user moves the slider control or enters a number in the 
+        edit box. 
+    Occurrences of <span class="mcode">'@VAL'</span> will be replaced with the 
+    current value. If you don't need a callback don't supply this parameter or 
+        set <span class="mcode">In4 </span>to<span class="mcode"> ''</span>.</td>
+      </tr>
+      <tr>
+        <td style="width: 7%"><span class="mcode">&nbsp;&nbsp; In5</span></td>
+        <td width="85%">This parameter controls how the slider moves when the 
+        slider left/right arrows are clicked or when clicking in the space to 
+        the left or right of the slider button.<table border="0" cellpadding="0" cellspacing="5" style="border-collapse: collapse" bordercolor="#111111" width="90%" id="AutoNumber4" height="192">
+          <tr>
+            <td width="20%" height="23"><span class="mcode">&nbsp;&nbsp;<u><b>In5</b></u></span></td>
+            <td width="30%" height="23"><u><b>Movement</b></u></td>
+            <td width="50%" height="23"><u><b>Quantization</b></u></td>
+          </tr>
+          <tr>
+            <td width="20%" height="22"><span class="mcode">&nbsp;&nbsp; 1</span></td>
+            <td width="30%" height="22">Linear</td>
+            <td width="50%" height="22">none (default if In5 is missing)</td>
+          </tr>
+          <tr>
+            <td width="20%" height="22"><span class="mcode">&nbsp;&nbsp; 2</span></td>
+            <td width="30%" height="22">Linear </td>
+            <td width="50%" height="22">rounded to nearest integer</td>
+          </tr>
+          <tr>
+            <td width="20%" height="22"><span class="mcode">&nbsp;&nbsp; 3</span></td>
+            <td width="30%" height="22">Linear </td>
+            <td width="50%" height="22">rounded to nearest power of two</td>
+          </tr>
+          <tr>
+            <td width="20%" height="22"><span class="mcode">&nbsp;[4 q]</span></td>
+            <td width="30%" height="22">Linear </td>
+            <td width="50%" height="22">rounded to nearest multiple of q</td>
+          </tr>
+          <tr>
+            <td width="20%" height="24"><span class="mcode">&nbsp;&nbsp; 5</span></td>
+            <td width="30%" height="24">Logarithmic</td>
+            <td width="50%" height="24">none</td>
+          </tr>
+          <tr>
+            <td width="20%" height="22">
+            <p align="left"><span class="mcode">&nbsp;[6 q]</span></td>
+            <td width="30%" height="22">Linear</td>
+            <td width="50%" height="22">always equal to 1 (slider arrows)<br>
+            always equal to q (slider trough)</td>
+          </tr>
+        </table>
+        Note: q defaults to 10 if not specified (modes 4 and 6).
+        </td>
+      </tr>
+      <tr>
+        <td style="width: 7%"><span class="mcode">&nbsp;&nbsp; In6</span></td>
+        <td width="85%"><span class="mcode">[fmin; fval; fmax]</span><br>
+        fmin/fmax are formatting strings for the min/max labels and fval is the 
+        formatting string for the edit box. These strings may contain c style 
+        printf formatting codes or the w and v formats defined in the plt('ftoa') 
+        commands.<br>
+        For example: <span class="mcode">In8 = ['%2.1f';'%5w&nbsp;&nbsp;';'%3d&nbsp; ']<br>
+        </span>or the equivalent:<span class="mcode"> In8 = {'%2.1f','%5w','%3d'}</span><p>
+        If a single string is provided it is assumed to be the format string 
+        fval in which case '%2w' and '%3w' is assumed for fmin and fmax respectively. If 
+        In6 is not provided, then ['%2w';'%6w';'%3w'] is assumed.</td>
+      </tr>
+      <tr>
+        <td style="width: 7%"><span class="mcode">&nbsp;&nbsp; In7</span></td>
+        <td width="85%"><span class="mcode">[LableBG; EditBG; LabelFR; EditFR]<br>
+        </span>This is an array containing 3 columns and up to 4 rows. Columns 
+        1/2/3 respectively represent the proportion (0 to 1.0) of red/green/blue 
+        used in the control. The first two rows are the background colors for 
+        the label and edit fields respectively. The last two rows are optional 
+        and contain the label and edit field foreground colors. If the 
+        foreground colors are not specified black is assumed (i.e. [0 0 0]). If 
+        In7 is not provided [.75,.75,.75; 0,1,1] is assumed.</td>
+      </tr>
+    </table>
+
+<p><br>
+For the commands below, <span class="mcode">H</span> is the handle returned 
+from the above slider initialization command.</p>
+
+<h4><u>The get commands: </u></h4>
+
+    <table border="1" cellspacing="0" width="100%" id="AutoNumber5" style="border-collapse: collapse" bordercolor="#C0C0C0" cellpadding="10" height="109">
+      <tr>
+        <td height="22" style="width: 14%"><span class="mcode">plt('slider',H,'get')</span></td>
+        <td width="50%" height="22">returns the pseudo slider's current value</td>
+      </tr>
+      <tr>
+        <td height="22" style="width: 14%"><span class="mcode">
+        plt('slider',H,'get','value')</span></td>
+        <td width="50%" height="22">same as above</td>
+      </tr>
+      <tr>
+        <td height="22" style="width: 14%"><span class="mcode">
+        plt('slider',H,'get','vis')</span></td>
+        <td width="50%" height="22">returns 1 if the slider is visible, 0 
+        otherwise</td>
+      </tr>
+      <tr>
+        <td height="22" style="width: 14%"><span class="mcode">
+        plt('slider',H,'get','ena')</span></td>
+        <td width="50%" height="22">returns 1 if the slider is enabled, 0 
+        otherwise</td>
+      </tr>
+      <tr>
+        <td height="21" style="width: 14%"><span class="mcode">
+        plt('slider',H,'get','obj')</span></td>
+        <td width="50%" height="21">returns the slider 
+        object handles:<br>
+        [&nbsp; Label<br>
+&nbsp;&nbsp; Slider<br>
+&nbsp;&nbsp; MinText<br>
+&nbsp;&nbsp; MaxText<br>
+&nbsp;&nbsp; EditBox ]</td>
+      </tr>
+    </table>
+
+<p><b><u>The set commands:</u></b></p>
+
+    <div align="left">
+
+    <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse" bordercolor="#C0C0C0" width="100%" id="AutoNumber6" align="left">
+      <tr>
+        <td style="width: 18%"><span class="mcode">plt('slider',H,'set',a)</span></td>
+        <td width="50%">Sets the slider to value <span class="mcode">a</span>.<br>
+        Returns a possibly limited value.</td>
+      </tr>
+      <tr>
+        <td style="width: 18%"><span class="mcode">plt('slider',H,'set','value',a)</span></td>
+        <td width="50%">Same as above</td>
+      </tr>
+      <tr>
+        <td style="width: 18%"><span class="mcode">plt('slider',H,'set','val',a)</span></td>
+        <td width="50%">Same as above except the slider callback is <b>not</b> 
+        executed</td>
+      </tr>
+      <tr>
+        <td style="width: 18%"><span class="mcode">plt('slider',H,'position',a)</span></td>
+        <td width="50%">Sets the slider position.<br>
+        (See  <span class="mcode">In1</span> in the  initialization section).</td>
+      </tr>
+      <tr>
+        <td style="width: 18%"><span class="mcode">plt('slider',H,'set','minmax',a,b)</span></td>
+        <td width="50%">
+        <ul>
+          <li><span class="mcode">a</span> contains [smin,smax,emin,emax]<br>
+          (see 
+           
+          <span class="mcode">In2</span> in the initialization section)</li>
+          <li><span class="mcode">b</span> is a new slider value (optional)</li>
+        </ul>
+        <p style="margin-top: -15">Returns a possibly limited value.</td>
+      </tr>
+      <tr>
+        <td style="width: 18%"><span class="mcode">plt('slider',H,'set','visON')</span></td>
+        <td width="50%">Makes slider visible.</td>
+      </tr>
+      <tr>
+        <td style="width: 18%"><span class="mcode">plt('slider',H,'set','visOFF)</span></td>
+        <td width="50%">Makes the slider invisible.</td>
+      </tr>
+      <tr>
+        <td style="width: 18%"><span class="mcode">plt('slider',H,'set','enaON')</span></td>
+        <td width="50%">Enables the slider.</td>
+      </tr>
+      <tr>
+        <td style="width: 18%"><span class="mcode">plt('slider',H,'set','enaOFF')</span></td>
+        <td width="50%">Disables the slider</td>
+      </tr>
+      <tr>
+        <td style="width: 18%"><span class="mcode">plt('slider',H,'set','label',a)</span></td>
+        <td width="50%">Sets the label string to <span class="mcode">a</span>. 
+        If a is empty, the label is made invisible.</td>
+      </tr>
+      <tr>
+        <td style="width: 18%"><span class="mcode">plt('slider',H,'set','mode',a)</span></td>
+        <td width="50%">Sets the slider movement mode.<br>
+        (See  <span class="mcode">In5</span> in the  initialization section).<br>
+        Returns a possibly limited value.</td>
+      </tr>
+    </table>
+    </div>
+    </td>
+  </tr>
+  <tr>
+    <td width="14%" valign="top">
+    <br><font size="5" color="#006699">ColorPick</font><i><br>
+    (pseudo<br>
+    color select<br>
+    object)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i></td>
+    <td width="86%" valign="top"><br>
+	<img alt="" class="auto-style1" height="240" src="../images/ColorPick.png" style="float: left" width="314">Although 
+	you will probably choose an attractive color scheme for your GUI 
+	applications, the users satisfaction with the application may be 
+	greatly improved by allowing them to choose the colors used for the 
+	major screen objects. By using the ColorPick pseudo object you allow the 
+	user to efficiently choose the screen colors in a consistent way within and 
+	among your applications. Any Matlab object that has either a callback 
+	property or a buttondownfunc property may be used to bring up the ColorPick 
+	window shown here. Before I describe how this is done from a programming 
+	perspective I will describe how the user selects colors from this window.<br>
+	<br>The text above the sliders is generally used to identify the object or 
+	objects that are to receive the color being selected. The three sliders 
+	always indicate the RGB values of the currently selected color. In the example shown at the left, the RGB values are 
+	35%, 80%, and 60% respectively. In Matlab, this color would be represented 
+	by the vector [0.35&nbsp; 0.8&nbsp; 0.6]. The large rectangular patch object 
+	in the upper right corner always indicates the color that results when the 
+	proportions are set to agree with the values of the three RGB sliders. One 
+	of the sliders (the red one in this example) will always be shown with its 
+	text value in yellow and is referred to as the &quot;active slider&quot;. A slider 
+	will become the active slider whenever you either type in a value into its 
+	edit box or when you click on the left or right slider arrows. There are 3 
+	ways to alter the currently selected color:<br>
+	<ul>
+	<li>You can simply select the desired color using the RGB sliders. Note that
+	with this method it is irrelevant which slider is identified as active.</li>
+	<li>You can click on any one of the 121 small square patches that are arranged in an 11x11 grid.
+	The colors in this grid are entirely determined by the active slider. In this 
+	example, since the active slider shows RED=35%, every color in the 11x11 
+	color grid will have red = .35 with varying amounts of the other two colors. 
+	So in this example, the colors of the the 4 corners of this grid starting at 
+	the lower left and moving clockwise are:<nobr> 
+	[.35 0 0] [.35 1 0] [.35 1 1] [.35 0 1].</nobr> Likewise the colors of the 4 
+	squares diagonally adjacent to the squares just mentioned are <nobr> 
+	[.35 .1 .1] [.35 .9 .1] [.35 .9 .9] [.35 .1 .9]</nobr> and the square exactly in 
+	the middle of this grid has the color <nobr>[.35 .5 .5].</nobr> Clicking on any one of 
+	these 121 patches will change the two inactive sliders to the values 
+	associated with the patch that you clicked on. (The active slider will be 
+	unchanged and will remain active). Also the large patch will change to show 
+	the new selected color.</li>
+	<li>Clicking on the large patch will cause the 
+	sliders to move to the &quot;reset&quot; values - i.e. the color that was in effect 
+	when the ColorPick window was first opened. Note that this color never 
+	changes for as long as the ColorPick window remains open. The reset values 
+	may be changed to the values shown currently by the sliders by closing the 
+	ColorPick window and re-opening it again.</li>
+	</ul>
+	Next I will describe how 
+	the ColorPick object is created from the programmers viewpoint. I will call 
+	the object that initiates the creation of the ColorPick figure window the 
+	&quot;main object&quot;. You must do the following two things to make a ColorPick 
+	figure appear:<br>
+	<ul>
+	<li>You must assign an application data variable named <span class="mcode">'m'</span> to the main object with a 
+	cell array of this form:
+	<br><span class="mcode">{'PROP1', H1, 'PROP2', H2, 'PROP3', H3, ... 'PROPn', Hn, 'label'}</span>
+	<br>When the user selects a new color using the 
+	ColorPick figure, the 'PROP1' property of the object with handle H1 will be 
+	set to the 3 element vector <nobr>[R G B]</nobr> where RGB are the values from the 
+	ColorPick figure. If H1 is a row vector of handles, each of the represented 
+	objects will be treated similarly. Then in sequence the objects in H2, H3 
+	... Hn are treated in a like manner. If any of the 'PROPi' enrtries are 
+	'str' or 'string', then the numerical 3 element color vector is converted to 
+	an ascii string before being assigned to that property. Inplace of any property
+	string, you may use a cell array of strings in which case ColorPick will assign
+	the user selected color to all the properties listed in the cell array of all
+	the handles listed in the following argument. Finally, the 
+	last entry 'label' is optional, and if included will appear above the rgb 
+	sliders and is used to identify what screen elements are being controlled.</li>
+	<li>To the callback or buttondownfunc property (or both) 
+	of the main object you must assign one of the following strings:<br>
+	<ol>
+	<li><span class="mcode">'plt ColorPick'</span> This will cause the ColorPick 
+	figure to be created when the callback or buttondownfunction is called 
+	except for one special case - which is when the callback of an 'edit' style 
+	uicontrol is called. The reason for this special case is that if you type 
+	the desired colors directly into an edit box usually this indicates that you 
+	didn't need the help of the ColorPick figure.</li>
+	Note that in this special case, the properties listed in the 'm' application 
+	data cell array are still modified as described above even though the 
+	ColorPick figure is not created. Note that the ColorPick window will appear 
+	when you right click on such an edit box if the buttondownfunction of the 
+	edit box has been similarly assigned.
+	<li><span class="mcode">'plt ColorPick ccf'</span> This has the same effect as above 
+		except that when the user changes a color with the ColorPick figure, in 
+		addition to changing the properties in the 'm' cell array, the function 
+		'ccf' is called. (ccf stands for <em>color change function)</em>. Note 
+		that the ccf function may have numerical arguments, such as with
+		<nobr>'plt ColorPick changeFunc(3,-1)'</nobr>. In fact the function can have string 
+		arguments as well although this is less convenient since you would need 
+		two sets of quotes around each string argument ... for example
+		<nobr>'plt ColorPick changeFunc(''StringArg'')'</nobr>. You should especially avoid color 
+		change functions that required a string argument containing spaces 
+		although if you really wanted to do that it would be possible with an 
+		obscure looking callback such as
+		<nobr>'plt(''ColorPick'',''changeFunc(''''A string argument'''')'')'</nobr></li>
+	<li><span class="mcode">'plt ColorPick 0 0'</span> or <span class="mcode">plt ColorPick ccf 0'</span> This has the same effect as above 
+	except that the special case relating to the edit box callback does not 
+	apply (i.e. the ColorPick window will be created if every instance).</li>
+	</ol>
+	</li>
+	</ul>
+	Only one detail remains to describe the operation of the ColorPick object, 
+	and that has to do with how ColorPick determines the starting positions of 
+	the RGB sliders when the window is first openend. This is a two step 
+	process. First ColorPick must decide which object will be used to determine 
+	the initial color. Once the object is chosen, ColorPick must decide which 
+	property of this object to use. Here are the details of these two steps:<br>
+	<ol>
+	<li><strong><em>Picking the object which will determine the initial color.</em></strong> Usually the 
+	handle of the main object will be among one of the handles included in the 
+	'm' application data cell array and in this case the main object itself is 
+	used to determine the initial RGB slider positions. However sometimes this 
+	is not the case. For example, in the demoplt.m program, we would like to 
+	open the ColorPick window when we click on the text object &quot;text color&quot; 
+	which serves as a label for the text color patch. However since this is just 
+	a label, it is not entirely appropriate for the color of this text object to 
+	change which means that it will not appear in the list of handles in the 'm' 
+	cell array. So in this instance, ColorPick determines the initial color from 
+	the object whose handle is the first element of H1 in the 'm' cell array. 
+	(This is the only instance where the order of the handles in this array is 
+	significant.)</li>
+	<li><strong><em>Picking the property of the selected object which 
+	determines the initial color.</em></strong>
+	<ul>
+	<li><span class="auto-style2">If the selected object is a uicontrol</span>. If 
+	the uicontrol is an edit box then its 'string' property is always used to 
+	determine the initial color. If the string includes fewer than 3 numbers, 
+	then extra zeros are added to the end of the vector. If the string includes 
+	any numbers that are greater than one, then these numbers are clipped at one 
+	and if any numbers are less than zero, then these numbers are clipped at 
+	zero. If the uicontrol is not an edit box, then first the 'string' property 
+	is examined to see if it represents a valid color vector (i.e. it must have 
+	3 elements, all of which are between 0 and 1). If it is valid, than this 
+	vector is used as the initial color. If it is not valid, the uicontrol 
+	'backgroundcolor' property is used as the initial color.</li>
+	<li><span class="auto-style2">If the selected object is a text object</span>, its 'string' property is used if this 
+	string translates to a valid color vector. Otherwise the 'color' property of 
+	the text object is used.</li>
+	<li><span class="auto-style2">If the selected object is a patch object,</span> its 'facecolor' property is used as the 
+	initial color.</li>
+	<li><span class="auto-style2">For all other object types</span>, the 'color' property is used as the initial color.</li></li>
+	</ol>
+	</td>
+  </tr>
+  </table>
+<h3>&nbsp;</h3>
+<h3>&nbsp;</h3>
+
+<h3>&nbsp;</h3>
+
+<h3>&nbsp;</h3>
+
+<h3>&nbsp;</h3>
+
+<h3>&nbsp;</h3>
+
+</body>
+
+</html>
