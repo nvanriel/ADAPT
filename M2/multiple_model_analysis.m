@@ -35,7 +35,7 @@ if ~exist('analysis/SensitivityBox.mat', 'file')
 else
     load('analysis/SensitivityBox.mat')
 end
-if ~exist('sa_dataset.xls', 'file')
+if ~exist('sensitivity_analysis.xls', 'file')
     sa_ranked(SensitivityBox, names_par, names_xj); 
 end
 
