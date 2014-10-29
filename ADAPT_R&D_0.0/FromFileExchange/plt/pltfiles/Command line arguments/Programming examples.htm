@@ -1,0 +1,791 @@
+<html>
+
+<head>
+<title>Programming examples</title>
+<style>
+<!--
+h3           { color: #006699 }
+span.mcode   {
+	color: #E00000;
+	text-align: left;
+	font-weight: bold;
+}
+h2           { font-size: 22pt }
+-->
+</style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1" height="86">
+  <tr>
+    <td width="70%" height="86">
+    <h2>Programming examples</h2>
+    </td>
+    <td width="3%" height="86">&nbsp;<p>&nbsp;</p>
+    <p>&nbsp;</td>
+    <td width="27%" height="86">
+    <img border="0" src="../images/plt.png" width="214" height="98" align="right"></td>
+  </tr>
+</table>
+<p>&nbsp;In the demo folder you will find 22 example programs to help you learn 
+how to take advantage of many of plt's features.</p>
+<p>
+<img border="0" src="../images/demoplt.png" align="left" hspace="5">Also included in the demo 
+folder is <span class="mcode">demoplt.m</span>, a script which makes it easy to 
+start any of the example programs by clicking on the appropriate button or to run all of
+them in sequence (in the order listed below) 
+by clicking the &quot;<i>All Demos</i>&quot; button. I strongly recommend running through
+the <i>All Demos</i> sequence at least once. Many of the questions emailed to me about
+plt are something like "can plt do xxxxx?", but if they had only clicked thru the <i>All Demos</i>
+sequence once, most likely they would quickly discover that the answer to this question was "yes".
+Running demoplt is also a good way to verify that plt is working as properly on your system.
+Just type <span class="mcode">cd&nbsp;plt\demo</span>&nbsp; and then <span class="mcode">
+demoplt</span> at the command prompt. (The cd command is not necessary if you have added 
+the plt\demo folder to the MatLab path). Note that as you proceed through the <i>All Demos</i>
+sequence, the button associated with the currently running demo is shown in bold face type
+and the source code of that demo appears in the listbox. (The listbox font size may be
+adjusted using the fontsize popup in the lower right corner.)</p>
+<p>
+In addition to its main role as a demo program launcher, demoplt also 
+demonstrates the use of one of plt's pseudo objects, namely the ColorPick 
+window. (Note: A pseudo object is a collection of more primitive Matlab objects, 
+assembled together to perform a common objective.) The ColorPick pseudo object 
+is useful whenever the programmer wants to allow the user to have control over 
+the the color of one of the graphic elements. In demoplt there are 3 such 
+elements: The text color, the text background color, and the figure background 
+color. The ColorPick window is activated when you left or right click on any of 
+the 3 text labels near the bottom of the figure, or any of the uicontrol objects 
+adjacent to these labels. (Only a right click on the figure background edit box 
+will bring up a ColorPick window). After the ColorPick window appears you can 
+use the sliders or the color patches to change the color of the respective 
+graphic element. For more details, see the <a href="Pseudo%20objects.htm">Pseudo 
+objects</a> section in the help file.</p>
+<p>
+An optional feature of the ColorPick object is the color change callback 
+function (a function to be called whenever a new color is selected). This 
+feature is demonstrated here by assigning the color change callback to 
+&quot;demoplt(0)&quot;. Note that line 102 of this program can be deleted to remove this 
+callback. The callback function is used to &quot;animate&quot; the listbox by gradually 
+increasing the fontsize before returning it to its original value. This 
+animation is certainly not useful, but is there merely to demonstrate how to use 
+the callback. Although it's unrelated to plt, demoplt also demonstrates the use 
+of the close request function, which in this example is assigned to &quot;demoplt(1)&quot; 
+and is used to save the currently selected colors and screen position to a setup 
+file.</p>
+<h3><font color="red"><i>.... NOTE .... &nbsp; click on the thumbnails below to see the full size image</i></font></h3>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber2">
+  <tr>
+    <td width="6%" valign="top">
+    <h3>plt5.m</h3>
+    <a href=../demoImages/plt5.png> <img src=../demoImages/plt5T.png></a>
+     </td>
+     <td width="2%" valign="bottom">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+     <td width="99%" valign="top">This is a simple script which creates a plot 
+    containing 5 traces. Hopefully you have already been running this script 
+    while following thru the earlier sections.
+    <ul>
+      <li>Note how the five y-vectors are combined to form a single plt argument.</li>
+      <li>Note the use of the <span class="mcode">'Xlim'</span> and
+      <span class="mcode">'Ylim'</span> arguments to control the initial axis 
+      limits.</li>
+      <li>Note the use of <span class="mcode">'FigName'</span>to name the figure 
+      that contains the plot</li>
+      <li>Note the use of&nbsp; <span class="mcode">'LabelX'</span> argument to 
+      assign a label for the x axis.</li>
+      <li>Note the use of the <span class="mcode">'LabelY'</span> argument to 
+      add a label for both the left and right-hand axes.</li>
+    </ul>
+    Note that plt will use a right-hand axis since two labels were included in 
+    the <span class="mcode">LabelY</span> parameter. Usually the <span class="mcode">
+    'Right'</span> parameter is included to specify which traces are to use the 
+    right axis, but in this example the parameter was omitted, so plt defaults to 
+    putting just the last trace on the right-hand axis.<br><br>
+    </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>plt50.m</h3>
+    <a href=../demoImages/plt50.png> <img src=../demoImages/plt50T.png></a><br><br>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">This script is similar to plt5.m except the 
+    number of functions plotted has been increased to 50 to demonstrate the use 
+    of the TIDcolumn parameter.<ul>
+      <li>Normally the legend is rendered in a single column; but with this many 
+      traces, the trace IDs fit much more comfortably in two columns. The <span class="mcode">
+      'TIDcolumn',25 </span>included in the plt argument list actually specifies 
+      the number of items to put in the second column, which in this example 
+      means that both columns will contain 25 items.</li>
+      <li>With so many traces, the utility of using the legend to selectively 
+      enable or disable individual traces becomes even more compelling. Although 
+      the traces and the legend are color coded, it's difficult to distinguish 
+      every trace based on color, so clicking on a legend item is often 
+      necessary to uniquely identify a trace. This also is essential when you 
+      need to reduce the clutter that often results from plotting so many 
+      traces.</li>
+      <li>The <span class="mcode">'Position'</span> parameter is used to 
+      increase the figure area about 30% from the default of 700x525 pixels to 
+      800x600 to make the plot less crowded.</li>
+    </ul>
+      </td>
+  </tr>
+
+  <tr>
+    <td width="6%" valign="top">
+    <h3>pltn.m</h3>
+    <a href=../demoImages/pltn.png> <img src=../demoImages/pltnT.png></a>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">Similar to <span class="mcode">
+    plt5 </span>and<span class="mcode">
+    plt50</span>, except that this is a function instead of a script. This function takes an 
+    argument which specifies how many traces to plot. For instance
+    <span class="mcode">pltn(1)</span> will plot a single trace, and
+    <span class="mcode">pltn(99)</span> will plot 99 traces. If you specify any more
+    traces than this, the trace IDs are not displayed (since there will not be room for them).
+    <span class="mcode">pltn</span> with no arguments does the same thing as "pltn(99)".
+    You can change the number of traces plotted even after pltn is already running by entering
+    a new number in the "<b># of lines</b>" edit box (lower left). Try entering "1000" into this
+    edit box just to see that plt can actually handle such a large number of traces!
+      <ul>   
+      <li>The <span class="mcode">TIDcolumn</span> parameter is used to divide the trace 
+      IDs into up to three columns if necessary. (Showing 99 trace IDs in one column wouldn't 
+      be practical.)</li>
+      <li><span class="mcode">TraceIDs</span> are disabled when more than 99 traces 
+      are specified. (Otherwise plt would complain.)</li>
+      <li>Uses the
+    <span class="mcode">'Ystring'</span> parameter to show a continuous readout 
+      of the cursor index.</li>
+      <li>Uses the
+    <span class="mcode">'Xstring'</span> parameter to show a continuous readout 
+      of the date and time corresponding to the cursor X position. Note the edit box 
+      form is selected by placing a question mark character at the beginning of the 
+      string.</li>
+      <li>A callback is written for the Xstring edit box that moves the cursor 
+      to the index with a corresponding time as close as possible to the entered 
+      value. For example, try this:
+      <ol><li>Click on the top trace (which makes it easy to see the cursor).</li>
+          <li>Enter dates into the edit box - e.g. &quot;<b>30 dec 2006</b>&quot;,
+      or &quot;<b>3-jan-07 9:59</b>&quot;, etc.</li>
+         <li>Verify that the cursor moves to the corresponding point.</li>
+      </ol>
+       </ul>
+      </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>pltvbar.m</h3>
+    <a href=../demoImages/pltvbar.png> <img src=../demoImages/pltvbarT.png></a>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">This script demonstrates the use of vbar.m and 
+    ebar.m to plot vertical bars and error bars respectively. Some things to 
+    note about pltvbar are:<ul>
+      <li>The first vbar in the argument list plots two functions on a single 
+      trace (green) with the 1st function (phase1) defining the position of the 
+      bottom of the vertical bars and the 2nd function (phase2) defining the 
+      position of the tops of the bars.</li>
+      <li>The second vbar in the list plots 3 functions (called serp, bell1, and 
+      bell2). The 3 columns of the first vbar argument define the x coordinates 
+      for those three functions. The next argument (0) indicates that the bottom 
+      of all the vertical bars is at y=0. The last vbar argument gives the y 
+      coordinate for each of the 3 functions (one function per column).</li>
+      <li>The next trace definition (the data argument pair after the
+    <span class="mcode">'linewidth'</span>) plots two traces corresponding to 
+      the two columns of <span class="mcode">
+      poly23</span>. The 1st column is a 2nd order polynomial and the 2nd column 
+      is 3rd order.</li>
+      <li>The next trace definition uses ebar function to create two error bar 
+      traces, the first trace defined by the first column of each of the 3 
+      arguments and the second trace defined by the second column.</li>
+      <li>The
+    <span class="mcode">'screensize'</span> property is used to make the plot 
+      fill a fixed fraction of the space available.</li>
+      <li>The
+    <span class="mcode">'linewidth'</span> argument appears in the middle of the 
+      plt call to change the width of only the traces defined earlier in the 
+      argument list.</li>
+      <li>The
+    <span class="mcode">'TraceID'</span> argument is used to assign names for 
+      each trace that are appropriate for the data being displayed.</li>
+      <li>The
+    <span class="mcode">'AxisPos'</span> argument is used to widen the TraceID 
+      box to make room for the longer than usual trace ID names</li>
+      <li>The
+    <span class="mcode">'Options'</span> argument is used to enable the menu bar 
+      and to add the &quot;Print&quot; tag to the menu box.</li>
+      <li>The
+    <span class="mcode">'+FontSize'</span>,
+    <span class="mcode">'+FontWeight'</span>, 
+    <span class="mcode">'+FontAngle'</span>, 
+    <span class="mcode">'+Xtick'</span>, 
+    <span class="mcode">'+Ytick'</span>, 
+      arguments are used to modify the main axis properties of the same name 
+      (without the plus).</li>
+		<li>The Grid pseudo object is used to create a 8x3 table of character data.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>pltquiv.m</h3>
+    <a href=../demoImages/pltquiv.png> <img src=../demoImages/pltquivT.png></a>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">This script file demonstrates several plt 
+    tricks and features:<ul>
+      <li>The quiv.m function appears twice in the plt argument list to plot two 
+      vector fields both with the base location specified by f and lengths 
+      specified by v1 and v2 respectively. The first of these quiv calls is somewhat similar to the&nbsp; MatLab 
+      command <span class="mcode">
+      quiver(real(f),imag(f),real(v1),imag(v1));</span></li>
+      <li>Using tex commands (e.g. \uparrow) inside Trace ID names</li>
+      <li>Reassigning menu box items. In this example, the <span class="mcode">
+      LinX</span> tag is replaced by a <span class="mcode">
+      Filter</span> tag. Its buttondown function (which is executed when you 
+      click on 'Filter') searches for the 4th trace (using findobj) and swaps 
+      the contents of its user data and y-axis data. </li>
+      <li>Adding text items to the figure. Note that the text position is 
+      specified using x and y axes coordinates.</li>
+      <li>Using  NaNs (not a number) to blank out portions of a trace. In this 
+      case, the NaNs were inserted into the x coordinate data, although using 
+      the y or z coordinates for this purpose works equally as well.</li>
+      <li>Using the TraceID callback function (<span class="mcode">TIDcback</span>) 
+      to perform an action when you click on a trace ID. For example, when you 
+      click on the last trace ID (humps+rand) this will appear in the command 
+      window: &quot;A trace named humps+rand and color [1.00&nbsp;0.00&nbsp;0.00] was toggled&quot;. 
+      (This TraceID callback was contrived to use all the substitutions, and is 
+      not particularly useful.)</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>gauss.m</h3>
+    <a href=../demoImages/gauss.png> <img src=../demoImages/gaussT.png></a>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">This script plots the results of combining uniform random variables.
+    <ul>
+      <li>Shows the advantage of setting the line data after the 
+      <span class="mcode">plt(..)</span> call.</li>
+      <li>Note the use of the <span class="mcode">'FigName'</span> and 
+      <span class="mcode">'TraceID'</span> arguments.</li>
+      <li>Note the appearance of the Greek letter in the x-axis label.</li>
+      <li>Shows how to use the 
+      <span class="mcode">'COLORc'</span> argument to select Matlab's default 
+      plotting colors (typically set to use a white background for the plotting 
+      area)</li>
+      <li>Shows how to use the 
+      <span class="mcode">'DIStrace'</span> argument to disable some traces on 
+      startup.</li>
+      <li>Shows how to use the 
+      <span class="mcode">'MotionZoom'</span> argument to create a new plot 
+      showing only the zoom window. Admittedly this is more contrived than 
+      useful in this particular script, but at least this example will clarify 
+      the function of the MotionZoom parameter.</li>
+      <li>The zoom window plot also demonstrates an easy way to copy the trace data
+      from one plot to another (in this case from the main plot to the zoom plot).</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>tasplt.m</h3>
+    <a href=../demoImages/tasplt1.png> <img src=../demoImages/tasplt1T.png></a>
+    <a href=../demoImages/tasplt2.png> <img src=../demoImages/tasplt2T.png vspace="5"></a><br><br>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">This script file creates two plots each 
+    consisting of 9 traces. These plt tricks and features are demonstrated:<ul>
+      <li>Note that these figures plot multiple valued functions (i.e. 
+      relations).</li>
+      <li>The first plot (efficiency and range chart) creates a trace for each 
+      column of gph and mpg (9 columns for 9 altitudes)</li>
+      <li>Demonstrates adding an additional axis to show alternate units on the 
+      right hand and/or top axis</li>
+      <li>Demonstrates adding text objects to annotate the graph</li>
+      <li>Demonstrates how the cursors in two plots can be linked. Moving one, 
+      moves the other. Also in this example switching the active trace in one 
+      plot does the same in the other as well.</li>
+      <li>Uses <span class="mcode">'Xstrings'</span> and <span class="mcode">'Ystrings'</span> 
+      to display alternate units.</li>
+      <li>Shows how to close both figures when either plot is closed by using the
+          <span class="mcode">'Link'</span> parameter.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>trigplt.m</h3>
+    <a href=../demoImages/trigplt.png> <img src=../demoImages/trigpltT.png></a><br><br>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">This example demonstrates the use of the slider 
+    pseudo object as well as showing how to use the <span class="mcode">TraceMK</span> 
+    parameter to show the line characteristics in the trace selection box. 
+	Although it can be done using plt parameters, this example also shows how to 
+	modify other characteristics of the TraceID box such as its location, 
+	colors, and fonts.<br>
+    <br>
+    Text objects are used to display help information at the top of the plot 
+    window. This help text disappears when any parameter is changed but can be 
+    re-enabled by clicking on the help button.<br>
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>subplt.m</h3>
+    <a href=../demoImages/subplt.png> <img src=../demoImages/subpltT.png></a>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">The <span class="mcode">'SubPlot'</span> 
+    argument is used to create 3 axes. plt puts a single trace on each axes 
+    except for the main (lower) axis which gets all the remaining traces. In 
+    this case, since there are 5 traces defined, the main axis has 3 traces. 
+    Note that the traces are assigned to the axes from the bottom up so that the 
+    last trace (serp) appears on the upper most axis.<ul>
+      <li>The <span class="mcode">'LabelY'</span> argument defines the y-axis 
+      labels for all three axes, again from the bottom up. You can also define 
+      the y-axis label for the right hand main axis, by tacking it onto the end 
+      of the LabelY array (as done here).</li>
+      <li>The <span class="mcode">'Right',2 </span>argument is used to specify 
+      that the 2nd trace of the main axis should be put on the right hand axis. 
+      If this argument was omitted, plt would still have known that a right hand 
+      axis was desired (because of the extra y-label in the LabelY array) 
+      however it would have put trace 3 on the right hand axis. (By default, the 
+      last trace goes on the right axis).</li>
+      <li>The <span class="mcode">LineWidth</span> and <span class="mcode">
+      LineStyle</span> arguments define line characteristics for all 5 traces.</li>
+      <li>The <span class="mcode">TraceMK</span> parameter enables the trace 
+      selection 
+      box to show the line characteristics and the <span class="mcode">AxisPos</span> 
+      parameter widens the trace selection box to make room for this.</li>
+      <li>Note that the lower (main) axis has all the usual plt cursoring 
+      features. The other 2 plots support a subset of the cursoring features and 
+      have individual color coded y-value cursor readouts shown along the bottom 
+      portion of the figure.</li>
+      <li>Only a single x-axis edit box is needed since plt keeps the cursors of 
+      all three axes aligned. Also note that if you zoom or pan any of the 3 
+      plots, the other two plots will adjust their x-axis limits to agree.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>subplt8.m</h3>
+    <a href=../demoImages/subplt8.png> <img src=../demoImages/subplt8T.png></a><br><br>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">This script shows a slight expansion of the 
+    ideas found in subplt.m by increasing the number of axes from 3 to 8. Also 
+    the axes are arranged in two columns which allows the use of two different x 
+    axes (one for each column).<ul>
+      <li>Note that the four axes on the left are synchronized with each other 
+      as well as the four on the right, although the left and right halves are 
+      independent of each other and have different x axis limits and units.</li>
+      <li>The main plot (lower left) contains 3 traces because 10 traces have 
+      been defined and 7 of them are assigned to the other 7 subplots. The main 
+      plot doesn't have a right hand axis in this example, although it would if 
+      a <span class="mcode">'Right'</span> argument was included or if an extra 
+      y-label were included in the <span class="mcode">'LabelY'</span> array.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>winplt.m</h3>
+    <a href=../demoImages/winplt.png> <img src=../demoImages/winpltT.png></a>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">This function displays traces showing 
+    the time and frequency domain shapes of 31 different FFT windows. (The last 
+    2 are user defined.)<ul>
+      <li>Demonstrates how to provide application specific help from a menu box 
+      tag (<span class="mcode">HelpW</span>&nbsp; in this example).</li>
+      <li>The right hand axis is used to good advantage.</li>
+      <li>Demonstrates one way to add auxiliary controls to a figure created by 
+      plt.</li>
+      <li>The controls added include three types of <i>pseudo</i> objects, as 
+      well as the native Matlab text objects and uicontrols (the checkbox in 
+      this case).</li>
+      <li>The pseudo 
+    objects were created using the <span class="mcode">plt('slider')</span>, the <span class="mcode">plt('pop')</span>, 
+    and the <span class="mcode">plt('edit')</span> 
+    commands. All three of those commands are described&nbsp;<a href="Auxiliary%20plt%20functions.htm">here</a>.</li>
+      <li>Shows how the popup object can be used to edit a vector - the window 
+      kernel in this case. (See ID30 - adjust kernel)</li>
+      <li>For a more complete description of this example click on the 
+      <span class="mcode">HelpW</span> tag in the menu box or open 
+      <span class="mcode">winplt.chm</span> or 
+      <span class="mcode">winplt.pdf</span>. </li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>editz.m</h3>
+    <a href=../demoImages/editz1.png> <img src=../demoImages/editz1T.png></a>
+    <a href=../demoImages/editz2.png> <img src=../demoImages/editz2T.png vspace="5"></a>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top"> Two plots are created, one showing the 
+	poles and zeros of a z-plane transfer function and the other showing the 
+	magnitude and phase of it's frequency response. The frequency response plot 
+	automatically updates even while you are dragging a root to a new location. 
+	At first the updating in real time (i.e. while you are dragging) may not 
+	seem so important, but when you use the program its importance becomes 
+	clear. This is accomplished by using the <span class="mcode">MotionEdit</span> 
+	parameter (see line 133). Besides demonstrating the usefulness of plt's data
+	editing capability, my other purpose in writing this little 
+	application was to help engineering students develop a feel for how the
+	magnitude and phase response reacts to a change in the positions of the transfer
+	function poles and zeros. This intuition is much easier to develop if one
+	can watch the transfer function change in real time as one drags the roots
+	around the z-plane. <i>(You've got to try it to see what I mean.)</i> Typical
+	transfer function display routines rarely provide this capability.<ul>
+      <li>When the program first starts, text appears in the pole/zero 
+	  plot that tells you how you can use the mouse to move the roots of the 
+	  transfer function. However it is easy to miss these important instructions 
+	  since they dissappear as soon as you click on anything in that figure 
+	  widow. (This was necessary to manage clutter). However you can re-enable 
+	  the help text at any time by clickin on the yellow &quot;editz help&quot; tag which 
+	  is centered near the left edge of the figure window.</li>
+      <li>In the frequency plot, the x-cursor edit boxes show the cursor 
+	  location as a fraction of the sample rate. The <span class="mcode">Xstring</span> 
+	  parameter is used to show this as an angular measure (in degrees) just 
+	  to the right of the x-cursor readout. Since the DualCur parameter is used, there
+	  are two y-cursor edit boxes. The first one (green) shows the magnitude response
+	  in dB and the second one (purple) shows the phase response in degrees. The
+	  <span class="mcode">Ystring</span> parameter is used to show the magnitude
+	  response in linear form (in percent). Note that after the plot command, the
+	  Ystring is moved to the left of the plot because by default the Ystring appears
+	  in the same place as the dual cursor. The alternate location allows room for a
+	  multi-line Ystring which is generated compliments of <span class="mcode">prin</span>'s
+	  cell array output feature. The <span class="mcode">AxisLink</span> 
+        parameter is used so that by default the mag/phase axes are controlled separately.</li>
+		<li>In the pole/zero plot, the x and y-cursor edit boxes show the 
+		pole/zero locations in cartesian form. The Xstring parameter shows the 
+		polar form just to the right of the x-cursor readout.</li>
+		<li>Normally plt's data editing is initiated when you right click on 
+		either the x or the y cursor readouts. However when data editing is 
+		being used extensively (as in this program) it is useful to provide an 
+		easier way to enter editing mode. In this program, this is done with the 
+		patch object that appears just below the traceID box. (The patch object 
+		is created on line 148 of this file). The 'Dedit' application data 
+		variable is used (see lines 138 to 140) to change the default editing 
+		mode from the usual default (change only the y coordinate) to the 
+		alternative (allow changing both the x and y coordinates. Also the 
+		application data variable 'EditCur' (see line 141) is used to change the 
+		default size of the cursors used for editing.</li>
+		<li>Notice that while dragging a pole or a zero to a new location, the 
+		pole or zero remains inside the diamond shape edit cursor ... except 
+		that is when you get close to the x axis. At that point the root jumps 
+		out of the edit cursor and sticks to the x axis (for as long as the edit 
+		cursor remains inside the green band). Without this snap to behavior it 
+		would be nearly impossible to create a real root. Similarly, when you 
+		drag a zero (but not a pole) &quot;close&quot; enough to the unit circle, the zero 
+		will &quot;snap to&quot; the circle. Without this feature it would be difficult to 
+		create a transfer function with a symetric numerator polynomial.</li>
+		<li>How &quot;close&quot; is close enough for these snap to operations? Well this 
+		is determined by the Tolerance slider which is in the lower left corner 
+		of the pole/zero plot. Notice that as you move this slider, the width of 
+		the green band surrounding the x-axis and the unit circle gets bigger. 
+		If you want to disable the snap to feature, simply move the tolerance 
+		slider to 0.<br></li>
+	<li>Shows how to close both figures when either plot is closed by using the
+                 <span class="mcode">'Link'</span> parameter.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>weight.m</h3>
+    <a href=../demoImages/weight.png> <img src=../demoImages/weightT.png></a>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">This script shows another example of putting 
+    more than one plot in 
+    a single figure. The SubPlot argument is used to create three axes. The lower axis contains 
+    four traces showing the magnitude of 4 
+    different weighting functions used in sound level meters (as defined by IEC 
+    651). The upper axis also contains 4 traces showing the same 4 functions 
+    except in dB instead of the linear units used for the lower axis. The middle 
+    axis shows the inverse of the linear magnitude traces, which isn't 
+    particularly interesting except that I wanted to demonstrate the use of 
+    three axes.<ul>
+      <li>Normally plt only puts one trace on each subplot except for the main 
+      (lower) axis. So in this case (with 12 traces) plt puts 10 traces on the 
+      lower axis and one on the other two. Since we really want 4, 4, and 4, the <span class="mcode">'SubTrace'</span> 
+      parameter is used partition the traces between the axes as desired.</li>
+      <li>Note that using the SubTrace parameter pretty much assures that the 
+      native plt cursor objects will not behave consistently. For this reason, 
+      cursors are often disabled when the SubTrace parameter is used. However in 
+      this example we want the cursoring to work, so we use the <span class="mcode">'moveCB'</span> 
+      cursor callback (and case 1 of the switch command) to keep the cursors 
+      synchronized so they make sense for this particular situation. Because of 
+      this extra code you will notice that the cursors in the upper two axes 
+      automatically move to the same trace and the same x position used in the 
+      current approach</li>
+      <li>&nbsp;The traceID callback (<span class="mcode">'TIDcback'</span>) insures 
+      that the traceID box controls the traces in the upper two axes as well (switch case 2).</li>
+      <li>Note the <span class="mcode">'LineWidth'</span> argument in the plt 
+      call. This illustrates how any line property may be included in the 
+      calling sequence.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>curves.m</h3>
+    <a href=../demoImages/curves.png> <img src=../demoImages/curvesT.png></a>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">This function shows an example where many GUI controls need to 
+    fit into a relatively small 
+    space.<ul>
+      <li>The ten controls above the graph (nine edit text objects and one 
+    popup text object) all are used to control how the parametric curves in the 
+    graph are displayed.</li>
+      <li>If we used the traditional MatLab/Windows GUI objects, we would 
+    have had to make the graph much smaller to make room for all these controls.</li>
+      <li>In addition, the <span class="mcode">plt('edit')</span> objects provide a much easier way to modify the 
+    numeric values, nearly matching the convenience of a slider object. The <span class="mcode">plt('edit')</span> 
+    and <span class="mcode">plt('pop')</span> commands are described&nbsp;<a href="Auxiliary%20plt%20functions.htm">here</a>.</li>
+    </ul>
+    <p>After 
+    starting curves.m, right click on the curve name at the bottom of the figure 
+    to cycle thru the 36 different cool looking curve displays. Left click on 
+    the curve name as well to select from the complete list of curves.
+    If you start it by typing "<span class="mcode">curves cycle</span>" then
+    after starting it will cycle once through all 36 curves (at a rate of half
+    a second per curve).
+    </p>
+    <ul>
+      <li>The equations in white just below the graph and above the curve name, 
+      serve as more than just the x-axis label. This specific string is 
+      evaluated by Matlab to compute the points plotted on the graph.</li>
+      <li>The vector t, and the constants a, b, and c that appear in these 
+      equations are defined by the controls above the graph. Experiment by both 
+      right and left clicking on these controls.</li>
+      <li>For the cases when more than one trace is plotted, the first control 
+      on the left (labeled &quot;trace&quot;) indicates which trace is effected by the 
+      other nine controls above the graph.</li>
+      <li>Note that when you left click on a control, it will increase or 
+      decrease depending on whether you click on the left or right side of the 
+      text string.</li>
+      <li>Separate values for a, b, and c are saved for each trace of a 
+      multi-trace plot. This explains the variety of curves that can appear for 
+      a single set of equations (shown below the graph).</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>pub.m</h3>
+    <a href=../demoImages/pub1.png> <img src=../demoImages/pub1T.png></a>
+    <a href=../demoImages/pub2.png> <img src=../demoImages/pub2T.png vspace="5"></a>
+    <a href=../demoImages/pub3.png> <img src=../demoImages/pub3T.png></a>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">
+      All the other plt examples in the demo folder use plotting formats appropriate
+      for data exploration (the main design goal of plt). However plt can also use
+      formats appropriate for creating plots for publication. This script demonstrates
+      this by creating three different figures windows. Note that all three windows are
+      created by calling <span class="mcode">pltpub()</span> which simply calls
+      <span class="mcode">plt()</span> with several parameters optimized for creating
+      publishable plots.
+      <ol>
+      <li>The first window (plot 1 - lower left) is a bar chart that demonstrates how to embed the
+      plot data inside the script as comments. It also demonstrates the use of the
+      <span class="mcode">prin</span> function to display a table of random numbers
+      in a text box</li>
+      <li>The second window (plot 2 - upper left) demonstrates how to distrubute 15 functions
+      among 5 subplots by using the <span class="mcode">'SubTrace'</span> parameter
+      and how to set the trace colors and line styles.</li>
+      <li>
+      The third window (plot 3) contains two traces with error bars and shows
+      how to use text objects to create specially formatted tick labels.
+    <ul>
+      <li>Shows the use of the &quot;<span class="mcode">+ - &lt; &gt; .</span>&quot; prefixes 
+      to modify properties of:<br>
+&nbsp; &nbsp;&nbsp; <span class="mcode"><font size="5">+</font> </span>&nbsp; &nbsp; the left axis<br>
+&nbsp; &nbsp;&nbsp; <span class="mcode"><font size="5">-</font> </span>&nbsp; &nbsp; &nbsp;the right axis<br>
+&nbsp; &nbsp;&nbsp; <span class="mcode"><font size="5">&lt;</font> </span>&nbsp; &nbsp; the left y-label<br>
+&nbsp; &nbsp;&nbsp; <span class="mcode"><font size="5">&gt;</font> </span>&nbsp; &nbsp; the right y-label<br>
+&nbsp; &nbsp;&nbsp; <span class="mcode"><font size="5">.</font> </span>&nbsp; &nbsp; &nbsp; the x-label</li>
+      <li>Uses the <span class="mcode">'COLORdef'</span> parameter to select a 
+      white plot background</li>
+      <li>Uses the <span class="mcode">'NoCursor'</span> option to remove the 
+      cursor objects</li>
+      <li>Uses the <span class="mcode">'TraceID',''</span> parameter to remove 
+      the TraceID box</li>
+      <li>Demonstrates various ways of modifying the grid lines</li>
+    </ul>
+    </li></ol>
+    </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>pltvar.m</h3>
+    <a href=../demoImages/pltvar.png> <img src=../demoImages/pltvarT.png></a><br><br>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">To demonstrate the workspace plotter, this 
+    script creates several vectors in the workspace (including a structure 
+    containing two vector fields) and then starts the workspace 
+    plotter by calling plt with no
+arguments.<br>
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>pltsq.m</h3>
+    <a href=../demoImages/pltsq.png> <img src=../demoImages/pltsqT.png></a><br><br>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top"><p style="margin-bottom: -12">This function shows 
+    one programming style for adding 
+    additional GUI controls to a plt window. Typically this is something you 
+    will want to do when creating an application based on plt.</p>
+    <ul>
+      <li>Note how the 10 uicontrols are added to the figure (4 popups, 2 
+      buttons, and 6 text labels).</li>
+      <li>Note that the uicontrol units are changed to normalized so that they 
+      reposition properly when you resize the plt figure window.</li>
+      <li>The 'moveCB' argument and the plt('rename') call are used to provide 
+      simultaneous cursor readouts for all 5 traces (using the TraceID). Click 
+      anywhere in the plot area to see the cursor values update)</li>
+      <li>Note the use of the <span class="mcode">'AxisPos'</span> argument to make room for the uicontrols 
+      added above the plot area.</li>
+      <li>Note the use of the <span class="mcode">'Options'</span> argument to 
+      turn off grid lines (initially) and to remove the y-axes Log selector from 
+      the menu box.</li>
+      <li>You can use the Erasemode popup to explore the effect of the erasemode 
+      property on drawing speed.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>movbar.m</h3>
+    <a href=../demoImages/movbar.png> <img src=../demoImages/movbarT.png></a><br><br>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">This function plots a series of 40 random bars 
+    and displays a horizontal threshold line which you can move by sliding the 
+    mouse along the vertical green line. As you move the threshold line, a 
+    string below the plot reports the number of bars that exceed the threshold. 
+    (This demonstrates the use of the plt <span class="mcode">xstring</span> 
+    parameter.). These two buttons are added to the plt figure:<ul>
+      <li><i><b>Rand</b></i>: Sets the bar heights to a new random data set.</li>
+      <li><i><b>Walk</b></i>: Clicking this once starts a random walk process of 
+      the bar heights. Clicking a second time halts this process. The Walk 
+      button user data holds the walk/halt status (1/0 respectively) 
+      demonstrating a simple way to start and stop a moving plot.</li>
+    </ul>
+    <p>Note that you can move the threshold or press the Rand button while it is 
+    walking. Also, if you click on one of the vertical purple bars, the 
+    horizontal threshold bar will then follow the upper end of that vertical 
+    bar.<br>
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>dice.m</h3>
+    <a href=../demoImages/dice.png> <img src=../demoImages/diceT.png></a><br><br>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">This function displays a simulation of Sam 
+    Loyd's carnival dice game. - You bet 1 dollar to play (rolling 3 dice). If 
+    one six appears you get 2 dollars, if two sixes appear, you get 3 dollars, 
+    if three sixes appear, you get 4 dollars, and otherwise, you get nothing.<ul>
+      <li>Three traces are created: accumulated winnings, earnings per bet, and 
+      expected earnings per bet.</li>
+      <li>The first two traces are displayed as they are computed, i.e. every 
+      time the dice are rolled, a new value is appended to the trace and the 
+      plot is updated so you can watch the function grow in real time.</li>
+      <li>A second axis is added near the top of the figure to show the dice. 
+      For each die, a line with dots as markers is added for each of the six 
+      faces, with only one of these lines being visible at a time. A square 
+      patch is also added for each die for the visual effect.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>bounce.m</h3>
+    <a href=../demoImages/bounce.png> <img src=../demoImages/bounceT.png></a><br><br>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">This function displays a specified number of 
+    markers with random shapes and colors in the form of a 5 pedal rose which 
+    then start randomly walking around bouncing off the walls. Click on the 
+    &quot;Walk&quot;/&quot;Stop&quot; button to start and stop the motion. The 
+    slider controls the walking speed. The argument determines the number of 
+    markers, i.e. bounce(88) will display 88 markers. If bounce is called 
+    without an argument, the default value will be used (120 markers).<ul>
+      <li>Shows that plt can create many line objects (each marker is actually a 
+      line object) by using matrices for the x,y parameters.</li>
+      <li>Shows that plt can set line properties using cell arrays.</li>
+      <li>Shows how to disable TraceIDs to avoid the 99 trace limit.</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>circles12.m</h3>
+    <a href=../demoImages/circles12a.png> <img src=../demoImages/circles12aT.png></a>
+    <a href=../demoImages/circles12b.png> <img src=../demoImages/circles12bT.png vspace="5"></a><br><br>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">This is a two part script. The first part 
+    creates 3 figures each showing a different solution to the following problem ...<b><i><font color="#0000FF"><br>
+    <font size="4">Draw 12 circles in a plane so 
+    that every circle is tangent to exactly 5 others.</font></font></i></b><p>
+    The second part of the script draws the solution to the following problem 
+    ...<br>
+    <font size="4"><b><i><font color="#0000FF">Divide a circle into n congruent 
+    parts so that at least one part does not touch the center.
+    (Hint: the only 
+    known solution uses n = 12)<br>
+    </font></i></b></font>A slider is also added below the plot which lets you 
+    rotate the image and control the rotation speed.</p>
+    <ul>
+      <li>Shows the utility of using complex numbers to hold the x and y 
+    positions of the plotted points.</li>
+      <li>Note that even though the calls to plt for solutions 2&amp;3 specify same 
+      screen location ('Position' parameter) plt doesn't actually plot them on 
+      top of each other. Instead a small offset is added in this situation, a 
+      feature that makes it easier to create many plt windows so that any of 
+      them can be easily selected with the mouse.</li>
+      <li>Demonstrates two ways of creating the Trace IDs (reshape and repmat).</li>
+      <li>Demonstrates how to make circles look true by using a zero in the  <span class="mcode">
+      'Position' </span>argument (width or height).</li>
+      <li>Shows how to hide cursor objects and the menu box (second part of 
+      script)</li>
+      <li>Uses  <span class="mcode">
+      'options','Ticks'</span>
+      to select axis tick marks instead of full grid lines.</li>
+      </ul>
+      </td>
+  </tr>
+  <tr>
+    <td width="6%" valign="top">
+    <h3>wfall.m</h3>
+    <a href=../demoImages/wfall.png> <img src=../demoImages/wfallT.png></a>
+    </td>
+    <td width="2%"> </td>
+    <td width="99%" valign="top">This function shows one way to create a 
+    waterfall plot with hidden line removal.<ul>
+      <li>Note how plt is called with a single trace color and no TraceID box.</li>
+      <li>Figure user data and setappdata are used to communicate with the callback.</li>
+      <li>Extensive use of the slider pseudo object to control the plotted data.</li>
+    </ul>
+    </td>
+  </tr>
+  </table>
+
+</body>
+
+</html>

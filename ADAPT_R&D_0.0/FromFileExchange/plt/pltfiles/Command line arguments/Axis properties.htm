@@ -1,0 +1,372 @@
+<html>
+<head>
+<title>Axis properties</title>
+<style>
+<!--
+h3           { color: #006699 }
+span.mcode   {
+	color: #E00000;
+	text-align: left;
+	font-weight: bold;
+}
+h2           { font-size: 22pt }
+-->
+</style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1" height="86">
+  <tr>
+    <td width="70%" height="86">
+    <h2>Axis properties</h2>
+    </td>
+    <td width="3%" height="86">&nbsp;<p>&nbsp;</p>
+    <p>&nbsp;</td>
+    <td width="27%" height="86">
+    <img border="0" src="../images/plt.png" width="214" height="98" align="right"></td>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber2">
+  <tr>
+    <td width="119" valign="top">
+    <h3>Xlim</h3>
+    </td>
+    <td width="1010" valign="top"><p><span class="mcode">plt(...,'Xlim',[xmin xmax]);<br>
+    </span>Specifies the x-axis limits. If you are using a 2 column subplot, you 
+    can specify the x-limits for both both columns by using a cell array. i.e. <span class="mcode">
+    'Xlim',{[xminL&nbsp;xmaxL]&nbsp;[xminR&nbsp;xmaxR]}&nbsp;
+    </span>If you want to specify just the right column limits, replace the left 
+    column limits with the string <span class="mcode">'default'</span> .<br>
+&nbsp;</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="119" valign="top">
+    <h3>Ylim</h3>
+    </td>
+    <td width="1010" valign="top"><p> <span class="mcode">plt(...,'Ylim',[ymin ymax]);<br>
+    </span>Specifies the y-axis limits for the left-hand y axis of the main 
+    plot. Alternatively you may specify the limits for the main plot left and 
+    right hand y-axes using a cell array input as in: <span class="mcode">'Ylim',{[ymin&nbsp;ymax]&nbsp;[yminR&nbsp;ymaxR]}</span>. 
+    The <span class="mcode">'Right'</span> 
+    parameter should also be included in this case, however if you don't, plt 
+    will default to placing the last trace on the right hand axis. Note that 
+    this parameter only 
+    specifies limits for the main plot and never for any of the other subplots. 
+    If you need to set the y-axis limits for the other subplots, use the set 
+    command with the axis handles obtained from <span class="mcode">
+    getappdata(gcf,'axis')</span>.<br>
+&nbsp;</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="119" valign="top">
+    <h3>YlimR</h3>
+    </td>
+    <td width="1010" valign="top"><p><span class="mcode">plt(...,'YlimR',[ymin ymax]);<br>
+    </span>Although this is most often done with the <span class="mcode">Ylim</span> 
+    parameter (above) you may also specify the limits for right-hand y axis 
+    using the <span class="mcode">YlimR</span> parameter. The <span class="mcode">'Right'</span> 
+    parameter should also be included in this case, however if you don't, plt 
+    will default to placing the last trace on the right hand axis. <br>
+&nbsp;</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="119" valign="top">
+    <h3>AxisPos</h3>
+    </td>
+    <td width="1010" valign="top"><p><span class="mcode">plt(...,'AxisPos',p);<br>
+    </span>p is a 4 element vector that modifies the size and position of the 
+    plot axis in the figure window. The first two elements modify the x and y 
+    coordinates of the lower left corner of the axis. The last two elements 
+    modify the axis width and height respectively. For example if
+    <span class="mcode">p&nbsp;=&nbsp;[1&nbsp;1&nbsp;.9&nbsp;1]</span>, the width of the plot will shrink 
+    by 10%. If <span class="mcode">p&nbsp;=&nbsp;[1&nbsp;2&nbsp;1&nbsp;.8]</span> then the space between 
+    the bottom of the figure window and the bottom of the x-axis will double and 
+    the plot height will shrink by 20%. Changing the size and position of the 
+    axis is often useful when building applications to make room for additional 
+    GUI objects. If p is a 5 element vector, the width of the trace ID box is 
+    increased by a factor of p(5) to allow longer trace names. If p is an 8 
+    element vector, the position of the trace ID box (xLeft,yBottom,width,height) 
+    is multiplied by last four elements of p (i.e. p(5:8)) <br>
+&nbsp;</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="119" valign="top">
+    <h3>NewLimit<br>
+    axisCB&nbsp;&nbsp;&nbsp; </h3>
+    </td>
+    <td width="1010" valign="top"><p><span class="mcode">plt(...,'NewLimit',s);<br>
+    plt(...,'axisCB',s);<br>
+    </span>Evaluate string  <span class="mcode">s</span> when either the x or y-axis limits are changed. 
+    These two terms (<span class="mcode">NewLimit</span> and <span class="mcode">
+    axisCB</span>) are synonymous. This callback function can be 
+    overwritten by the cursor command<span class="mcode"> plt('cursor',cid,'set','axisCB',fcn) </span>
+    which is described in more detail in the <a href="Cursor%20commands.htm">
+    cursor commands</a> section. In addition to a string, <span class="mcode">s</span> 
+    may also be a function handle of the form <span class="mcode">@func</span> 
+    or <span class="mcode">{@func,arg1,arg2,...,argn}</span>. Note that the 
+    string substitutions can't be used with the function handle form of this 
+    parameter.<br>
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="119" valign="top">
+    <h3>moveCB</h3>
+    </td>
+    <td width="1010" valign="top"><span class="mcode">plt(...,'moveCB',s);<br>
+    </span>Evaluate string  <span class="mcode">s</span> whenever the cursor is moved. This callback function can be 
+    overwritten by the the cursor command<span class="mcode"> plt('cursor',cid,'set','moveCB',fcn) </span>
+    which is described in more detail in the <a href="Cursor%20commands.htm">
+    cursor commands</a> section. The <span class="mcode">moveCB</span> is not 
+    really an axis property, but is included in this section because of the 
+    parallels with the above <span class="mcode">axisCB</span> parameter. As 
+    with the axisCB parameter, you may use function handles for this parameter 
+    (see above).<br>
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="119" valign="top">
+    <h3>ENApre</h3>
+    </td>
+    <td width="1010" valign="top">
+    <p><span class="mcode">plt(...,'ENApre',[ENAx ENAy]);</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ENAx or ENAy = 0 to disable metric prefixes on the x/y axis.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ENAx or ENAy = 1 to enable metric prefixes on the x/y axis (default).<br>
+    When metric prefixes are enabled plt will choose the best unit for the 
+    respective axis. As an example, suppose the x-axis label is 'seconds' and 
+    the x-axis data is [0 1 2 3 4 5]*1e-8. With metric prefixes disabled, the 
+    x-axis tick-labels and cursor readout will be in scientific notation. With 
+    metric prefixes enabled, the x-axis label will change to &quot;nano-seconds&quot; and 
+    scientific notation will no longer be required making the graph and cursors 
+    far more readable. (Note: metric prefixes are not used on the right hand 
+    axis).<br>
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="119" valign="top">
+    <h3>AxisLink</h3>
+    </td>
+    <td width="1010" valign="top">
+    <span class="mcode">plt(...,'AxisLink',m);
+    </span>tells plt to start with the left/right axes linked if m=1 or unlinked 
+    if m=0. For more details, see the&nbsp;
+    <a href="../Using%20the%20plt%20window/Right%20hand%20axis.htm">right hand 
+    axis</a> section.<br>
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="119" valign="top">
+    <h3>+AxisProp<br>
+    -AxisProp<br>
+    &lt;LabelProp<br>
+    &gt;LabelProp<br>
+    .LabelProp</h3>
+    </td>
+    <td width="1010" valign="top">
+    If a property name is prefixed with a
+    <span class="mcode">+</span> or a <span class="mcode">-</span> character then the property value will be 
+    applied to the left or right hand axis 
+    respectively.
+    If a property name is prefixed with a
+    <span class="mcode">&gt;</span> ,
+    <span class="mcode">&lt;</span> or a
+    <span class="mcode">.</span> character then the property value will be 
+    applied to the left hand axis label, right hand axis label, or x axis label 
+    respectively.<p>
+    <span class="mcode">plt(...,'+Ycolor',[0 0 1],'-Yscale','Log');
+    </span>In this example plt will assign the value
+    <span class="mcode">[0 0 1]</span> (blue) to the
+    <span class="mcode">Ycolor</span> property of the main (left hand) axis, and 
+    it will apply the value
+    <span class="mcode">'Log'</span> to the
+    <span class="mcode">Yscale</span> property of the right hand axis. The plus 
+    and minus signs are called a property prefix characters and&nbsp; are required so that plt 
+    knows which axis you want to modify.</p>
+    <p>
+    <span class="mcode">plt(...,'&gt;FontName','Lucida Handwriting');
+    </span>In this example the font used for the right hand axis label is 
+    changed to Lucida Handwriting.</p>
+    <p>
+    More than one property prefix character may be included in front of a property name. For example:</p>
+    <p>
+    <span class="mcode">plt(...,'+&lt;.FontSize',13);
+    </span>In this case, the font size for the left hand axis tick labels, the 
+    left y-label, and the x-label are increased to 13.<p>
+    The example
+    <span class="mcode">demo\pub.m</span> demonstrates the use of these prefix 
+    characters.
+    Note that if a property name appears without one of these 5 leading prefix 
+    characters (<span class="mcode">&lt;&gt;.+-</span>), then property value will 
+    be assigned to all the lines that have 
+    been defined earlier in the argument list.<br>
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="119" valign="top">
+    <h3>SubPlot</h3>
+    </td>
+    <td width="1010" valign="top">
+    <span class="mcode">plt(...,'SubPlot',v);
+    </span>Normally plt puts all the defined traces on a single plot (which may 
+    have left and right hand y-axes) that fills most of the figure area. However 
+    with the SubPlot parameter you can tell plt to create several plots in the 
+    same figure. All the plots are arranged in either one or two columns. All 
+    plots in a column must use the same x-axis. The subplot in the lower left 
+    corner has a special designation (the main plot) since that is the only plot 
+    that includes a traceID box. Also some of the cursoring features are only 
+    available on the main plot (peak/valley finder, delta cursors, expansion 
+    history, the Mark/Zout/LinX/LinY tags, and the x-axis slider. Each subplot 
+    however has its own y-axis cursor readout. These cursor readouts are easy to 
+    identify since its background color matches the trace and axis colors. The 
+    full panning and zooming features of plt are supported for each subplot. When 
+    any subplot is panned or zoomed in the x-axis, all the x-axis limits of all 
+    the other subplots in the same column are set to match the newly chosen 
+    values.<p><b><font size="4">Single column<br>
+    </font></b>To create a single column of plots (all using the same x axis), 
+    the subplot argument consists of n positive numbers, where n is the number 
+    of plots desired. Each number specifies the percent of the area to be 
+    occupied by each plot (starting from the bottom). Normally the sum of the 
+    array should be 100, although if the sum is less than 100, there will be 
+    some unused space at the top of the figure. For example,
+    <span class="mcode">'SubPlot',[40&nbsp;30&nbsp;15&nbsp;15]</span> tells plt to create 
+    four 
+    plots. The bottom one (the &quot;main&quot; plot) will us up 40% of the available 
+    height. The plot above that will use 30% of the height, and the remaining 
+    two will take 15% each. Each subplot except the main (lower) plot is 
+    assigned a single trace, with the last trace defined appearing in the upper 
+    most axis, the second to last trace appearing in the axis below that, etc. 
+    For example, the command
+    <span class="mcode">plt(1:50,rand(7,50),'SubPlot',[40&nbsp;30&nbsp;15&nbsp;15])</span> will 
+    create 7 random traces, with the first four traces displayed on the main 
+    (lower) plot (with a traceID box containing four labels) and the last 3 
+    traces are displayed in the other three subplots. The example script
+    <span class="mcode">demo\subplt.m</span> demonstrates the use of single 
+    column subplots. Usually only the main plot may contain multiple traces, 
+    although the 
+    <span class="mcode">SubTrace</span> parameter (see below) allows you to 
+    change this behavior.</p>
+    <p><b><font size="4">Dual column<br>
+    </font></b>The example script
+    <span class="mcode">demo\subplt8.m</span> demonstrates the use of dual 
+    column subplots. To create two columns of plots, insert a negative number 
+    into the subplot argument. The number of entries to the left of the negative 
+    number indicates how many plots will appear in the left column, and 
+    likewise, the number of entries to the right of the negative number 
+    indicates the number of plots in the right column. The negative number 
+    itself specifies the width (in percent) of the left column. Some examples 
+    will help clarify (assume
+    <span class="mcode">y&nbsp;=&nbsp;[a&nbsp;b&nbsp;c&nbsp;d&nbsp;e&nbsp;f]</span> where
+    <span class="mcode">a,b,c...</span> are column vectors):</p>
+    <p>
+    <span class="mcode">plt(x,y,'SubPlot',[100&nbsp;-60&nbsp;100],'Right',[2&nbsp;3]);</span> 
+    The subplot parameters tells plt to create two plots both of which fill the 
+    entire height available in the plotting area of the figure. The left (main) 
+    plot fills 60% of the width with the second plot filling the remaining 40%. 
+    Since six traces are defined, the first five traces (a thru e) appear on the 
+    main plot and the last trace (f) appears on the right plot. Since the 
+    TRACEid parameter was not included, the trace ID box next to the main plot 
+    will contain the default trace labels (Line1 thru Line5). To label the 
+    traces more informatively, a parameter such as
+    <span class="mcode">'TRACEid',{'a'&nbsp;'b'&nbsp;'c'&nbsp;'d'&nbsp;'e'}
+    </span>could be added to the plt argument list. Since the 'Right' parameter 
+    was included, the main plot will include both right and left axes, with the 
+    2nd and 3rd traces (b and c) on the right and the remaining three traces (a,d,e) 
+    on the left. The left and right axes will be separated by enough space to 
+    leave room for the axis labels, and this space will be increased when the 
+    'Right' parameter is used so that there is room for an axis label on the 
+    right side of the main (i.e. left) axis. However if you would like to 
+    increase or decrease the amount of space between the two columns you can do 
+    this by modifying the width argument. As an example, suppose as above you 
+    still want the left plot to occupy 60% of the available width, but you want 
+    to increase the spacing between the two axes by 2.3% of the figure window 
+    width. To do that you would use
+    <span class="mcode">'SubPlot',[100&nbsp;-60.023&nbsp;100]</span>. And for another 
+    example, if you wanted to decrease the spacing by 3% of the figure width you 
+    would use
+    <span class="mcode">'SubPlot',[100&nbsp;-60.97&nbsp;100]</span>.</p>
+    <p>
+    <span class="mcode">plt(x,y,'SubPlot',[50&nbsp;30&nbsp;20&nbsp;-55 70 20]);</span> Three 
+    plots will be created in the left column which fills 55% of the width of the 
+    plotting area. The main plot on the bottom (containing traces a &amp; b) fills 
+    50% of the height, the middle plot (trace c) fills 30% and the top plot 
+    (trace d) fills the remaining 20% of the height. Two plots are created in 
+    the right column which fills the remaining 45% of the width. The lower of 
+    these (trace e) fills 70% of the height, and the upper (trace f) fills 20%, 
+    with the upper 10% remaining blank. Note that both traces in the main plot 
+    use the left-hand axis since no 'Right' parameter was given and no limits or 
+    labels were specified for the right-hand axis. (With this many subplots it's 
+    best not to use a right-hand axis since it makes all the subplots 
+    significantly narrower to make room for the right-hand axis ticks and 
+    labels.)</p>
+    <p>
+    <span class="mcode">plt(x,y,'LabelX',{'meters' 'pascals'},'Ylim'{[0 5] [0 
+    .1]});</span> Even though the subplot argument is not included here, plt 
+    will split the plot horizontally as if you had included
+    <span class="mcode">'SubPlot',[100&nbsp;<font face="Lucida Sans Typewriter">­</font>50&nbsp;100]</span> 
+    in the argument list. This is because two different x-axis labels are 
+    specified with the 'LabelX' parameter and the only time this is needed is 
+    for two column subplots. The right column plot will contain trace f and the 
+    left column (main) plot will contain traces a thru e. Since two y-axis 
+    limits are specified, plt will put both left and right axes on the main 
+    plot. In this example the 'Right' parameter is not included, so plt will 
+    default to putting the last trace of the main plot (trace e) on the right 
+    axis with the other four traces on the left axis. (Be careful not to confuse 
+    the concepts of the right and left axes of the main plot, with the right and 
+    left columns of subplots.) Also note that the 'Ylim' parameter only 
+    specifies limits for the main plot and never for any of the other subplots. 
+    If you need to set the y-axis limits for the other subplots, use the set 
+    command with the axis handles obtained from getappdata(gcf,'axis').<br>
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="119" valign="top">
+    <h3>SubTrace</h3>
+    </td>
+    <td width="1010" valign="top">
+    When using subplots, it is important to understand that the default behavior 
+    is to allow only a single trace on each subplot except for the main axis 
+    (lower left). The main reason for this is to allow plt to provide a simple 
+    cursoring mechanism which allows every trace to be cursored. However there 
+    are two situations where you may want to change this default behavior. The 
+    first is where cursoring is disabled (usually because the plot is too be 
+    used for publication instead of for data exploration). Since cursoring is 
+    not an issue, there is no reason you must stick with the default behavior 
+    for assigning the traces to the axes. The second plot in the script
+    <span class="mcode">demo\pub.m</span>&nbsp; is an example of how the
+    <span class="mcode">SubTrace</span> parameter might by used in this 
+    situation. The second situation where you might want to use this parameter 
+    is when you plan on modifying the cursor behavior to make sense for the 
+    particular trace arrangement you have in mind. This requires a detailed 
+    understanding of plt's cursoring commands, but is doable when the trace 
+    configuration and desired cursoring scheme are reasonably simple.An example 
+    of this second situation can be found in the script
+    <span class="mcode">demo\weight.m</span>.<p>There are two ways to use this 
+    parameter to assign the traces to the various subplots. For either method 
+    you must know how plt numbers the axes. Axis number one is always the main 
+    axis (lower left). Then axis two is the one directly above the main axis and 
+    axis three is the one above that, continuing to the top of the left column. 
+    Then the lowest axis of the second column (if it exists) is assigned to the 
+    next number, and continuing upwards as before. Finally after all the 
+    subplots have been assigned a number in this manner, the right hand axis of 
+    the main plot (if it exists) is assigned to the next higher integer.</p>
+    <p>Suppose for example, you have 4 axes and 9 traces and that you want 
+    to put two traces on each of the first 3 axes and then put the remaining 3 
+    traces on the last axis. You could do this with
+    <span class="mcode">'SubTrace',[2 2 2 3]</span>. Instead of specifying how 
+    many traces are on each axis, an alternate way of doing this is to specify 
+    which axis each trace goes on. So an equivalent to the previous parameter 
+    you could use
+    <span class="mcode">'SubTrace',[1 1 2 2 3 3 4 4 4]</span>. Of course this 
+    second method is always going to be longer than the first method, so you 
+    would likely only use it if you needed to assign the traces to the axes
+    in a different order, for example
+    <span class="mcode">'SubTrace',[1 2 3 1 2 3 4 4 4]</span>.</td>
+  </tr>
+</table>
+
+</body>
+
+</html>

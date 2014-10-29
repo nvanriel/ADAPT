@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>Installation instructions</title>
+<style>
+<!--
+span.mcode   {
+	color: #E00000;
+	font-weight: bold;
+}
+h2           { font-size: 22pt }
+-->
+</style>
+</head>
+<body>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1">
+  <tr>
+    <td width="46%">
+    <h2>Installation instructions</h2>
+    </td>
+    <td width="28%">
+    <p align="right">&nbsp;</p>
+    <p align="right">&nbsp;</td>
+    <td width="26%">
+    <img border="0" src="../images/plt.png" width="215" height="105" align="right"></td>
+  </tr>
+</table>
+
+<ul>
+  <li>Create a new folder called <span class="mcode">plt</span> in any convenient place on your disk.</li>
+  <li>Add this new folder to your Matlab path.</li>
+  <li>Extract the downloaded archive file
+  (<span class="mcode">plt.zip</span>) into this new folder. 
+  It is important that your unzipper preserves the directory structure.
+  (Most unzippers will do this properly by default.)
+  After the unzip operation the new folder will contain the files and folders shown below.
+  The 22 example programs will appear in a subdirectory called demo. It may be 
+  convenient to also add this demo directory to your Matlab path. If you prefer
+  not to do that, you can still run the demo programs by using the Matlab
+  <span class="mcode">cd</span> command to make the demo folder active.</li>
+</ul>
+<table cellpadding="10" cellspacing="0" style="float: none;" bordercolor="#C0C0C0" id="AutoNumber2" align="left" class="auto-style1">
+	<tr>
+		<td class="auto-style2" style="width: 120"><span class="mcode">plt.m</span></td>
+		<td class="auto-style2" style="width: 550">Matlab code for plt</td>
+	</tr>
+	<tr>
+		<td class="auto-style2" style="width: 120"><span class="mcode">Pvbar.m</span></td>
+		<td class="auto-style2" style="width: 550">Auxiliary function: for displaying functions as vertical bars</td>
+	</tr>
+	<tr>
+		<td class="auto-style2" style="width: 120"><span class="mcode">Pebar.m</span></td>
+		<td class="auto-style2" style="width: 550">Auxiliary function: for displaying error bar plots</td>
+	</tr>
+	<tr>
+		<td class="auto-style2" style="width: 120"><span class="mcode">Pquiv.m</span></td>
+		<td class="auto-style2" style="width: 550">Auxiliary function for displaying vector fields (arrows)</td>
+	</tr>
+	<tr>
+		<td class="auto-style2" style="width: 120"><span class="mcode">prin.m<br>prin.pdf<br>Pftoa.m</span></td>
+		<td class="auto-style2" style="width: 550">A powerful alternative to sprintf and fprintf. (Called by plt.m and its demo programs.)
+		                                          <br>A complete description of the prin function.
+		                                          <br>Called by prin. (Implements the additional floating point conversion formats.)</td>
+	</tr>
+	<tr>
+		<td class="auto-style2" style="width: 120"><span class="mcode">contents.m</span></td>
+		<td class="auto-style2" style="width: 550">brief help text</td>
+	</tr>
+	<tr>
+		<td class="auto-style2" style="width: 120"><span class="mcode">plt.htm<br>pltfiles\</span></td>
+		<td class="auto-style2" style="width: 550">Top level html help file
+		                                          <br>A folder containing all lower level html files and images.</td>
+	</tr>
+	<tr>
+		<td class="auto-style2" style="width: 120"><span class="mcode">plt.chm</span></td>
+		<td class="auto-style2" style="width: 550">full help documentation (compiled from above plt.htm and pltfiles\)</td>
+	</tr>
+	<tr>
+		<td class="auto-style2" style="width: 120"><span class="mcode">demo\plt5.m<br>demo\plt50.m<br>demo\pltn.m<br>demo\pltvbar.m<br>demo\pltquiv.m<br>demo\gauss.m<br>demo\tasplt.m<br>demo\trigplt.m<br>demo\subplt.m<br>demo\subplt8.m<br>demo\winplt.m<br>demo\winplt.chm<br>demo\winplt.pdf<br>demo\editz.m<br>demo\weight.m<br>demo\curves.m<br>demo\pub.m<br>demo\pltvar.m<br>demo\pltsq.m<br>demo\movbar.m<br>demo\dice.m<br>demo\bounce.m<br>demo\circles12.m<br>demo\wfall.m</span></td>
+		<td class="auto-style2" style="width: 550">Example programs.<br>For descriptions, click
+    	<a href="../Command%20line%20arguments/Programming%20examples.htm">here</a></td>
+	</tr>
+	<tr>
+		<td class="auto-style2" style="width: 120"><span class="mcode">demo\demoplt.m</span></td>
+		<td class="auto-style2" style="width: 550">Auto sequences through all 22 examples (in the order of the files shown 
+    above)</td>
+	</tr>
+</table>
+<br clear="left"><br>
+<h3><font size="5">Notes for PC based systems:</font></h3>
+<p>If you type <span class="mcode">plt help</span> or 
+if you click on the &quot;Help&quot; tag in the plt menu box, then
+<span class="mcode">plt.chm</span> is opened with the Windows help system
+<span class="mcode">hh.exe</span>. (Normally hh.exe resides in the C:\Windows folder)
+If hh.exe is missing or if you prefer not to use the chm compiled help file,
+just delete the chm file and plt will instead open plt.htm using your browser.</p>
+<h3><font size="5">Notes for Unix based systems:</font></h3>
+<p>If you type <span class="mcode">plt help</span> or 
+if you click on the &quot;Help&quot; tag in the plt menu box, then
+<span class="mcode">plt.htm</span> is opened in your browser. This file
+points to many other html files and images inside the
+<span class="mcode">pltfiles\ </span>folder. If your browser supports chm help
+files and you prefer to use it, you can do that by deleting or renaming
+the plt.htm file.</p>
+
+</body>
+
+</html>

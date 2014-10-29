@@ -1,0 +1,354 @@
+<html>
+<head>
+<title>Auxiliary functions</title>
+<style>
+<!--
+.mcode   {
+	color: #E00000;
+	line-height: 1.2;
+	margin-top: 0;
+	margin-bottom: 0;
+	font-weight: bold;
+}
+h3           { color: #006699 }
+h2           { font-size: 22pt }
+-->
+</style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1" height="96">
+  <tr>
+    <td width="72%" height="96">
+    <h2>Auxiliary plt functions and .m files</h2>
+    </td>
+    <td width="2%" height="96">&nbsp;</td>
+    <td width="26%" height="96">
+    <img border="0" src="../images/plt.png" width="211" height="97" align="right"></td>
+  </tr>
+</table>
+<p style="margin-top: -18">&nbsp;</p>
+<p>The first two functions in this list are part of plt.m and the remaining functions exist as as
+separate .m files in the main plt folder. The last three functions
+(<span class="mcode">vbar</span>,&nbsp;<span class="mcode">ebar</span>,&nbsp;<span class="mcode">quiv</span>)
+aid in creating special plot types. The other functions help solve text formating issues that
+often arise when writing plotting programs.</p>
+<p>&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber2">
+  </tr>
+  <tr>
+    <td valign="top" style="width: 11%">
+    <b><font size="5" color="#006699">datestr</font></b><i><br>
+    (serial date<br>number to<br>ascii)</i>
+    </td>
+    <td width="86%" valign="top">
+<span class="mcode">s = plt('datestr',datenum,fmt)</span> is similar to
+<span class="mcode">s = datestr(datenum,fmt)</span><p>except that it displays 
+the time with 1 millisecond resolution instead of 1 second resolution used by 
+the Matlab datestr function. You should only use formats that include the number 
+of seconds in the result. If fmt is not included in the argument list, format 0 
+is assumed. For example:</p>
+<p>
+<span class="mcode">a = now; [plt('datestr',a) '&nbsp;&nbsp; ' datestr(a)]</span></p>
+<p>Will respond with something like:</p>
+<p><span class="mcode"> 21-Jan-2007&nbsp;10:28:02.898&nbsp;&nbsp; 
+21-Jan-2007&nbsp;10:28:03</span></p>
+<p>Type
+<span class="mcode">help datestr </span>for a description of the allowable 
+formats. You will find format 13 useful when the date is not required, i.e.
+<span class="mcode">plt('datestr',now,13)</span> which will return something 
+like:<span class="mcode"> 10:28:02.898<br>
+<br>
+&nbsp;</span></p>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 11%">
+    <b><font size="5" color="#006699">metricp&nbsp&nbsp</font></b><i><br>(metric<br> prefixes)</i></td>
+    <td width="86%" valign="top">
+<p><span class="mcode">[Ret1,&nbsp;Ret2] = plt('metricp',x);</span></p>
+
+<p>Used to converts a number to a form using standard metric prefixes. Ret1 is 
+the metric prefix (in Ascii) that is most appropriate for displaying the value 
+x, and Ret2 is the number you should multiply x by. For example, if
+<span class="mcode">x </span>is in volts, you can display it using a metric 
+prefix as:</p>
+
+<p><span class="mcode">[pfix, mult] = plt('metricp',x);<br>
+disp([num2str(x*mult) '&nbsp;' pfix 'Volts']);<br>
+<br>
+&nbsp;</span></p>
+
+    </td>
+  </tr>
+    <tr>
+    <td valign="top" style="width: 11%">
+    <b><font size="5" color="#006699">prin.m</font></b><i><br>(sprintf<br>& fprintf<br>alternative)</i></td>
+    <td width="86%" valign="top">
+<p><span class="mcode">s = prin(fmtstr,OptionalArguments); <br>
+                       s = prin(FID,fmtstr,OptionalArguments);</span></p>
+<p>Converts the OptionalArguments to a string s using the format specified by fmtstr. Note that this
+does the same thing as sprintf or fprintf (with the same calling sequences) except that prin offers some
+additional features including four extra formatting codes. prin calls the ftoa
+function described below to implement the new formatting codes.
+For a complete description, see <a href="../../prin.pdf">prin.pdf</a> (in the main plt folder).
+</p>
+&nbsp;</span></p>
+
+    </td>
+  </tr>
+    <tr>
+    <td valign="top" style="width: 11%">
+    <b><font size="5" color="#006699">ftoa.m</font></b><i><br>
+    (float to<br>
+    ascii)&nbsp;&nbsp; </i></td>
+    <td width="86%" valign="top"> <span class="mcode">s = ftoa(fmtstr,x)</span> 
+    returns in string
+<span class="mcode">s</span> an ascii representation of the scalar number
+<span class="mcode">x</span> according to the formatting 
+    string
+<span class="mcode">fmtstr</span>. <br><br>
+    If
+<span class="mcode">fmtstr</span> is of the form
+<span class="mcode">'%nW'</span> then
+<span class="mcode">s </span>will be the string representation of x with the 
+    maximum resolution possible while using <i><b>at most</b></i> n characters.<p>
+    If
+<span class="mcode">fmtstr</span> is of the form
+<span class="mcode">'%nV'</span> then
+<span class="mcode">s </span>will be the string representation of x with the 
+    maximum resolution possible while using <i><b>exactly</b></i> n characters.</p>
+    If
+<span class="mcode">fmtstr</span> is of the form
+<span class="mcode">'%nw'</span> then
+<span class="mcode">s </span>will be the string representation of x with the 
+    maximum resolution possible while using <i><b>at most</b></i> n characters - 
+    not counting the decimal point if one is needed.<p>If
+<span class="mcode">fmtstr</span> is of the form
+<span class="mcode">'%nv'</span> then
+<span class="mcode">s </span>will be the string representation of x with the 
+    maximum resolution possible while using <i><b>exactly</b></i> n characters - 
+    not counting the decimal point if one is needed.</p>
+    <p>The lower case formats (v,w) are typically used to generate strings to fit into gui 
+    objects of a fixed width. The reason the decimal point is not counted is 
+    that with the proportional fonts generally used in these gui objects, the 
+    extra space taken up by the decimal point is insignificant.</p>
+    <p> With all four format types, if the field width is too 
+    small to allow even one significant digit, then
+<span class="mcode">'*'</span> is returned.</p>
+<span class="mcode">fmtstr</span> may also use any of the numeric formats 
+    allowed with sprintf. For example:</p>
+    <p>
+<span class="mcode">ftoa('%7.2f',x) </span>is equivalent to
+<span class="mcode">sprintf('%7.2f',x)</span>
+      <br><br>
+      Calling ftoa with just a single argument will create a test file which you may
+      find helpful in understanding the new floating point formats.<br>
+&nbsp;</span></p>
+    </td>
+</tr>
+  <tr>
+    <td width="11%" valign="top">
+    <b><font size="5" color="#006699">vbar.m</font></b><i><br>
+    (vertical<br>bar plots)&nbsp;&nbsp; </i></td>
+    <td width="86%" valign="top"> This function is used to plot a series of 
+    vertical bars. It doesn't do any plotting itself, but returns an array which 
+    is then plotted using plt (or even plot). For example, suppose you want to 
+    plot 4 vertical bars at x-axis locations 2,3,7,8. Each bar is to start at 
+    y=0 and extend up to y=6,6,5,1 respectively. The following line would meet 
+    this objective:<p> <span class="mcode">plt(vbar([2 3 7 8],0,[6 6 5 1]);</span></p>
+    <p>Normally the 3 vbar arguments are the same size, however in this case 
+    since the lower y position of each bar is the same, a constant may be used 
+    for the 2nd argument. </p>
+    <p>Although you don't have to know this to use it, vbar returns a complex 
+    array which is interpreted correctly by plt or plot to display the desired 
+    sequence of vertical bars. plt and plot displays complex arrays by plotting 
+    the real part of the array along the x-axis and the imaginary part of the 
+    array along the y-axis. The trick that vbar uses to display a series of 
+    lines with a single array stems from the fact that NaN values (not a number) 
+    are not plotted and can be used like a &quot;pen up&quot; command. (The ebar 
+    and quiv functions described below use this same trick.)</p>
+    <p>The general form of the vbar function call is:</p>
+    <p> <span class="mcode">v = vbar(x,y1,y2)</span></p>
+    <p>If the inputs are row or column vectors, this would return a complex 
+    column vector which when plotted with plt or plot would produce a series of vertical bars (of the same color) at 
+    x-axis locations given by x. y1 and y2 specify the lower and upper limits of 
+    the vertical bar. It doesn't matter whether you list the upper or lower 
+    limit first. If y1 is a scalar, vbar expands it to a constant vector of the 
+    same size as y2.</p>
+    <p>Suppose you wanted to plot 30 bars of one color (specified by length 30 
+    column vectors xa,ya1,ya2) and 30 bars of a different color (specified by 
+    length 30 column vectors xb,yb1,yb2). You could do this with two calls to 
+    vbar as in:</p>
+    <p> <span class="mcode">plt(vbar(xa,ya1,ya2),vbar(xb,yb1,yb2));</span></p>
+    <p>That's probably the first way you would think of, but if xa and xb happen 
+    to be the same length (as in this case) you can accomplish the same thing 
+    with a single call to vbar:</p>
+    <p> <span class="mcode">plt(vbar([xa xb],[ya1 yb1],[ya2 yb2]);</span></p>
+    <p>The second form is especially convenient when plotting many bar series 
+    (generally each series in a different color). Interestingly, if you use plot 
+    instead of plt you must use the second form since the first form will not 
+    work.</p>
+    <p>Note that vbar will expand the second argument in either dimension if 
+    needed. So for instance in the example above, if ya1 and yb1 were the same 
+    you could just use ya1 as the second argument. Or suppose the base (lower 
+    limit) of the first series was always 0 and the base of the second series 
+    was always -1. Then you could use [0 -1] as the second argument. If the base 
+    of all the bars in all the series was the same value, then the second 
+    argument may be a scalar.</p>
+    <p>To see vbar in action, look at the <a href="Programming%20examples.htm">
+    example program</a> <span class="mcode">
+    pltvbar.m</span> in the demo folder. This example also shows the use of the 
+    ebar function described below.</p>
+    <p>&nbsp;</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" valign="top">
+    <b><font size="5" color="#006699">ebar.m</font></b><i><br>
+    (error bar<br>plots)&nbsp;&nbsp; </i>
+    <p>&nbsp;</td>
+    <td width="86%" valign="top">
+This function is used to plot a series of vertical bars similar to the above 
+vbar function with the addition of a small horizontal &quot;T&quot; section on the top and 
+bottom of each bar. This is commonly used to depict an error bound of a 
+function, or a range of values that may be achieved by a certain function. 
+Another difference with vbar is the way the lower and upper y positions of the 
+bars are specified. With ebar, the first two arguments (x,y) specify a reference 
+position for each vertical bar, which is normally (but not strictly necessary) 
+somewhere in the middle of the bar. The third/fourth arguments (l,u) specify the 
+distance between the reference position and the lower/upper end (respectively) 
+of the vertical bar. <p>The general form of the ebar function call is:</p>
+    <p> <span class="mcode">e = ebar(x,y,l,u,dx)</span></p>
+    <p>The position of the top of the error bars is <span class="mcode">y+u</span> 
+    and the bottom is <span class="mcode">y-l</span>. The last argument (<span class="mcode">dx</span>) 
+    is a scalar that specifies the width of the horizontal Ts as a percentage of 
+    the average x spacing. The last two arguments are optional. If <span class="mcode">
+    dx</span> is not specified it defaults to 30 (%). If <span class="mcode">u</span> 
+    is not specified it defaults to <span class="mcode">l</span> (the 3rd 
+    argument) in which case the reference coordinates become the midpoints of 
+    the error bars. <span class="mcode">e,x,y,l,u </span>are generally vectors 
+    or matrices of the same size, the only exception being that if l or u are 
+    constant, the may be scalar. Read the description of vbar above for an 
+    explanation of how vector and matrix inputs are interpreted.</p>
+<p>To see ebar in action, look at the <a href="Programming%20examples.htm">
+    example program</a> <span class="mcode">
+    pltvbar.m</span> in the demo folder. This example also shows the use of the 
+    vbar function described above.</p>
+<p>&nbsp;</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="11%" valign="top">
+    <b><font size="5" color="#006699">quiv.m&nbsp&nbsp</font></b><i><br>
+    (vector<br>plots)</i></td>
+    <td width="86%" valign="top">
+This function is used to plot a vector fields represented by a set of arrows 
+with arbitrary head and tail locations. It doesn't do any plotting itself, but 
+returns an array which is then plotted using plt (or even plot). For example, 
+suppose you wanted to plot 3 arrows (all in the same color) with tail locations 
+(4,9) (2,3) and (1,7). Also suppose you wanted each vector to be of length one, 
+pointing up, down, and the the right respectively. Either of the following lines 
+would meet this objective:<p> <span class="mcode">plt(quiv([4;2;1],[9;3;7],[0;0;1],[1;-1;0]));</span></p>
+<p> <span class="mcode">plt(quiv([4+9i;2+3i;1+7i],[1i;-1i;1]));</span></p>
+<p>Note that row vectors could have been used instead of column vectors if 
+desired. Now suppose in addition to those 3 vectors, you wanted to plot 3 more 
+vectors (in a second color) with the same tail locations but pointing in the 
+opposite direction. Either of the following lines would meet this objective:</p>
+<p> <span class="mcode">plt(quiv([4+9i;2+3i;1+7i],[1i;-1i;1]),quiv([4+9i;2+3i;1+7i],[-1i;1i;-1]));</span></p>
+<p> <span class="mcode">plt(quiv([4+9i;2+3i;1+7i]*[1 1],[1i;-1i;1]*[1 -1]));</span></p>
+<p>Of course the equivalent 4 argument (real input) form of quiv could have been 
+used as well.</p>
+<p>There are 8 possible calling sequences for quiv depending on whether the 
+input arguments are real or complex and on whether the optional arrow head size 
+argument is included. Quiv is smart enough to figure out which calling sequence 
+you are using.</p>
+<table border="1" cellpadding="6" cellspacing="0" width="100%" id="AutoNumber3" bordercolor="#C0C0C0" style="border-collapse: collapse">
+  <tr>
+    <td width="151" align="center"><i><b><font face="Arial" size="4">Calling 
+    sequence</font></b></i></td>
+    <td width="161" align="center"><i><b><font face="Arial" size="4">Tail 
+    coordinates</font></b></i></td>
+    <td width="159" align="center"><i><b><font face="Arial" size="4">Arrow 
+    width/length</font></b></i></td>
+    <td width="72" align="center"><i><b><font face="Arial" size="4">Arrow head 
+    size</font></b></i></td>
+  </tr>
+  <tr>
+    <td width="151" align="left">q = quiv(A,B)</td>
+    <td width="161" align="center">[real(A), imag(A)] </td>
+    <td width="159" align="center">[real(B), imag(B)] </td>
+    <td width="72" align="center">0.3</td>
+  </tr>
+  <tr>
+    <td width="151" align="left">q = quiv(A,B,h)</td>
+    <td width="161" align="center">[real(A), imag(A)] </td>
+    <td width="159" align="center">[real(B), imag(B)] </td>
+    <td width="72" align="center">h</td>
+  </tr>
+  <tr>
+    <td width="151" align="left">q = quiv(x,y,B)</td>
+    <td width="161" align="center">[x,y]</td>
+    <td width="159" align="center">[real(B), imag(B)] </td>
+    <td width="72" align="center">0.3</td>
+  </tr>
+  <tr>
+    <td width="151" align="left">q = quiv(x,y,B,h)</td>
+    <td width="161" align="center">[x, y]</td>
+    <td width="159" align="center">[real(B), imag(B)] </td>
+    <td width="72" align="center">h</td>
+  </tr>
+  <tr>
+    <td width="151" align="left">q = quiv(A,u,v)</td>
+    <td width="161" align="center">[real(A), imag(A)] </td>
+    <td width="159" align="center">[u, v] </td>
+    <td width="72" align="center">0.3</td>
+  </tr>
+  <tr>
+    <td width="151" align="left">q = quiv(A,u,v,h)</td>
+    <td width="161" align="center">[real(A), imag(A)] </td>
+    <td width="159" align="center">[u, v] </td>
+    <td width="72" align="center">h</td>
+  </tr>
+  <tr>
+    <td width="151" align="left">q = quiv(x,y,u,v)</td>
+    <td width="161" align="center">[x, y]</td>
+    <td width="159" align="center">[u, v] </td>
+    <td width="72" align="center">0.3</td>
+  </tr>
+  <tr>
+    <td width="151" align="left">q = quiv(x,y,u,v,h)</td>
+    <td width="161" align="center">[x, y]</td>
+    <td width="159" align="center">[u, v] </td>
+    <td width="72" align="center">h</td>
+  </tr>
+</table>
+<p>where:<br>
+<span class="mcode">q,A,B</span> are complex vectors or matrices<br>
+<span class="mcode">x,y,u,v</span> are real vectors or matrices<br>
+<span class="mcode">h</span> is a scalar (Arrow head size - relative to vector length)<br>
+&nbsp;</p>
+<p>Read in the vbar description above how complex values and NaNs are used to 
+generate the desired display. To see quiv in action, look at the <a href="Programming%20examples.htm">
+    example program</a> <span class="mcode">
+    pltquiv.m</span> in the demo folder.</p>
+
+<p>&nbsp;</p>
+
+    </td>
+  </tr>
+  </table>
+<h3>&nbsp;</h3>
+<h3>&nbsp;</h3>
+
+<h3>&nbsp;</h3>
+
+<h3>&nbsp;</h3>
+
+<h3>&nbsp;</h3>
+
+<h3>&nbsp;</h3>
+
+</body>
+
+</html>

@@ -1,0 +1,329 @@
+<head>
+<title>Cursoring</title>
+<style>
+<!--
+span.mcode   {
+	color: #E00000;
+	font-weight: bold;
+}
+h2           { font-size: 22pt }
+-->
+</style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1">
+  <tr>
+    <td width="70%">
+    <h2>Cursoring</h2>
+    </td>
+    <td width="3%">&nbsp;</td>
+    <td width="27%">
+    <img border="0" src="../images/plt.png" width="215" height="105" align="right"></td>
+  </tr>
+</table>
+
+<h3>Selecting the active trace</h3>
+
+<p>
+<img border="0" src="../images/CursorID.png" align="left" hspace="10" vspace="10" width="137" height="67">Simply click on the trace you wish to cursor. The cursor will move to the 
+trace you clicked on and that trace will become active. The x and y-cursor edit 
+boxes will change to the color of the new active trace and those edit boxes will 
+be updated to contain the current x and y locations of the cursor. Although the 
+color of the edit box will often be enough to let you know which trace is active it 
+sometimes may be difficult to tell at a glance if there are many traces plotted. 
+For this reason a cursor ID tag is displayed just to the left of the 
+y-cursor edit box. This will be especially helpful if you assigned meaningful 
+trace names in the plt calling sequence. This cursor ID tag is also in the same 
+color as the active trace.
+&nbsp;</p>
+<br clear="left">
+<h3>Dragging the cursor</h3>
+
+<p>Click on a trace, hold down the mouse button and drag the cursor left or 
+right. The cursor will follow the mouse as you are dragging and the edit boxes 
+will continually update with the current cursor location. Make sure you click 
+directly on the trace. If you are not close enough to the trace when you click
+the mouse button, dragging the mouse will pan the display instead of moving the
+cursor. Once you start to drag the cursor however, the cursor will follow the
+mouse x position even if the mouse moves far away from the line. This is the
+easiest and most natural way to move the cursor, and probably the only way you
+will use for small data sets. The other ways of moving the cursor (described below)
+become more attractive as the data set gets larger (perhaps over 500 points or so).</p>
+<br clear="left">
+<h3>Typing in a cursor location</h3>
+
+<p>If you type a new value into the x-cursor edit box, the cursor will move to 
+(x,y) where x is the value you typed in, and y is the value of the active trace 
+at location x. (i.e. the cursor will remain on the active trace). However if you 
+type a new value into the y-cursor edit box, the cursor will move up or down (off 
+the trace) to the location (x,y) where x is the old cursor x position, and y is 
+the value you typed in.</p>
+<br clear="left">
+	
+<h3>
+Clicking on the x-axis label</h3>
+<p>
+The advantage of this method is that it is very easy to move the cursor by the
+smallest amount possible (i.e. one data element) even when the data density is
+very high. Simply click on the x-axis label (for example &quot;Milli-seconds&quot; 
+in the plot shown in the above Preliminaries section) and the cursor will move forward
+by one data element. And a right click will move in the reverse direction. This method
+is especially useful when the data order is not clear from the plot (unconnected 
+markers for instance). If you are viewing the entire data set (i.e. the x axis is not
+zoomed in) then continuing to click after the cursor has reached the left or right edge
+will have no effect. However if you are zoomed in, then the cursor will continue to move
+to the next data element beyond the edge of the display, but then the display will
+pan so that the cursor remains at the display edge.<br><br>
+
+A useful feature of the x-axis label is that if after the left or right click you hold
+down mouse button, after a short delay (called the repeat delay) the cursor will continue
+to step left or right at the "repeat rate". When the x-axis is zoomed in, this provides
+a pleasing and smooth way to pan the display left or right. The default repeat rate is
+0.03 seconds (i.e. 33Hz) but you like to pan slower or faster you can change the repeate
+rate. For example, to change the repeat rate to 0.01 seconds (i.e. 100Hz) use the command:
+
+<br><br><span class="mcode">setappdata(gcf,'repeat',0.01)</span><br><br>
+
+It's less likely you will also want to change the default repeat delay (which is 0.4 seconds)
+but for example to set the repeat rate to 0.01 and the repeat delay to 0.2 seconds, use the command:
+
+<br><br><span class="mcode">setappdata(gcf,'repeat',[0.01 0.2])</span><br><br>
+
+The easiest way to reset back to the default repeat and repeat delay values is to set the 'repeat'
+property to null (<span class="mcode">[]</span>&nbsp;or&nbsp;<span class="mcode">''</span>)
+or simply remove this property alltogether, i.e. <span class="mcode">rmappdata(gcf,'repeat')</span>.</p>
+<p>&nbsp;</p>
+
+<h3>X-axis cursor slider</h3>
+<p>
+<img border="0" src="../images/SliderButton.png" align="left" hspace="10" vspace="10" width="98" height="64">
+If the string 
+<span class="mcode"><font face="Times New Roman">'</font>Slider<font face="Times New Roman">'</font></span>&nbsp; 
+or 
+<span class="mcode">'S'</span> appear in the 
+<span class="mcode">'Options'<font face="Times New Roman">  </font></span>
+argument then this slider is inserted just below the cursor button group
+discussed below. This slider has two different functions depending on whether
+the x axis has been expanded.</p>
+<p>
+If the x axis has not been expanded (or has been expanded by less than a factor 
+of two) then this slider moves the cursor left or right by 1% of the data length 
+when you click on the left or right slider arrows and left or right by 5% of the 
+data length when you click in the trough area of the slider to the left or right 
+of the slider button. The slider button itself is not used in this mode and 
+remains fixed in the middle of the slider.</p>
+<p>
+If the x axis has been expanded (by more than a factor of two) then this slider 
+makes it easy to quickly scroll thru the data set or to pan to a particular 
+location. Clicking on the left or right arrows moves the view window left or 
+right by 10% of the visible range i.e. currently visible data will be scrolled 
+out of view after 10 clicks. (Holding the mouse button down over these arrows 
+results in a pleasing continuous scrolling effect.)&nbsp; Clicking in the trough 
+area to the left or right of the slider button moves the view window left or 
+right by 100% of the visible range (i.e. currently visible data will be scrolled 
+out of view for every click). Note that the slider button moves to show the 
+relative position of the data currently in view. Also you can do a quick pan by 
+grabbing the slider button with the mouse and dragging it left or right. 
+Dragging it as far as possible to the left or right causes the plot to pan to 
+the beginning or end of the data and dragging it near the center of the slider 
+pans the plot to show data near the middle of the data set. Note that all three 
+panning methods (arrow, trough, button) keep the amount of data displayed 
+constant (i.e. the difference between the upper and lower x-axis limits doesn't 
+change). The data cursor is kept in the middle of the x-axis during this type of panning.
+<br><br>
+Although the slider behaves somewhat differently, most of the cursor movement
+and display panning capabilities of this slider are also achieved using the x-axis
+label features described above. So you should experiment with these two methods to
+figure out which one you prefer. An advantage of the slider is that having a
+separate graphical element for these functions reminds you that you have this
+capability, where as the features of the x-axis label are often overlooked or forgotten.
+</p>
+<p>&nbsp;</p>
+
+<h3>The Cursor button group</h3>
+<p>
+<img border="0" src="../images/CursorButtons.png" align="left" hspace="10" vspace="10" width="55" height="48">
+In the lower left corner of the display you will find these four cursor buttons.<br><br>
+
+The up and down arrow buttons on the left are the peak and valley finder buttons respectively.
+When you click on the &uarr; button (peak finder), the cursor will move to the largest peak in the 
+current display range of the active trace. The next click on the up arrow will move 
+the cursor to the second largest peak and so on. Moving the cursor by clicking 
+on the trace or by using the cursor slider will reset the peak finder so that the next time 
+you click on the up arrow the cursor again moves to the largest peak in the 
+display range. An alternate way to reset the peak finder is to <i>right</i> 
+click on the peak finder button. The &darr; button (valley finder) works the same as the
+peak finder except that the cursor moves to successive local minima.
+<br><br>
+<b>Left</b> clicking on the marker button (o) will toggle the line styles used for all traces in the figure
+(including subplots). The first click will change the style from lines to markers.
+The 2nd click will change the style to showing both lines and markers, and the 3rd click
+will restore the traces back to the original lines only style. <b>Right</b> clicking on the marker button
+will toggle the line smoothing property of all plot traces from off to on or visa versa.
+Note that the initial state of the line smoothing property may be turned on using the
+<a href="../Command%20line%20arguments/Options.htm">Options</a> parameter.
+Matlab automatically switches to the OpenGL renderer when line smoothing is turned on and then switches
+back to the default renderer when line smoothing is turned off again. Usually line smoothing results
+in a more pleasing plot although on many systems, bugs in the OpenGL renderer will cause (mostly minor)
+display anomolies. Surprisingly, turning smoothing on may increase ploting speed. I discovered this
+while running <span class="mcode">demo\wfall.m</span> which starts up with smoothing turned on.
+The plotting slows down by a factor of 3 or 4 when I toggle the smoothing off, suggesting
+that the OpenGL renderer is better optimized for speed on the systems I tested. Be aware that line
+smoothing is an undocumented feature of Matlab and it will not work on all Matlab versions. I found that
+it worked in Matlab R2009b, but the line smoothing parameter will probably have no effect in Matlab versions
+much older than that.
+<br><br>
+The last button (&Delta;) controls the delta cursor mode which is decribed below.</p>
+<br clear="left">
+
+<h3>Delta cursors</h3>
+<p>
+<img border="0" src="../images/DeltaCursor.png" align="left" hspace="10" vspace="10" width="627" height="199"></p>
+
+<p>
+Delta 
+cursors are useful for measuring horizontal or vertical distances between two 
+points on a trace. First move the cursor to the desired reference point on the 
+trace. Then press the Delta&nbsp;(<font face="Times New Roman">&#8710;) cursor button. The 
+reference location will be marked with a large red plus (about 4 times bigger 
+than the normal cursor). Also the Delta cursor button will be highlighted as an 
+additional reminder that delta cursors are enabled. Next, click on a different point on the same trace (or drag 
+the cursor to the desired location). The view will then look similar to the 
+picture shown here. (You can also click on a point on a different trace -- the 
+delta cursor will still work as expected.) You can read the current location of the cursor (the small 
+yellow plus) in the usual way - i.e. the edit boxes just to the right of the 
+grey x/y labels. In this case the cursor x location is 5.75 msec and the y 
+location is 0.377755. The other two edit boxes show how far away the cursor is 
+from the marked reference. In this example, it shows that the cursor at a 
+location 1.55&nbsp;msec later than and .37885&nbsp;units less than the marked reference. 
+Simply click on the delta cursor button again, and the reference mark will 
+disappear, the delta cursor button returns to its normal color, and the usual cursor operation will return.</font></p>
+<br clear="left">
+<h3>Average, RMS, Slope, &amp; Distance readout</h3>
+
+<img border="0" src="../images/Arrow3.png" width="705" height="43">
+<br clear="left">
+<div align="left">
+  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="985" id="AutoNumber2" height="14">
+    <tr>
+      <td width="139" height="40">
+      <img border="0" src="../images/CursorID.png" width="137" height="67"></td>
+      <td width="14" height="40">&nbsp;</td>
+      <td width="143" height="40">
+      <img border="0" src="../images/CursorID2.png" width="137" height="67"></td>
+      <td width="9" height="40">&nbsp;</td>
+      <td width="137" height="40">
+      <img border="0" src="../images/CursorID3.png" width="137" height="67"></td>
+      <td width="16" height="40">&nbsp;</td>
+      <td width="137" height="40">
+      <img border="0" src="../images/CursorID4.png" width="137" height="67"></td>
+      <td width="12" height="40">&nbsp;</td>
+      <td width="194" height="40">
+      <img border="0" src="../images/CursorID5.png" width="138" height="67"></td>
+      <td width="144" height="40">&nbsp;</td>
+      <td width="40" height="40">
+    </tr>
+  </table>
+</div>
+
+
+<p>When you click on the  cursor ID tag (Line 4 in this example) the ID tag changes<font face="Times New Roman"> 
+to <span class="mcode">Avg</span> and the edit box then shows</font> the average y-value of all the points 
+of the active trace that are within the current display x limits.</p>
+
+<p><font face="Times New Roman">When you click on the ID tag a second time, the
+<span class="mcode">Avg</span> changes to <span class="mcode">RMS</span> and the edit box then shows</font> the rms value of the active 
+trace. As with Avg, the rms calculation only includes points that are within the currently 
+displayed x-axis limits. (In case you are not familiar with this commonly used form 
+of averaging - rms stands for &quot;root&nbsp;mean&nbsp;square&quot; and is calculated by taking the 
+square root of the average of the squares of the data values).</p>
+
+<p><font face="Times New Roman">When you click on the ID tag a third time, the 
+<span class="mcode">RMS</span> changes  </font>&nbsp;to <span class="mcode">y/x</span> 
+and the value in the y-cursor edit box changes to show the ratio of the y and x 
+cursor values at the current cursor position (i.e. the slope of the line from 
+the origin to the cursor). If delta cursors were enabled, and additional edit 
+box appears to the right of the y-cursor edit box containing <font face="Times New Roman">&#916;Y/&#916;X, which is the slope of 
+the line connecting the marked position to the current cursor. You can use this 
+to estimate the slope of a trace at a particular point.</font></p>
+
+<p><font face="Times New Roman">When you click on the ID tag a fourth time, the 
+<span class="mcode">y/x</span> changes  </font>&nbsp;to <span class="mcode"> &radic;x<sup>2</sup>+y<sup>2</sup></span> and the value in the y-cursor edit box changes to show 
+distance from the origin to the cursor position (i.e. the 
+magnitude of x+yi). If delta cursors were enabled, and additional edit box 
+appears to the right of the y-cursor edit box showing the distance from the 
+marked position to current cursor position (i.e. the magnitude of <font face="Times New Roman">&#916;X+&#916;Yi</font>).</p>
+
+<p>Clicking the ID tag a fifth time (or clicking in the plot area) restores the 
+cursor readout to show the usual Y value and the ID tag again shows the name of 
+the cursored trace.</p>
+
+<p>&nbsp;</p>
+
+<h3>Dual cursor</h3>
+
+<p>The usual cursor can show the value of only one of the visible traces on the 
+plot. With a dual cursor, two such values can be shown at the same time. This is 
+especially useful when displaying two tightly linked values (for example, the 
+magnitude and phase of a complex quantity). You specify a dual cursor for 
+the Nth trace by including <span class="mcode">'DualCur',N</span> in the 
+parameter list. Then when you move the cursor, two y value readouts are updated.
+The first one (the active trace) in the usual y value readout location (immediately 
+to the right of the &quot;y:&quot; cursor label) and immediately to the right of
+that the second value (trace N) will appear. In the plot area, in addition to the
+normal cursor on the active trace you will see the dual cursor on trace N. The dual
+cursor will be shaped like an asterisk (or star) if the associated trace is on the
+left axis and it will be shaped like a square if it is on the right axis.</p>
+
+<p>
+<img border="0" src="../images/DualCur.png" align="left" hspace="10" vspace="10" width="223" height="205"></p>
+
+<p>This example was created by including <span class="mcode">'DualCur',1</span> 
+in the parameter list so that the first trace (green in this example) is always 
+cursored along with the active trace. In this picture, Line 2 (purple) has been 
+selected as the active trace (by clicking on it) and so its y value is shown 
+(also in purple) in the usual y-readout location. As you move the active cursor 
+back and forth along the x-axis, the dual cursor on trace 1 (the asterisk) 
+tracks the back and forth movement and the Line 1 y-value is shown in the green 
+edit box.</p>
+
+<p>A complication happens when you are 
+      using the dual cursor and delta cursor features at the same time, because 
+      the same auxiliary y readout location is used for both features. To resolve this
+      conflict plt disables the dual cursor while delta cursors are being used.</p>
+<br clear="left">
+<h3>Subplot cursors</h3>
+
+<p>When using subplots, the full cursoring features described above apply only 
+the main (lower left) plot. The cursoring features that are only 
+    available on the main plot are:</p>
+<ul>
+  <li>peak/valley finding</li>
+  <li>delta cursors</li>
+  <li>expansion 
+    history</li>
+  <li>LinX / LinY / Mark / Zout tags</li>
+  <li>x-axis slider</li>
+</ul>
+<p>Each subplot 
+    however has its own y-axis cursor readout. These cursor readouts are easy to 
+    identify since its background color matches the trace and axis colors. Also 
+the 
+    full panning and zooming features of plt are supported for each subplot. For 
+dual column subplots, moving the cursor left and right by left/right clicking on 
+the x-axis label (as described above) works independently for the two columns as 
+you would expect.</p>
+
+<h3>
+Right clicking on the y-axis label</h3>
+<p>
+When you right click on the y-axis label, the menu box and all cursor objects 
+disappear. This is useful for making screen captures of the plots since these 
+objects are used for data exploration and are normally just a distraction in a 
+hardcopy. Right clicking again causes the objects to reappear. (The <span class="mcode">plt&nbsp;hideCur;</span> 
+command has the same effect.)</p>
+
+</body>
+
+</html>
