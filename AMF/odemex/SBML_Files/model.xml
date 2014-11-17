@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2" level="2" version="1">
+  <model id="base">
+    <listOfCompartments>
+      <compartment id="cell" size="1"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="EGF" compartment="cell" initialConcentration="0"/>
+      <species id="NGF" compartment="cell" initialConcentration="0"/>
+      <species id="freeEGFReceptor" compartment="cell" initialConcentration="80000"/>
+      <species id="boundEGFReceptor" compartment="cell" initialConcentration="0"/>
+      <species id="freeNGFReceptor" compartment="cell" initialConcentration="10000"/>
+      <species id="boundNGFReceptor" compartment="cell" initialConcentration="0"/>
+      <species id="SosInactive" compartment="cell" initialConcentration="120000"/>
+      <species id="SosActive" compartment="cell" initialConcentration="0"/>
+      <species id="P90RskInactive" compartment="cell" initialConcentration="120000"/>
+      <species id="P90RskActive" compartment="cell" initialConcentration="0"/>
+      <species id="RasInactive" compartment="cell" initialConcentration="120000"/>
+      <species id="RasActive" compartment="cell" initialConcentration="0"/>
+      <species id="RasGapActive" compartment="cell" initialConcentration="120000"/>
+      <species id="Raf1Inactive" compartment="cell" initialConcentration="120000"/>
+      <species id="Raf1Active" compartment="cell" initialConcentration="0"/>
+      <species id="BRafInactive" compartment="cell" initialConcentration="120000"/>
+      <species id="BRafActive" compartment="cell" initialConcentration="0"/>
+      <species id="MekInactive" compartment="cell" initialConcentration="600000"/>
+      <species id="MekActive" compartment="cell" initialConcentration="0"/>
+      <species id="ErkInactive" compartment="cell" initialConcentration="600000"/>
+      <species id="ErkActive" compartment="cell" initialConcentration="0"/>
+      <species id="PI3KInactive" compartment="cell" initialConcentration="120000"/>
+      <species id="PI3KActive" compartment="cell" initialConcentration="0"/>
+      <species id="AktInactive" compartment="cell" initialConcentration="120000"/>
+      <species id="AktActive" compartment="cell" initialConcentration="0"/>
+      <species id="C3GInactive" compartment="cell" initialConcentration="120000"/>
+      <species id="C3GActive" compartment="cell" initialConcentration="0"/>
+      <species id="Rap1Inactive" compartment="cell" initialConcentration="120000"/>
+      <species id="Rap1Active" compartment="cell" initialConcentration="0"/>
+      <species id="RapGapActive" compartment="cell" initialConcentration="120000"/>
+      <species id="PP2AActive" compartment="cell" initialConcentration="120000"/>
+      <species id="Raf1PPtase" compartment="cell" initialConcentration="120000"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="krbEGF" value="2.18503e-05"/>
+      <parameter id="kruEGF" value="0.0121008"/>
+      <parameter id="krbNGF" value="1.38209e-07"/>
+      <parameter id="kruNGF" value="0.00723811"/>
+      <parameter id="kEGF" value="694.731"/>
+      <parameter id="KmEGF" value="6086070"/>
+      <parameter id="kNGF" value="389.428"/>
+      <parameter id="KmNGF" value="2112.66"/>
+      <parameter id="kdSos" value="1611.97"/>
+      <parameter id="KmdSos" value="896896"/>
+      <parameter id="kSos" value="32.344"/>
+      <parameter id="KmSos" value="35954.3"/>
+      <parameter id="kRasGap" value="1509.36"/>
+      <parameter id="KmRasGap" value="1432410"/>
+      <parameter id="kRasToRaf1" value="0.884096"/>
+      <parameter id="KmRasToRaf1" value="62464.6"/>
+      <parameter id="kpRaf1" value="185.759"/>
+      <parameter id="KmpRaf1" value="4768350"/>
+      <parameter id="kpBRaf" value="125.089"/>
+      <parameter id="KmpBRaf" value="157948"/>
+      <parameter id="kdMek" value="2.83243"/>
+      <parameter id="KmdMek" value="518753"/>
+      <parameter id="kpMekCytoplasmic" value="9.85367"/>
+      <parameter id="KmpMekCytoplasmic" value="1007340"/>
+      <parameter id="kdErk" value="8.8912"/>
+      <parameter id="KmdErk" value="3496490"/>
+      <parameter id="kpP90Rsk" value="0.0213697"/>
+      <parameter id="KmpP90Rsk" value="763523"/>
+      <parameter id="kPI3K" value="10.6737"/>
+      <parameter id="KmPI3K" value="184912"/>
+      <parameter id="kPI3KRas" value="0.0771067"/>
+      <parameter id="KmPI3KRas" value="272056"/>
+      <parameter id="kAkt" value="0.0566279"/>
+      <parameter id="KmAkt" value="653951"/>
+      <parameter id="kdRaf1ByAkt" value="15.1212"/>
+      <parameter id="KmRaf1ByAkt" value="119355"/>
+      <parameter id="kC3GNGF" value="146.912"/>
+      <parameter id="KmC3GNGF" value="12876.2"/>
+      <parameter id="kC3G" value="1.40145"/>
+      <parameter id="KmC3G" value="10965.6"/>
+      <parameter id="kRapGap" value="27.265"/>
+      <parameter id="KmRapGap" value="295990"/>
+      <parameter id="kRap1ToBRaf" value="2.20995"/>
+      <parameter id="KmRap1ToBRaf" value="1025460"/>
+      <parameter id="kdRaf1" value="0.126329"/>
+      <parameter id="KmdRaf1" value="1061.71"/>
+      <parameter id="kdBRaf" value="441.287"/>
+      <parameter id="KmdBRaf" value="10879500"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="EGFBindingReaction">
+        <listOfReactants>
+          <speciesReference species="EGF"/>
+          <speciesReference species="freeEGFReceptor"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="boundEGFReceptor"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> krbEGF </ci>
+              <ci> EGF </ci>
+              <ci> freeEGFReceptor </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="EGFUnbindingReaction">
+        <listOfReactants>
+          <speciesReference species="boundEGFReceptor"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="EGF"/>
+          <speciesReference species="freeEGFReceptor"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kruEGF </ci>
+              <ci> boundEGFReceptor </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="NGFBindingReaction">
+        <listOfReactants>
+          <speciesReference species="NGF"/>
+          <speciesReference species="freeNGFReceptor"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="boundNGFReceptor"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> krbNGF </ci>
+              <ci> NGF </ci>
+              <ci> freeNGFReceptor </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="NGFUnbindingReaction">
+        <listOfReactants>
+          <speciesReference species="boundNGFReceptor"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="NGF"/>
+          <speciesReference species="freeNGFReceptor"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kruNGF </ci>
+              <ci> boundNGFReceptor </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="SosActivationByEGFReaction">
+        <listOfReactants>
+          <speciesReference species="SosInactive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="SosActive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="boundEGFReceptor"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kEGF </ci>
+                <ci> boundEGFReceptor </ci>
+                <ci> SosInactive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> SosInactive </ci>
+                <ci> KmEGF </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="SosActivationByNGFReaction">
+        <listOfReactants>
+          <speciesReference species="SosInactive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="SosActive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="boundNGFReceptor"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kNGF </ci>
+                <ci> boundNGFReceptor </ci>
+                <ci> SosInactive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> SosInactive </ci>
+                <ci> KmNGF </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="SosDeactivationReaction">
+        <listOfReactants>
+          <speciesReference species="SosActive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="SosInactive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="P90RskActive"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kdSos </ci>
+                <ci> P90RskActive </ci>
+                <ci> SosActive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> SosActive </ci>
+                <ci> KmdSos </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="RasActivationReaction">
+        <listOfReactants>
+          <speciesReference species="RasInactive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RasActive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="SosActive"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kSos </ci>
+                <ci> SosActive </ci>
+                <ci> RasInactive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> RasInactive </ci>
+                <ci> KmSos </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="RasDeactivationReaction">
+        <listOfReactants>
+          <speciesReference species="RasActive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RasInactive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="RasGapActive"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kRasGap </ci>
+                <ci> RasGapActive </ci>
+                <ci> RasActive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> RasActive </ci>
+                <ci> KmRasGap </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Raf1ByRasActivationReaction">
+        <listOfReactants>
+          <speciesReference species="Raf1Inactive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Raf1Active"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="RasActive"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kRasToRaf1 </ci>
+                <ci> RasActive </ci>
+                <ci> Raf1Inactive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> Raf1Inactive </ci>
+                <ci> KmRasToRaf1 </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="MekbyRaf1ActivationReaction">
+        <listOfReactants>
+          <speciesReference species="MekInactive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="MekActive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="Raf1Active"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kpRaf1 </ci>
+                <ci> Raf1Active </ci>
+                <ci> MekInactive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> MekInactive </ci>
+                <ci> KmpRaf1 </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="MekbyBRafActivationReaction">
+        <listOfReactants>
+          <speciesReference species="MekInactive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="MekActive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="BRafActive"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kpBRaf </ci>
+                <ci> BRafActive </ci>
+                <ci> MekInactive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> MekInactive </ci>
+                <ci> KmpBRaf </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="ErkActivationReaction">
+        <listOfReactants>
+          <speciesReference species="ErkInactive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ErkActive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="MekActive"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kpMekCytoplasmic </ci>
+                <ci> MekActive </ci>
+                <ci> ErkInactive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> ErkInactive </ci>
+                <ci> KmpMekCytoplasmic </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="MekDeactivationReaction">
+        <listOfReactants>
+          <speciesReference species="MekActive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="MekInactive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="PP2AActive"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kdMek </ci>
+                <ci> PP2AActive </ci>
+                <ci> MekActive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> MekActive </ci>
+                <ci> KmdMek </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="ErkDeactivationReaction">
+        <listOfReactants>
+          <speciesReference species="ErkActive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ErkInactive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="PP2AActive"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kdErk </ci>
+                <ci> PP2AActive </ci>
+                <ci> ErkActive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> ErkActive </ci>
+                <ci> KmdErk </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Raf1byPPtaseDeactivationReaction">
+        <listOfReactants>
+          <speciesReference species="Raf1Active"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Raf1Inactive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="Raf1PPtase"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kdRaf1 </ci>
+                <ci> Raf1PPtase </ci>
+                <ci> Raf1Active </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> Raf1Active </ci>
+                <ci> KmdRaf1 </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="P90RskActivationReaction">
+        <listOfReactants>
+          <speciesReference species="P90RskInactive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="P90RskActive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="ErkActive"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kpP90Rsk </ci>
+                <ci> ErkActive </ci>
+                <ci> P90RskInactive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> P90RskInactive </ci>
+                <ci> KmpP90Rsk </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="PI3KbyEGFRActivationReaction">
+        <listOfReactants>
+          <speciesReference species="PI3KInactive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="PI3KActive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="boundEGFReceptor"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kPI3K </ci>
+                <ci> boundEGFReceptor </ci>
+                <ci> PI3KInactive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> PI3KInactive </ci>
+                <ci> KmPI3K </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="PI3KbyRasActivationReaction">
+        <listOfReactants>
+          <speciesReference species="PI3KInactive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="PI3KActive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="RasActive"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kPI3KRas </ci>
+                <ci> RasActive </ci>
+                <ci> PI3KInactive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> PI3KInactive </ci>
+                <ci> KmPI3KRas </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="AktActivationReaction">
+        <listOfReactants>
+          <speciesReference species="AktInactive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AktActive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="PI3KActive"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kAkt </ci>
+                <ci> PI3KActive </ci>
+                <ci> AktInactive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> AktInactive </ci>
+                <ci> KmAkt </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Raf1ByAktDeactivationReaction">
+        <listOfReactants>
+          <speciesReference species="Raf1Active"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Raf1Inactive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="AktActive"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kdRaf1ByAkt </ci>
+                <ci> AktActive </ci>
+                <ci> Raf1Active </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> Raf1Active </ci>
+                <ci> KmRaf1ByAkt </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="C3GActivationReaction">
+        <listOfReactants>
+          <speciesReference species="C3GInactive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="C3GActive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="boundNGFReceptor"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kC3GNGF </ci>
+                <ci> boundNGFReceptor </ci>
+                <ci> C3GInactive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> C3GInactive </ci>
+                <ci> KmC3GNGF </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Rap1ActivationReaction">
+        <listOfReactants>
+          <speciesReference species="Rap1Inactive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rap1Active"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="C3GActive"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kC3G </ci>
+                <ci> C3GActive </ci>
+                <ci> Rap1Inactive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> Rap1Inactive </ci>
+                <ci> KmC3G </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Rap1DeactivationReaction">
+        <listOfReactants>
+          <speciesReference species="Rap1Active"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rap1Inactive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="RapGapActive"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kRapGap </ci>
+                <ci> RapGapActive </ci>
+                <ci> Rap1Active </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> Rap1Active </ci>
+                <ci> KmRapGap </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="BRafByRap1ActivationReaction">
+        <listOfReactants>
+          <speciesReference species="BRafInactive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="BRafActive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="Rap1Active"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kRap1ToBRaf </ci>
+                <ci> Rap1Active </ci>
+                <ci> BRafInactive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> BRafInactive </ci>
+                <ci> KmRap1ToBRaf </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="BRafbyPPtaseDeactivationReaction">
+        <listOfReactants>
+          <speciesReference species="BRafActive"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="BRafInactive"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="Raf1PPtase"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> kdBRaf </ci>
+                <ci> Raf1PPtase </ci>
+                <ci> BRafActive </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> BRafActive </ci>
+                <ci> KmdBRaf </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>
