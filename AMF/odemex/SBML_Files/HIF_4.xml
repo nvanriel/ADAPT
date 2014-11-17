@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version3" level="2" version="3">
+  <model metaid="COPASI1" id="HIF_model" name="HIF pathway">
+    <notes>
+      <body xmlns="http://www.w3.org/1999/xhtml"/>
+    </notes>
+    <listOfFunctionDefinitions>
+      <functionDefinition id="influx" name="Constant flux (irreversible)">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> v </ci></bvar>
+		<ci> v </ci>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+    <listOfUnitDefinitions>
+      <unitDefinition id="volume">
+        <listOfUnits>
+          <unit kind="dimensionless"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="time">
+        <listOfUnits>
+          <unit kind="second" multiplier="60"/>
+        </listOfUnits>
+      </unitDefinition>
+    </listOfUnitDefinitions>
+    <listOfCompartments>
+      <compartment id="c" name="c" size="1"/>
+    </listOfCompartments>
+    
+    <listOfSpecies>
+      <species id="HIF_1a" name="HIF_1a" compartment="c" initialConcentration="1.0535"/>
+      <species id="ARNT" name="ARNT" compartment="c" initialConcentration="6.5587"/>
+      <species id="HRE" name="HRE" compartment="c" initialConcentration="7.8222"/>
+      <species id="PHD" name="PHD" compartment="c" initialConcentration="0.6179"/>
+      <species id="HIF_1a_ARNT" name="HIF_1a_ARNT" compartment="c" initialConcentration="6.9027"/>
+      <species id="HIF_1a_ARNT_HRE" name="HIF_1a_ARNT_HRE" compartment="c" initialConcentration="8.5775"/>
+      <species id="HIF_1a_PHD" name="HIF_1a_PHD" compartment="c" initialConcentration="0.8013"/>
+      <species id="HIF_1a_OH" name="HIF_1a_OH" compartment="c" initialConcentration="11.7663"/>
+      <species id="O2" name="O2" compartment="c" initialConcentration="196.3402" boundaryCondition="true" constant="true"/>
+    </listOfSpecies>
+    
+    <listOfParameters>
+      <parameter id="IC_HIF_1a" name="IC_HIF_1a" value="1.0535"/>
+      <parameter id="IC_ARNT" name="IC_ARNT" value="6.5587"/>
+      <parameter id="IC_HRE" name="IC_HRE" value="7.8222"/>
+      <parameter id="IC_PHD" name="IC_PHD" value="0.6179"/>
+      <parameter id="IC_HIF_1a_ARNT" name="IC_HIF_1a_ARNT" value="6.9027"/>
+      <parameter id="IC_HIF_1a_ARNT_HRE" name="IC_HIF_1a_ARNT_HRE" value="8.5775"/>
+      <parameter id="IC_HIF_1a_PHD" name="IC_HIF_1a_PHD" value="0.8013"/>
+      <parameter id="IC_HIF_1a_OH" name="IC_HIF_1a" value="11.7663"/>
+	</listOfParameters>
+	
+    <listOfReactions>
+      <reaction id="HIF_production" name="HIF_1a production" reversible="false">
+        <listOfProducts>
+          <speciesReference species="HIF_1a"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> c </ci>
+              <apply>
+                <ci> influx </ci>
+                <ci> v </ci>
+              </apply>
+            </apply>
+          </math>
+          <listOfParameters>
+            <parameter id="v" name="v" value="2.4878"/>
+          </listOfParameters>
+        </kineticLaw>
+      </reaction>
+      <reaction id="ARNT_complexation" name="ARNT complexation">
+        <listOfReactants>
+          <speciesReference species="HIF_1a"/>
+          <speciesReference species="ARNT"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="HIF_1a_ARNT"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> c </ci>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> ARNT_complexation_fwd </ci>
+                  <ci> HIF_1a </ci>
+                  <ci> ARNT </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> ARNT_complexation_bwd </ci>
+                  <ci> HIF_1a_ARNT </ci>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+          <listOfParameters>
+            <parameter id="ARNT_complexation_fwd" name="ARNT_complexation_fwd" value="0.0773"/>
+            <parameter id="ARNT_complexation_bwd" name="ARNT_complexation_bwd" value="10.6237"/>
+          </listOfParameters>
+        </kineticLaw>
+      </reaction>
+      <reaction id="HRE_complexation" name="HRE complexation">
+        <listOfReactants>
+          <speciesReference species="HRE"/>
+          <speciesReference species="HIF_1a_ARNT"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="HIF_1a_ARNT_HRE"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> c </ci>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> HRE_complexation_fwd </ci>
+                  <ci> HRE </ci>
+                  <ci> HIF_1a_ARNT </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> HRE_complexation_bwd </ci>
+                  <ci> HIF_1a_ARNT_HRE </ci>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+          <listOfParameters>
+            <parameter id="HRE_complexation_fwd" name="HRE_complexation_fwd" value="1.3097"/>
+            <parameter id="HRE_complexation_bwd" name="HRE_complexation_bwd" value="2.2010"/>
+          </listOfParameters>
+        </kineticLaw>
+      </reaction>
+      <reaction id="PHD_complexation" name="PHD complexation">
+        <listOfReactants>
+          <speciesReference species="HIF_1a"/>
+          <speciesReference species="PHD"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="HIF_1a_PHD"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> c </ci>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> PHD_complexation_fwd </ci>
+                  <ci> HIF_1a </ci>
+                  <ci> PHD </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> PHD_complexation_bwd </ci>
+                  <ci> HIF_1a_PHD </ci>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+          <listOfParameters>
+            <parameter id="PHD_complexation_fwd" name="PHD_complexation_fwd" value="43.1170"/>
+            <parameter id="PHD_complexation_bwd" name="PHD_complexation_bwd" value="5.3871"/>
+          </listOfParameters>
+        </kineticLaw>
+      </reaction>
+      <reaction id="HIF_hydroxylation" name="HIF hydroxylation" reversible="false">
+        <listOfReactants>
+          <speciesReference species="HIF_1a_PHD"/>
+          <speciesReference species="O2"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="HIF_1a_OH"/>
+          <speciesReference species="PHD"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> c </ci>
+              <ci> HIF_hydroxylation_fwd </ci>
+              <ci> HIF_1a_PHD </ci>
+              <ci> O2 </ci>
+            </apply>
+          </math>
+          <listOfParameters>
+            <parameter id="HIF_hydroxylation_fwd" name="HIF_hydroxylation_fwd" value="0.3977"/>
+          </listOfParameters>
+        </kineticLaw>
+      </reaction>
+      <reaction id="HIF_degradation" name="HIF degradation" reversible="false">
+        <listOfReactants>
+          <speciesReference species="HIF_1a_OH"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> c </ci>
+              <ci> HIF_degradation_fwd </ci>
+              <ci> HIF_1a_OH </ci>
+            </apply>
+          </math>
+          <listOfParameters>
+            <parameter id="HIF_degradation_fwd" name="HIF_degradation_fwd" value="8.1326"/>
+          </listOfParameters>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>
