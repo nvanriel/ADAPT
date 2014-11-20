@@ -10,9 +10,6 @@ switch upper(method)
     case 'SPLINE'
         interpFunc = @interpSpline;
         
-    case 'RAND_SPLINE'
-        interpFunc = @interpRandSpline;
-        
     otherwise
         error('Unknown interpolation method.');
 end
@@ -21,9 +18,30 @@ for field = fieldArr
     field.time = t(:);
     
     if isConstant(field)
-        % constant
-        field.val = field.source.val * ones(size(t(:)));
-        field.std = field.source.std * ones(size(t(:)));
+        if isempty(field.src.time)
+            % static (no time point)
+            val = ones(size(field.time)) * field.curr.val;
+            
+            if any(field.curr.std)
+                std = ones(size(field.time)) * field.curr.std;
+            else
+                std = [];
+            end
+        else
+            % constant (vector of NaNs with one value at the measured time
+            % point)
+            timeIdx = find(t == field.src.time);
+            val = nan(size(field.time)); val(timeIdx) = field.curr.val;
+            
+            if any(field.curr.std)
+                std = nan(size(field.time)); std(timeIdx) = field.curr.std;
+            else
+                std = [];
+            end
+        end
+        
+        field.val = val;
+        field.std = std;
     else
         % dynamic
         [val, std] = interpFunc(field, t);

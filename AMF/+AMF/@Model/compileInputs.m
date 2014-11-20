@@ -12,11 +12,11 @@ import AMF.utils.writeFile
 
 fn = char(this.functions.inputs);
 
-header = ['function u = ', fn, '(t,m)\n\n'];
+header = ['function u = ', fn, '(t,uv,m)\n\n'];
 
 for i = 1:length(this.inputs)
     comp = this.inputs(i);
-    IC{i} = ['u(', num2str(comp.index), ') = interp1(m.u.', comp.name, '_t, ', 'm.u.', comp.name, ', t, ''', comp.method, ''', ''extrap'');\n'];
+    IC{i} = ['u(', num2str(comp.index), ') = interp1(uv(m.u.', comp.name, '_t), ', 'uv(m.u.', comp.name, '), t, ''', comp.method, ''', ''extrap'');\n'];
 end
 
 content = [IC{:}];

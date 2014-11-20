@@ -6,7 +6,7 @@ end
 
 for comp = this.inputs
     
-    comp.time = this.predictor.val;
+    comp.time = this.time(:);
     comp.val = zeros(size(comp.time));
     
     switch upper(comp.type)
@@ -17,8 +17,8 @@ for comp = this.inputs
 
             if isempty(comp.func)
                 dataField = this.dataset.ref.(comp.args{1});
-                comp.initVal = dataField.val;
-                comp.initTime = dataField.time; 
+                comp.initVal = dataField.src.val;
+                comp.initTime = dataField.src.time; 
             else
                 dataFields = get(this.dataset, comp.args{:});
                 [t, val] = comp.func(dataFields);

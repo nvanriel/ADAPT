@@ -1,3 +1,7 @@
 function this = plot(this)
 
-errorbar(this.source.time, this.source.val, this.source.std, 'xr');
+if any(this.src.std)
+    errorbar(this.src.time, this.src.val, this.src.std, 'xr');
+else
+    plot(this.src.time, this.src.val, 'xr');
+end

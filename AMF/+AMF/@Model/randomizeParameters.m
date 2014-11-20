@@ -8,6 +8,8 @@ pcurr = 10.^((smax-smin)*rand(np,1)+smin);
 
 for i = 1:np
     this.fitParameters(i).init = pcurr(i);
+    this.fitParameters(i).curr = pcurr(i);
 end
 
+parseParameters(this);
 parseInputs(this);

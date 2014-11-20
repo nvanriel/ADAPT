@@ -10,7 +10,7 @@ initiateExperiment(model, data);
 
 %% config
 
-model.options.optimset.Display = 'iter';
+model.options.optimset.Display = 'off';
 model.options.useMex = 1;
 
 parseAll(model);

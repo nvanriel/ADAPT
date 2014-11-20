@@ -14,3 +14,5 @@ if ts > 0
         t = [t0; (t0+t(ts))/2; t(ts)];
     end
 end
+
+t = t(:);

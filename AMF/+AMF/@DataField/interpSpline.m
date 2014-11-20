@@ -1,4 +1,13 @@
-function [val, std] = interpSpline(field)
+function [val, std] = interpSpline(field, t)
 
-val = interp1(field.source.time, field.source.val, t, 'spline', 'extrap');
-std = sqrt(interp1(field.source.time, field.source.std .^ 2, t, 'spline', 'extrap'))';
+if isempty(field.ppform)
+    genSpline(field);
+end
+
+val = ppval(field.ppform, t)';
+
+if any(field.curr.std)
+    std = sqrt(interp1(field.src.time, field.curr.std .^ 2, t, 'linear','extrap'))';
+else
+    std = [];
+end

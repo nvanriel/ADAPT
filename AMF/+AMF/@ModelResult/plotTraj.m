@@ -12,9 +12,9 @@ for it = 1:numIter
 end
 
 if ~isempty(comp.data)
-    data.time = comp.data.source.time;
-    data.val = comp.data.source.val;
-    data.std = comp.data.source.std;
+    data.time = comp.data.src.time;
+    data.val = comp.data.src.val;
+    data.std = comp.data.src.std;
 
     errorbar(data.time, data.val, data.std, 'k--', 'LineWidth', 2);
 end

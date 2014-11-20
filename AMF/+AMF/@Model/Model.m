@@ -24,12 +24,18 @@ classdef Model < handle
         fitParameters
         observableStates
         observableReactions
-        
+        observables
+        mStruct
+
         predictor
         
+        time
         fitTime
         
         options
+        result
+        
+        currTimeStep
     end
     methods
         function this = Model(modelFile)
@@ -97,6 +103,10 @@ classdef Model < handle
             this.options.savePrefix = '';
             
             this.options.interpMethod = 'linear';
+            
+            this.currTimeStep = 0;
+
+            this.time = getTime(this);
         end
     end
 end

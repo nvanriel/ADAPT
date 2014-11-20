@@ -11,11 +11,14 @@ classdef DataComponent < handle
         unitConv
         smooth
         
-        source
+        src
+        curr
+        
         time
         val
         std
 
+        ppform
         options
         
         fitIdx

@@ -1,23 +1,5 @@
 classdef DataField < AMF.DataComponent
     properties
-%         name
-%         obs
-%         index
-%         
-%         timeField
-%         valField
-%         stdField
-%         
-%         unitConv
-%         smooth
-%         
-%         source
-%         time
-%         val
-%         std
-%         
-%         ppform
-%         options
     end
     methods
         function this = DataField(index, name, obs, timeField, valField, stdField, unitConv, smooth)
@@ -30,10 +12,13 @@ classdef DataField < AMF.DataComponent
             this.unitConv = unitConv;
             this.smooth = smooth;
             
-            this.source.val = [];
-            this.source.std = [];
-            this.source.time = [];
-            this.source.ppform = struct();
+            this.src.val = [];
+            this.src.std = [];
+            this.src.time = [];
+            this.ppform = struct();
+            
+            this.curr.val = [];
+            this.curr.std = [];
         end
     end
 end

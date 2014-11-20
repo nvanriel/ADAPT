@@ -1,6 +1,7 @@
 function this = initiateExperiment(this, dataset)
 
 this.dataset = dataset;
+interp(this.dataset, 0, 'spline');
 
 observables = filter(this.dataset, @isObservable);
 
@@ -8,7 +9,7 @@ this.fitTime = [];
 
 for i = 1:length(observables)
     dataField = observables{i};
-    this.fitTime = [this.fitTime, dataField.source.time];
+    this.fitTime = [this.fitTime, dataField.src.time];
 end
 
 this.fitTime = sort(unique(this.fitTime));
@@ -20,7 +21,5 @@ for i = 1:length(observables)
     comp = this.ref.(fieldName);
     comp.data = dataField;
     
-    dataField.fitIdx = arrayfun(@(t) find(this.fitTime == t), dataField.source.time);
+    dataField.fitIdx = arrayfun(@(t) find(this.fitTime == t), dataField.src.time);
 end
-
-interp(dataset, this.fitTime);

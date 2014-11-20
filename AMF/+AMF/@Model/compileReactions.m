@@ -8,7 +8,7 @@ import AMF.utils.writeFile
 
 fn = char(this.functions.reactions);
 
-header = ['function v = ', fn, '(t,x,p,m)\n\n'];
+header = ['function v = ', fn, '(t,x,p,u,m)\n\n'];
 
 CC = {};
 for i = 1:length(this.constants)
@@ -19,7 +19,7 @@ end
 IC = {};
 for i = 1:length(this.inputs)
     comp = this.inputs(i);
-    IC{i} = [comp.name, ' = interp1(m.u.', comp.name, '_t, ', 'm.u.', comp.name, ', t, ''', comp.method, ''', ''extrap'');\n'];
+    IC{i} = [comp.name, ' = interp1(u(m.u.', comp.name, '_t), ', 'u(m.u.', comp.name, '), t, ''', comp.method, ''', ''extrap'');\n'];
 end
 
 SC = {};

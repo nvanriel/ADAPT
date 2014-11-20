@@ -5,7 +5,7 @@ import AMF.*
 model = Model('minGlucModel');
 data = DataSet('minGlucData');
 
-loadGroup(data, 't2d_1wk');
+loadGroup(data, 't2d_pre');
 initiateExperiment(model, data);
 
 

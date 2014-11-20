@@ -1,9 +1,10 @@
-% minGlucReg.m
-% Regularization function of the minimal
-% glucose model by Dalla Man et al.
 function E = minGlucReg(model)
 
 Ra = model.ref.Ra_g;
+
+tmp = cumtrapz(model.time, Ra.curr);
+AUC_Ra = tmp(end);
+
 Gtot = model.ref.Gtot;
 
-E = AUC(Ra) - Gtot.val;
+E = AUC_Ra - Gtot.val;

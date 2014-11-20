@@ -30,6 +30,8 @@ MODEL.PARAMETERS = {
     'ra4' 1 1    [0 inf] {}                     %
     'ra5' 1 1    [0 inf] {}                     %
     'ra6' 1 1    [0 inf] {}                     %
+    
+    'asd' 0 'p3' [] {}
 };
 
 MODEL.STATES = {

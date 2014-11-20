@@ -26,7 +26,3 @@ DATASET.FIELDS = {
     'InsulinRel' 0 't' 'insulin_rel'     'insulin_std'    1000/6.94 []
     'BW'         0 []  'm_mean'          'm_std'          1         []
 };
-
-DATASET.FUNCTIONS = {
-    'DoubleGluc'    0 @dataSum {'Glucose', 'Glucose'}
-};

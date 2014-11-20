@@ -2,15 +2,19 @@ function this = plot(this, name)
 
 comp = this.ref.(name);
 
-plot(comp.time, comp.val, 'r');
+plot(this.time, comp.val, 'r');
 
 if ~isempty(comp.data)
-    data.time = comp.data.source.time;
-    data.val = comp.data.source.val;
-    data.std = comp.data.source.std;
+    data.time = comp.data.src.time;
+    data.val = comp.data.src.val;
+    data.std = comp.data.src.std;
 
     hold on
-    errorbar(data.time, data.val, data.std, 'kx', 'LineWidth', 2);
+    if any(data.std)
+        errorbar(data.time, data.val, data.std, 'kx', 'LineWidth', 2);
+    else
+        plot(data.time, data.val, 'kx', 'LineWidth', 2);
+    end
     hold off
 end
 

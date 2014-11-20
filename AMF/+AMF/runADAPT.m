@@ -2,12 +2,14 @@ function modelResult = runADAPT(model)
 
 import AMF.*
 
+model.time = getTime(model);
+
 seed = model.options.seed;
 numIter = model.options.numIter;
 
-if isempty(model.functions.reg)
-    model.functions.reg = @regFun;
-end
+% if isempty(model.functions.reg)
+%     model.functions.reg = @regFun;
+% end
 
 rng('default'); rng(seed);
 
@@ -18,17 +20,22 @@ tic
 result = getResult(model);
 result.error = 0;
 
-parfor it = 1:numIter
+for it = 1:numIter
     randomizeParameters(model);
     randomizeData(model);
     initializeObservables(model);
+
+    parseAll(model);
     
     error = zeros(size(t));
     for ts = 1:length(t)
+        setTimeStep(model, ts);
         [~, sse, ~] = fitTimeStep(model, ts);
 
         error(ts) = sse;
     end
+
+    saveTrajectory(model);
     
     itResult = getResult(model);
     itResult.error = error(:);

@@ -44,10 +44,13 @@ classdef ModelResult < handle
                     end
                 end
                 for j = 1:length(this.reactions)
+%                     disp(this.reactions(j).name);
+%                     disp(i);
+%                     disp(j);
                     this.reactions(j).val(:,i) = result(i).reactions(j).val;
                     if ~isempty(this.reactions(j).data)
-                        this.reactions(j).data.val(:,i) = result(i).reactions(j).data.val;
-                        this.reactions(j).data.std(:,i) = result(i).reactions(j).data.std;
+                        this.reactions(j).data.val(:,i) = result(i).reactions(j).data.val(:,1);
+                        this.reactions(j).data.std(:,i) = result(i).reactions(j).data.std(:,1);
                     end
                 end
                 for j = 1:length(this.inputs)

@@ -1,29 +1,38 @@
-function result = computeAll(this, t, x0, p, ts)
+function this = computeAll(this, t, x0, p, ts)
 
 if nargin < 5, ts = 0; end
 
-u = this.computeInputs(t);
-
-if ~isempty(this.inputs)
-    save(this.inputs, t, u, ts);
-end
-
+% compute
 x = computeStates(this, t, x0, p);
-v = this.computeReactions(t, x, p);
 
 if ts > 0
+    t = t(end);
     x = x(end,:);
-    v = v(end,:);
-    if ~isempty(u)
-        u = u(end,:);
-    end
 end
 
-save(this.states, t, x, ts);
-save(this.reactions, t, v, ts);
+u = this.computeInputs(t);
+v = this.computeReactions(t, x, p);
 
-result.t = t;
-result.x = x;
-result.v = v;
-result.u = u;
-result.p = p;
+% update the component current values
+for i = 1:length(this.states)
+    this.states(i).curr = x(:,i);
+end
+for i = 1:length(this.reactions)
+    this.reactions(i).curr = v(:,i);
+end
+for i = 1:length(this.inputs)
+    this.inputs(i).curr = u(:,i);
+end
+
+% store the values in the trajectories
+if ts > 0
+    this.result.x(ts,:) = x;
+    this.result.v(ts,:) = v;
+    if ~isempty(this.inputs)
+        this.result.u(ts,:) = u;
+    end
+else
+    this.result.x = x;
+    this.result.v = v;
+    this.result.u = u;
+end
