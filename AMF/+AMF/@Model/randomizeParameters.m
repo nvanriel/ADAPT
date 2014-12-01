@@ -11,5 +11,5 @@ for i = 1:np
     this.fitParameters(i).curr = pcurr(i);
 end
 
-parseParameters(this);
-parseInputs(this);
+this.result.pcurr = [this.parameters.init];
+this.result.pinit = [this.parameters.init];

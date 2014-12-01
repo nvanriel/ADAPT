@@ -1,12 +1,10 @@
 function this = randomizeData(this)
 
+randomize(this.dataset);
+
 t = getTime(this);
-comps = filter(this, @isObservable);
 
-for i = 1:length(comps)
-    comp = comps{i};
-    randomize(comp.data);
-%     interp(comp.data, t, 'SPLINE');
-end
+[idd, ids] = getInterpData(this.dataset, t, 'spline');
 
-interp(this.dataset, t, 'SPLINE');
+this.result.idd = idd;
+this.result.ids = ids;

@@ -1,17 +1,16 @@
 classdef DataFunction < AMF.DataComponent
     properties
-        func
-        args
-        stdDataField
+        valExpr
+        stdExpr
     end
     methods
-        function this = DataFunction(index, name, obs, func, args, stdDataField)
+        function this = DataFunction(index, name, obs, timeField, valExpr, stdExpr)
             this.index = index;
             this.name = name;
             this.obs = obs;
-            this.func = func;
-            this.args = args;
-            this.stdDataField = stdDataField;
+            this.timeField = timeField;
+            this.valExpr = valExpr;
+            this.stdExpr = stdExpr;
         end
     end
 end

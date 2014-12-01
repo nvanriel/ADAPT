@@ -16,7 +16,7 @@ model.options.odeTol       = [1e-12 1e-12 100];
 model.options.numIter      = 1;
 model.options.numTimeSteps = 3;
 model.options.parScale     = [2 -2];
-model.options.seed         = 1;
+model.options.seed         = 3;
 model.options.SSTime       = 1000;
 model.options.lab1         = .1;
 model.options.optimset.Display = 'iter';
@@ -26,7 +26,7 @@ compileAll(model);
 
 %% run
 
-% model.functions.reg = @tiemannReg;
+model.functions.reg = @tiemannReg;
 
 result = runADAPT(model);
 

@@ -1,10 +1,7 @@
-function E = minGlucReg(model)
+function E = minGlucReg(model, m, d)
 
-Ra = model.ref.Ra_g;
+r = model.result;
 
-tmp = cumtrapz(model.time, Ra.curr);
-AUC_Ra = tmp(end);
+AUC = trapz(r.time, r.vcurr(:, m.v.Ra_g));
 
-Gtot = model.ref.Gtot;
-
-E = AUC_Ra - Gtot.val;
+E = AUC - m.c.Gtot;

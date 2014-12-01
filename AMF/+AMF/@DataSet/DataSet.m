@@ -13,6 +13,9 @@ classdef DataSet < handle
         functions
         ref
         list
+        
+        funcs
+        compileDir
     end
     methods
         function this = DataSet(dataFile)
@@ -20,6 +23,9 @@ classdef DataSet < handle
             this.specification = feval(dataFile);
             this.description = this.specification.DESCRIPTION;
             this.groups = this.specification.GROUPS;
+            
+            this.compileDir = 'temp/';
+            this.funcs.func = str2func(['C_', this.name, '_FUNCTIONS']);
             
             % fields
             this.fields = AMF.DataField.empty;
@@ -36,11 +42,11 @@ classdef DataSet < handle
             % functions
             if isfield(this.specification, 'FUNCTIONS')
                 this.functions = AMF.DataFunction.empty;
-                n = size(this.specification.FUNCTIONS, 1);
-                for i = 1:n
+                m = size(this.specification.FUNCTIONS, 1);
+                for i = 1:m
                     fieldSpec = this.specification.FUNCTIONS(i,:);
                     fieldName = fieldSpec{1};
-                    newFunc = AMF.DataFunction(i, fieldSpec{:});
+                    newFunc = AMF.DataFunction(i + n, fieldSpec{:});
                     this.ref.(fieldName) = newFunc;
 
                     this.functions(i) = newFunc;
@@ -53,6 +59,10 @@ classdef DataSet < handle
             this.data = load([this.specification.FILE, '.mat']);
             
             this.loadGroup(this.groups{1});
+            
+            if ~isempty(this.functions)
+                compileFunctions(this);
+            end
         end
     end
 end

@@ -14,14 +14,10 @@ for comp = this.constants
             end
             
             comp.val = this.dataset.ref.(comp.expr).src.val(1);
-            comp.init = comp.val;
             
         case 'double'
             comp.val = comp.expr;
-            comp.init = comp.val;
             
     end
-    
-    comp.curr = comp.init;
-    comp.prev = comp.init;
+
 end

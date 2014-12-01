@@ -1,13 +1,15 @@
 function this = parseStates(this)
 
+[dd, ~] = getInterpData(this.dataset, 0, 'spline');
+d = getDataStruct(this.dataset);
+
 for comp = this.states
-    comp.time = this.time(:);
-    comp.val = zeros(size(comp.time));
     
-    if isa(comp.init, 'char')
-        dataCompName = comp.init;
-        comp.init = this.dataset.ref.(dataCompName).val(1);
-        comp.curr = comp.init;
-        comp.prev = comp.init;
+    if isa(comp.initExpr, 'char')
+        dataCompName = comp.initExpr;
+        comp.init = dd(d.d.(dataCompName));
     end
 end
+
+this.result.xinit = [this.states.init];
+this.result.xcurr = [this.states.init];

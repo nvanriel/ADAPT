@@ -10,6 +10,7 @@ classdef ModelInput < AMF.ModelComponent
         initTime
         
         args
+        pidx
     end
     methods
         function this = ModelInput(index, name, type, args, method, meta)

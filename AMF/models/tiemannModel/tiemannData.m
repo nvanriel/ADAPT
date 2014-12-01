@@ -27,7 +27,6 @@ DATASET.FIELDS = {
 };
 
 DATASET.FUNCTIONS = {
-    %name           %obs %func %valArgs                            %stdArg
-    'dplasma_C_HDL' 1    @prod {'dplasma_C', 'dplasma_C_HDL_FPLC'} 'dplasma_C_HDL_FPLC'
-    'dplasma_C_0'   0    @diff {'dplasma_C', 'dplasma_C_HDL'}      'dplasma_C'
+    'dplasma_C_HDL'  1 't1' 'dplasma_C .* dplasma_C_HDL_FPLC' 'dplasma_C_HDL_FPLC'
+    'dplasma_C_0'    0 't1' 'dplasma_C - dplasma_C_HDL'       'dplasma_C'
 };

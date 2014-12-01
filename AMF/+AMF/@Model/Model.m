@@ -24,8 +24,12 @@ classdef Model < handle
         fitParameters
         observableStates
         observableReactions
+        observableStatesData
+        observableReactionsData
         observables
         mStruct
+        iStruct
+        dStruct
 
         predictor
         
@@ -85,7 +89,7 @@ classdef Model < handle
             this.reactions = getAll(this, 'reactions');
             
             % derived component groups
-            this.fitParameters = filter(this.parameters, @isFitParameter);
+            this.fitParameters = this.parameters(logical([this.parameters.fit]));
             
             % ---
             
@@ -101,12 +105,42 @@ classdef Model < handle
             this.options.numTimeSteps = this.predictor.val(end) - this.predictor.val(1);
             this.options.SSTime    = 1000;
             this.options.savePrefix = '';
+            this.options.randPars = 1;
+            this.options.randData = 1;
             
             this.options.interpMethod = 'linear';
             
             this.currTimeStep = 0;
 
             this.time = getTime(this);
+            
+            this.result.oxi = [];
+            this.result.ofi = [];
+            this.result.oxdi = [];
+            this.result.ofdi = [];
+            this.result.pidx = [];
+            this.result.lb = [];
+            this.result.p = [];
+            this.result.x = [];
+            this.result.u = [];
+            this.result.v = [];
+            this.result.sse = [];
+            this.result.dt = [];
+            this.result.dd = [];
+            this.result.ds = [];
+            this.result.idd = [];
+            this.result.ids = [];
+            this.result.xinit = [];
+            this.result.xcurr = [];
+            this.result.pcurr = [this.parameters.init];
+            this.result.pinit = [];
+            this.result.pprev = [];
+            this.result.vcurr = [];
+            this.result.nfp = length(this.fitParameters);
+            this.result.time = [];
+            this.result.uidx = [];
+            this.result.upidx = [];
+            this.result.uvec = [];
         end
     end
 end

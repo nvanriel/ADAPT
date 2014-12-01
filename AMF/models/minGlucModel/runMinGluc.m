@@ -5,7 +5,7 @@ import AMF.*
 model = Model('minGlucModel');
 data = DataSet('minGlucData');
 
-loadGroup(data, 't2d_pre');
+loadGroup(data, 'ngt_pre');
 initiateExperiment(model, data);
 
 
@@ -14,17 +14,20 @@ initiateExperiment(model, data);
 model.options.optimset.Display = 'iter';
 model.options.useMex = 1;
 
-model.functions.reg = @minGlucReg;
-
 parseAll(model);
 compileAll(model);
 
 %% run
 
-fit(model);
+model.functions.reg = @minGlucReg;
+
+result = fit(model);
+result = simulate(model);
 
 %% plot
 
-manipulate(model, 'Glucose');
+% manipulate(model, 'G');
+figure;plot(result, {'G', 'X', 'dGdt', 'Ra_g', 'Gin'});
 
-model.ref.SI.val(1)
+getValue(result, 'p3')
+getValue(result, 'SI', 1)

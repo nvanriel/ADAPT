@@ -1,7 +1,5 @@
-% additional regularization term Tiemann model
-function reg = tiemannReg(model)
+function reg = tiemannReg(model, m, d)
 
-Vm_TG_prod = model.ref.Vm_TG_prod;
-Vm_TG_ER_prod = model.ref.Vm_TG_ER_prod;
+r = model.result;
 
-reg = (Vm_TG_prod.curr + Vm_TG_ER_prod.curr - Vm_TG_prod.prev - Vm_TG_ER_prod.prev) / (Vm_TG_prod.init + Vm_TG_ER_prod.init);
+reg = (r.pcurr(m.p.Vm_TG_prod) + r.pcurr(m.p.Vm_TG_ER_prod) - r.pprev(m.p.Vm_TG_prod) - r.pprev(m.p.Vm_TG_ER_prod)) / (r.pinit(m.p.Vm_TG_prod) + r.pinit(m.p.Vm_TG_ER_prod));

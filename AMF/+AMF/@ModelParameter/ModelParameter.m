@@ -9,10 +9,9 @@ classdef ModelParameter < AMF.ModelComponent
             this = this@AMF.ModelComponent(index, name, meta);
 
             this.expr = expr;
-            this.init = expr;
-            this.val = expr;
-            this.curr = expr;
-            this.prev = expr;
+            if isa(expr, 'double')
+                this.init = expr;
+            end
             
             this.fit = fit;
             

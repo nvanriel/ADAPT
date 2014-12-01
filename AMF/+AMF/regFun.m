@@ -1,21 +1,14 @@
-function reg = regFun(model)
+function reg = regFun(model, t)
 
-if model.options.lab1 > 0
-    t = model.time;
-    p = model.fitParameters;
+lab1 = model.options.lab1;
+pcurr = model.result.pcurr;
+pprev = model.result.pprev;
+pinit = model.result.pinit;
 
-    lab1 = model.options.lab1;
+dt = t(end) - t(1);
 
-    % < standard ADAPT reg
-    dt = t(end) - t(1);
-
-    if t(end) == 0
-        reg = 0;
-    else
-        reg = ([p.curr] - [p.prev]) ./ [p.init] ./ dt * lab1;
-    end
-    % />
-
+if t(end) == 0
+    reg = zeros(1, length(pcurr));
 else
-    reg = 0;
+    reg = (pcurr - pprev) ./ pinit ./ dt * lab1;
 end

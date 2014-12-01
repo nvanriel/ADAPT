@@ -19,10 +19,7 @@ DATASET.GROUPS = {
 };
 
 DATASET.FIELDS = {
-    'Glucose'    1 't' 'glucose_mean'    'glucose_std'    18.0182   []
-    'Gb'         0 []  'glucose_ss_mean' 'glucose_ss_std' 18.0182   []
-    'Ib'         0 []  'insulin_ss_mean' 'glucose_ss_std' 1000/6.94 []
-    'Insulin'    0 't' 'insulin_mean'    'insulin_std'    1000/6.94 []
-    'InsulinRel' 0 't' 'insulin_rel'     'insulin_std'    1000/6.94 []
-    'BW'         0 []  'm_mean'          'm_std'          1         []
+    'G'          1 't' 'glucose_mean'    'glucose_std'    1e9 []
+    'I'          0 't' 'insulin_mean'    'insulin_std'    1e3 []
+    'BW'         0 []  'm_mean'          'm_std'          1   []
 };
