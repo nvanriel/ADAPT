@@ -6,6 +6,13 @@ classdef ModelComponent < handle
         
         % data
         data
+        dataIdx
+        obs = 0
+        dt
+        dd
+        ds
+        idd
+        ids
         
         % computed
         time

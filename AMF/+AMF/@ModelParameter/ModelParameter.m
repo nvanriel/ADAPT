@@ -5,13 +5,13 @@ classdef ModelParameter < AMF.ModelComponent
         ub
     end
     methods
-        function this = ModelParameter(index, name, fit, init, bnd, meta)
+        function this = ModelParameter(index, name, fit, expr, bnd, meta)
             this = this@AMF.ModelComponent(index, name, meta);
 
-            this.init = init;
-            this.val = init;
-            this.curr = init;
-            this.prev = init;
+            this.expr = expr;
+            if isa(expr, 'double')
+                this.init = expr;
+            end
             
             this.fit = fit;
             

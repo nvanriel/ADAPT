@@ -1,7 +1,7 @@
 
-#define N_STATES 2
-#define N_PARAMS 10
-#define N_INPUTS 32
+#define N_STATES 11
+#define N_PARAMS 24
+#define N_INPUTS 0
 #define SOLVER 1
 #define BLOCK_SIZE 1000
 

@@ -1,10 +1,10 @@
-function error = minCPepReg(model)
+function E = minCPepReg(model, m, d)
 
-h = get(model, 'h');
-Gb = get(model, 'Gb');
+r = model.result;
 
-if h.val < Gb.val
-    error = Gb.val - h.val;
-else
-    error = 0;
-end
+ISRi = trapz(r.time, r.vcurr(:, m.v.ISR));
+IDRi = trapz(r.time, r.vcurr(:, m.v.IDR));
+
+HE = 1 - IDRi / ISRi;
+
+E = (HE - .4) * 100;

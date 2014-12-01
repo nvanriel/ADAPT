@@ -1,14 +1,14 @@
-function reg = regFun(model)
-
-t = getTime(model);
-p = model.fitParameters;
+function reg = regFun(model, t)
 
 lab1 = model.options.lab1;
+pcurr = model.result.pcurr;
+pprev = model.result.pprev;
+pinit = model.result.pinit;
 
 dt = t(end) - t(1);
 
 if t(end) == 0
-    reg = 0;
+    reg = zeros(1, length(pcurr));
 else
-    reg = ([p.curr] - [p.prev]) ./ [p.init] ./ dt * lab1;
+    reg = (pcurr - pprev) ./ pinit ./ dt * lab1;
 end

@@ -1,4 +1,4 @@
-function mStruct = getInputStruct(this)
+function mStruct = getInputStructMex(this)
 
 for state = this.states, mStruct.s.(state.name) = state.index; end
 for param = this.parameters, mStruct.p.(param.name) = param.index; end

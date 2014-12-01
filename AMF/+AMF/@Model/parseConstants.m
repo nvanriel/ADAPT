@@ -13,13 +13,11 @@ for comp = this.constants
                 error('Can not obtain constant value from dataset.');
             end
             
-            comp.val = this.dataset.ref.(comp.expr).val(1);
-            comp.init = comp.val;
+            comp.val = this.dataset.ref.(comp.expr).src.val(1);
             
         case 'double'
             comp.val = comp.expr;
-            comp.init = comp.val;
             
     end
-    
+
 end

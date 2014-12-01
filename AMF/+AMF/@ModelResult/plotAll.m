@@ -17,7 +17,7 @@ numIter = this.options.numIter;
 figure('Name', upper(type));
 
 for i = 1:n
-    subplot(floor(ns),ceil(ns),i); hold on;
+    subplot(ceil(ns),ceil(ns),i); hold on;
 
     comp = comps(i);
     
